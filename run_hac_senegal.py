@@ -22,9 +22,6 @@ causes = dataset.iloc[:, [2]].values
 
 def write_to_csv(data,filename):
     with open(filename,'w',newline='') as myfile:
-        row = (['clusterid', 'name'])
-        mywriter = csv.writer(myfile, delimiter='\t')
-        mywriter.writerow(row)
         for k,v in  data.items():
             row=([k,v])
             mywriter=csv.writer(myfile,delimiter='\t')
@@ -129,6 +126,11 @@ for cluster_id,list_concepts in clusterid_to_concept_text.items():
     avg_of_concept_names=sum(average_emb_all_concepts_for_this_clusterid)/len(average_emb_all_concepts_for_this_clusterid)
     index_of_element_closest_to_average=find_nearest(average_emb_all_concepts_for_this_clusterid,avg_of_concept_names)
     cluster_id_cluster_name[cluster_id]=list_concepts[index_of_element_closest_to_average]
+
+
+assert len(cluster_id_cluster_name.keys()) > 0
+write_to_csv(clusterid_to_concept_text,'clusterid_to_concept_text.csv')
+
 
 
 assert len(cluster_id_cluster_name.keys()) > 0
