@@ -8,9 +8,11 @@ import pandas as pd
 GLOVE_PATH_CLARA_SERVER="/data/nlp/corpora/glove/glove_lemmas.840B.300d.txt"
 GLOVE_PATH_LOCAL="./glove_bottom10.txt"
 
+random.seed(3)
+
 words_embeddings={}
 def read_from_glove_assimilate():
-    df = pd.read_csv(GLOVE_PATH_CLARA_SERVER,skiprows=[3651,365405,365679,0],header=None)
+    df = pd.read_csv(GLOVE_PATH_LOCAL,skiprows=[3651,365405,365679,0],header=None)
     #df = pd.read_csv(GLOVE_PATH_LOCAL)
     for index,line in df.iterrows():
             all_words=line[0].split()
