@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4c37fce7-66be-46ee-a946-19bf0c223be9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/read_senegal_concepts.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/glove_read_get_embed.py" beforeDir="false" afterPath="$PROJECT_DIR$/glove_read_get_embed.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hac_scikit_atelier.py" beforeDir="false" afterPath="$PROJECT_DIR$/hac_scikit_atelier.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/temp_data.csv" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/run_hac_senegal.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hac_scikit_atelier.py" beforeDir="false" afterPath="$PROJECT_DIR$/clustering_atelier.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -24,35 +21,35 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="py" value="5" />
+          <entry key="py" value="8" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Python" value="5" />
+          <entry key="Python" value="8" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="dummy" value="27" />
-          <entry key="py" value="3222" />
+          <entry key="dummy" value="45" />
+          <entry key="py" value="3412" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="PLAIN_TEXT" value="27" />
-          <entry key="Python" value="3222" />
+          <entry key="PLAIN_TEXT" value="45" />
+          <entry key="Python" value="3412" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/hac_scikit_atelier.py">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/clustering_atelier.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="344">
-              <caret line="38" column="25" lean-forward="true" selection-start-line="38" selection-start-column="25" selection-end-line="38" selection-end-column="25" />
+            <state relative-caret-position="180">
+              <caret line="12" column="1" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="17" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
@@ -60,11 +57,20 @@
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/run_hac_senegal.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="284">
+              <caret line="40" column="33" lean-forward="true" selection-start-line="40" selection-start-column="33" selection-end-line="40" selection-end-column="33" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file:///opt/miniconda3/envs/huggingface/lib/python3.8/site-packages/sklearn/utils/validation.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="156">
-              <caret line="618" selection-start-line="618" selection-end-line="618" />
+            <state relative-caret-position="149">
+              <caret line="649" selection-start-line="649" selection-end-line="649" />
             </state>
           </provider>
         </entry>
@@ -74,6 +80,15 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="179">
               <caret line="309" selection-start-line="309" selection-end-line="309" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file:///opt/miniconda3/envs/huggingface/lib/python3.8/site-packages/scipy/cluster/hierarchy.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="156">
+              <caret line="1559" selection-start-line="1559" selection-end-line="1559" />
             </state>
           </provider>
         </entry>
@@ -116,6 +131,8 @@
         <option value="$PROJECT_DIR$/read_senegal_concepts.py" />
         <option value="$PROJECT_DIR$/glove_read_get_embed.py" />
         <option value="$PROJECT_DIR$/hac_scikit_atelier.py" />
+        <option value="$PROJECT_DIR$/clustering_atelier.py" />
+        <option value="$PROJECT_DIR$/run_hac_senegal.py" />
       </list>
     </option>
   </component>
@@ -149,6 +166,11 @@
   <component name="PropertiesComponent">
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
   <component name="RunDashboard">
     <option name="ruleStates">
       <list>
@@ -161,7 +183,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.cluster">
+  <component name="RunManager" selected="Python.run_hac_senegal">
     <configuration name="cluster" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="clustering" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -174,7 +196,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/hac_scikit_atelier.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/clustering_atelier.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -204,12 +226,35 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="run_hac_senegal" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="clustering" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/run_hac_senegal.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <list>
       <item itemvalue="Python.cluster" />
       <item itemvalue="Python.glove_read_get_embed" />
+      <item itemvalue="Python.run_hac_senegal" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.run_hac_senegal" />
         <item itemvalue="Python.cluster" />
         <item itemvalue="Python.glove_read_get_embed" />
       </list>
@@ -259,25 +304,65 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/hac_scikit_atelier.py</url>
+          <url>file://$PROJECT_DIR$/clustering_atelier.py</url>
           <line>45</line>
           <option name="timeStamp" value="25" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/hac_scikit_atelier.py</url>
-          <line>50</line>
-          <option name="timeStamp" value="26" />
+          <url>file://$PROJECT_DIR$/run_hac_senegal.py</url>
+          <line>60</line>
+          <option name="timeStamp" value="31" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/hac_scikit_atelier.py</url>
-          <line>53</line>
-          <option name="timeStamp" value="27" />
+          <url>file://$PROJECT_DIR$/run_hac_senegal.py</url>
+          <line>62</line>
+          <option name="timeStamp" value="32" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/run_hac_senegal.py</url>
+          <line>58</line>
+          <option name="timeStamp" value="33" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/run_hac_senegal.py</url>
+          <line>47</line>
+          <option name="timeStamp" value="34" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/run_hac_senegal.py</url>
+          <line>52</line>
+          <option name="timeStamp" value="35" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateCodeFragment">
+      <expression>
+        <expression-string>X</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>labels</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>(X.shape)</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>type(X)</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>X.shape</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
       <expression>
         <expression-string>concept_emb</expression-string>
         <language-id>Python</language-id>
@@ -298,43 +383,11 @@
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
-      <expression>
-        <expression-string>emb[2]</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>emb</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>all_words</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>line[0].split()</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>line[0]</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
-      </expression>
     </expressions>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/read_senegal_concepts.py">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file:///opt/miniconda3/envs/huggingface/lib/python3.8/codecs.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="309" selection-start-line="309" selection-end-line="309" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/glove_read_get_embed.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -350,18 +403,39 @@
     </entry>
     <entry file="file:///opt/miniconda3/envs/huggingface/lib/python3.8/site-packages/sklearn/utils/validation.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="618" selection-start-line="618" selection-end-line="618" />
+        <state relative-caret-position="149">
+          <caret line="649" selection-start-line="649" selection-end-line="649" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/hac_scikit_atelier.py">
+    <entry file="file:///opt/miniconda3/envs/huggingface/lib/python3.8/codecs.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="344">
-          <caret line="38" column="25" lean-forward="true" selection-start-line="38" selection-start-column="25" selection-end-line="38" selection-end-column="25" />
+        <state relative-caret-position="179">
+          <caret line="309" selection-start-line="309" selection-end-line="309" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///opt/miniconda3/envs/huggingface/lib/python3.8/site-packages/scipy/cluster/hierarchy.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="156">
+          <caret line="1559" selection-start-line="1559" selection-end-line="1559" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/clustering_atelier.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="1" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="17" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run_hac_senegal.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="284">
+          <caret line="40" column="33" lean-forward="true" selection-start-line="40" selection-start-column="33" selection-end-line="40" selection-end-column="33" />
         </state>
       </provider>
     </entry>

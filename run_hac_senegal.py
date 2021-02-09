@@ -23,7 +23,8 @@ total_oov_words=0
 total_tokens=0
 concept_emb={}
 X=[]
-for cause in causes:
+map_concept_name_to_id={}
+for index,cause in enumerate(causes):
     concept_name=cause[0]
     cause_split_tokens=concept_name.split()
     total=[]
@@ -39,15 +40,23 @@ for cause in causes:
             total_oov_words+=1
     avg_emb=np.average(emb_total)
     concept_emb[concept_name]=avg_emb
-    X.append(avg_emb)
+    map_concept_name_to_id[concept_name]=index
+    X.append([index, avg_emb])
 
 
 
 print(f"total number of oov tokens/total tokens={total_oov_words/total_tokens}")
 
-X=np.asarray(X).reshape(1,-1)
+X=np.asarray(X)
+
+#plot the dendrogram before clustering process
+# plt.figure(figsize=(15, 12))
+# dendo=sch.dendrogram(sch.linkage(X,method='average'))
+# plt.show()
+# sys.exit()
+
 #the engine part which does clustering and plotting. will need cosine similarities of each concept as input
-model=AgglomerativeClustering(n_clusters=None, distance_threshold=0.3, linkage='average',compute_full_tree=True)
+model=AgglomerativeClustering(n_clusters=None, distance_threshold=3, linkage='average',compute_full_tree=True)
 model.fit(X)
 labels=model.labels_
 
@@ -59,6 +68,3 @@ plt.scatter(X[labels==4, 0], X[labels==4, 1], s=50, marker='o', color='orange')
 plt.show()
 
 
-# plt.figure(figsize=(15, 12))
-# dendo=sch.dendrogram(sch.linkage(X,method='average'))
-# plt.show()
