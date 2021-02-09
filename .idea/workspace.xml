@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4c37fce7-66be-46ee-a946-19bf0c223be9" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/glove_read_get_embed.py" beforeDir="false" afterPath="$PROJECT_DIR$/glove_read_get_embed.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run_hac_senegal.py" beforeDir="false" afterPath="$PROJECT_DIR$/run_hac_senegal.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -20,24 +21,24 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="py" value="8" />
+          <entry key="py" value="9" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Python" value="8" />
+          <entry key="Python" value="9" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="45" />
-          <entry key="py" value="3706" />
+          <entry key="py" value="5161" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="45" />
-          <entry key="Python" value="3706" />
+          <entry key="Python" value="5161" />
         </counts>
       </usages-collector>
     </session>
@@ -56,11 +57,15 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/run_hac_senegal.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="103">
-              <caret line="69" column="10" selection-start-line="69" selection-end-line="69" selection-end-column="23" />
+            <state relative-caret-position="45">
+              <caret line="11" selection-start-line="11" selection-end-line="11" />
+              <folding>
+                <element signature="e#0#14#0" expanded="true" />
+                <marker date="1612863680130" expanded="true" signature="776:1037" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -92,15 +97,15 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/glove_read_get_embed.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="112">
-              <caret line="8" selection-start-line="8" selection-end-line="8" />
+            <state relative-caret-position="172">
+              <caret line="12" column="44" selection-start-line="12" selection-start-column="44" selection-end-line="12" selection-end-column="44" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
-                <marker date="1612856064003" expanded="true" signature="662:1032" ph="..." />
-                <marker date="1612856064003" expanded="true" signature="1098:1195" ph="..." />
+                <marker date="1612863731107" expanded="true" signature="774:1144" ph="..." />
+                <marker date="1612863731107" expanded="true" signature="1210:1307" ph="..." />
               </folding>
             </state>
           </provider>
@@ -128,10 +133,10 @@
       <list>
         <option value="$PROJECT_DIR$/cluster.py" />
         <option value="$PROJECT_DIR$/read_senegal_concepts.py" />
-        <option value="$PROJECT_DIR$/glove_read_get_embed.py" />
         <option value="$PROJECT_DIR$/hac_scikit_atelier.py" />
         <option value="$PROJECT_DIR$/clustering_atelier.py" />
         <option value="$PROJECT_DIR$/run_hac_senegal.py" />
+        <option value="$PROJECT_DIR$/glove_read_get_embed.py" />
       </list>
     </option>
   </component>
@@ -286,8 +291,8 @@
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32837528" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.43020594" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32837528" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.43020594" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -309,38 +314,33 @@
         </line-breakpoint>
         <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/run_hac_senegal.py</url>
-          <line>62</line>
+          <line>84</line>
           <option name="timeStamp" value="31" />
         </line-breakpoint>
         <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/run_hac_senegal.py</url>
-          <line>60</line>
+          <line>82</line>
           <option name="timeStamp" value="33" />
         </line-breakpoint>
         <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/run_hac_senegal.py</url>
-          <line>54</line>
+          <line>76</line>
           <option name="timeStamp" value="35" />
         </line-breakpoint>
         <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/run_hac_senegal.py</url>
-          <line>61</line>
+          <line>83</line>
           <option name="timeStamp" value="36" />
         </line-breakpoint>
         <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/run_hac_senegal.py</url>
-          <line>69</line>
+          <line>92</line>
           <option name="timeStamp" value="37" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/run_hac_senegal.py</url>
-          <line>83</line>
-          <option name="timeStamp" value="38" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/run_hac_senegal.py</url>
-          <line>78</line>
-          <option name="timeStamp" value="41" />
+          <line>140</line>
+          <option name="timeStamp" value="61" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
@@ -350,6 +350,31 @@
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateCodeFragment">
+      <expression>
+        <expression-string>cluster_id_cluster_name</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>list_concepts[index_of_element_closest_to_average]</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>average_emb_all_concepts_for_this_clusterid</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>clusterid_to_concept_text[17]</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>clusterid_to_concept_text</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
       <expression>
         <expression-string>concept_text_cluster_id</expression-string>
         <language-id>Python</language-id>
@@ -370,48 +395,11 @@
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
-      <expression>
-        <expression-string>X</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>labels</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>(X.shape)</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>type(X)</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>X.shape</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
-      </expression>
     </expressions>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/read_senegal_concepts.py">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/glove_read_get_embed.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="8" selection-start-line="8" selection-end-line="8" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-            <marker date="1612856064003" expanded="true" signature="662:1032" ph="..." />
-            <marker date="1612856064003" expanded="true" signature="1098:1195" ph="..." />
-          </folding>
-        </state>
-      </provider>
     </entry>
     <entry file="file:///opt/miniconda3/envs/huggingface/lib/python3.8/site-packages/sklearn/utils/validation.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -444,10 +432,33 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/run_hac_senegal.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="103">
-          <caret line="69" column="10" selection-start-line="69" selection-end-line="69" selection-end-column="23" />
+        <state relative-caret-position="45">
+          <caret line="11" selection-start-line="11" selection-end-line="11" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+            <marker date="1612863680130" expanded="true" signature="776:1037" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/glove_read_get_embed.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="172">
+          <caret line="12" column="44" selection-start-line="12" selection-start-column="44" selection-end-line="12" selection-end-column="44" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+            <marker date="1612863731107" expanded="true" signature="774:1144" ph="..." />
+            <marker date="1612863731107" expanded="true" signature="1210:1307" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
