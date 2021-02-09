@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4c37fce7-66be-46ee-a946-19bf0c223be9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/glove_read_get_embed.py" beforeDir="false" afterPath="$PROJECT_DIR$/glove_read_get_embed.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -21,10 +21,12 @@
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="py" value="9" />
+          <entry key="txt" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
+          <entry key="PLAIN_TEXT" value="1" />
           <entry key="Python" value="9" />
         </counts>
       </usages-collector>
@@ -32,11 +34,12 @@
         <counts>
           <entry key="dummy" value="45" />
           <entry key="py" value="5161" />
+          <entry key="txt" value="25" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="PLAIN_TEXT" value="45" />
+          <entry key="PLAIN_TEXT" value="70" />
           <entry key="Python" value="5161" />
         </counts>
       </usages-collector>
@@ -96,7 +99,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/glove_read_get_embed.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="97">
@@ -106,6 +109,15 @@
                 <marker date="1612863780676" expanded="true" signature="782:1152" ph="..." />
                 <marker date="1612863780676" expanded="true" signature="1218:1315" ph="..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/requirements.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="30">
+              <caret line="2" column="10" lean-forward="true" selection-start-line="2" selection-start-column="10" selection-end-line="2" selection-end-column="10" />
             </state>
           </provider>
         </entry>
@@ -136,6 +148,7 @@
         <option value="$PROJECT_DIR$/clustering_atelier.py" />
         <option value="$PROJECT_DIR$/run_hac_senegal.py" />
         <option value="$PROJECT_DIR$/glove_read_get_embed.py" />
+        <option value="$PROJECT_DIR$/requirements.txt" />
       </list>
     </option>
   </component>
@@ -281,7 +294,7 @@
     <editor active="true" />
     <layout>
       <window_info id="Favorites" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24960506" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24960506" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Version Control" show_stripe_button="false" />
       <window_info anchor="bottom" id="Python Console" />
@@ -290,7 +303,7 @@
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32837528" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32837528" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.43020594" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -458,6 +471,13 @@
             <marker date="1612863780676" expanded="true" signature="782:1152" ph="..." />
             <marker date="1612863780676" expanded="true" signature="1218:1315" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/requirements.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="10" lean-forward="true" selection-start-line="2" selection-start-column="10" selection-end-line="2" selection-end-column="10" />
         </state>
       </provider>
     </entry>
