@@ -22,7 +22,7 @@ causes = dataset.iloc[:, [2]].values
 
 def write_to_csv(data,filename):
     with open(filename,'w',newline='') as myfile:
-        row = (['concept', 'cluster_id'])
+        row = (['clusterid', 'name'])
         mywriter = csv.writer(myfile, delimiter='\t')
         mywriter.writerow(row)
         for k,v in  data.items():
@@ -138,14 +138,9 @@ for cluster_id,list_concepts in clusterid_to_concept_text.items():
 assert len(cluster_id_cluster_name.keys()) > 0
 write_to_csv(cluster_id_cluster_name,'cluster_id_cluster_name.csv')
 
-sys.exit()
-
-
-plt.scatter(X[labels==0, 0], X[labels==0, 1], s=50, marker='o', color='red')
-plt.scatter(X[labels==1, 0], X[labels==1, 1], s=50, marker='o', color='blue')
-plt.scatter(X[labels==2, 0], X[labels==2, 1], s=50, marker='o', color='green')
-plt.scatter(X[labels==3, 0], X[labels==3, 1], s=50, marker='o', color='purple')
-plt.scatter(X[labels==4, 0], X[labels==4, 1], s=50, marker='o', color='orange')
+#
+for k,v in clusterid_to_concept_text.items():
+    plt.scatter(X[labels==k, 0], X[labels==k, 1], s=50)
 plt.show()
 
 
