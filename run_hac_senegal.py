@@ -73,11 +73,7 @@ for index,cause in enumerate(causes):
 
 X=np.asarray(X)
 
-#plot the dendrogram before clustering process
-# plt.figure(figsize=(15, 12))
-# dendo=sch.dendrogram(sch.linkage(X,method='average'))
-# plt.show()
-# sys.exit()
+
 
 #the engine part which does clustering and plotting. will need cosine similarities of each concept as input
 model=AgglomerativeClustering(n_clusters=None, distance_threshold=3, linkage='average',compute_full_tree=True)
@@ -141,6 +137,12 @@ write_to_csv(cluster_id_cluster_name,'cluster_id_cluster_name.csv')
 #
 for k,v in clusterid_to_concept_text.items():
     plt.scatter(X[labels==k, 0], X[labels==k, 1], s=50)
+
+# plot the dendrogram before clustering process
+plt.figure(figsize=(15, 12))
+dendo=sch.dendrogram(sch.linkage(X,method='average'))
+
+
 plt.show()
 
 
