@@ -24,6 +24,7 @@ total_tokens=0
 concept_emb={}
 X=[]
 map_concept_name_to_id={}
+map_id_to_concept_name={}
 for index,cause in enumerate(causes):
     concept_name=cause[0]
     cause_split_tokens=concept_name.split()
@@ -41,11 +42,12 @@ for index,cause in enumerate(causes):
     avg_emb=np.average(emb_total)
     concept_emb[concept_name]=avg_emb
     map_concept_name_to_id[concept_name]=index
+    map_id_to_concept_name[index]=concept_name
     X.append([index, avg_emb])
 
 
 
-print(f"total number of oov tokens/total tokens={total_oov_words/total_tokens}")
+
 
 X=np.asarray(X)
 
@@ -56,9 +58,23 @@ X=np.asarray(X)
 # sys.exit()
 
 #the engine part which does clustering and plotting. will need cosine similarities of each concept as input
-model=AgglomerativeClustering(n_clusters=None, distance_threshold=3, linkage='average',compute_full_tree=True)
-model.fit(X)
+model=AgglomerativeClustering(n_clusters=None, distance_threshold=5, linkage='average',compute_full_tree=True)
+clustering =model.fit(X)
 labels=model.labels_
+cluster_count=clustering.n_clusters_
+
+print(f"total number of oov tokens/total tokens={str(total_oov_words)}/{str(total_tokens)}")
+print(f"total number of concepts is {index}")
+print(f"total number of clusters is {cluster_count}")
+
+concept_text_cluster_id={}
+for index,label in enumerate(labels):
+    concept_name=map_id_to_concept_name.get(index,None)
+    assert concept_name is not None
+    concept_text_cluster_id[concept_name]=label
+
+
+
 
 plt.scatter(X[labels==0, 0], X[labels==0, 1], s=50, marker='o', color='red')
 plt.scatter(X[labels==1, 0], X[labels==1, 1], s=50, marker='o', color='blue')
