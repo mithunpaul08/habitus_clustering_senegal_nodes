@@ -5,12 +5,12 @@ from numpy import random
 import pandas as pd
 
 
-GLOVE_PATH_CLARA_SERVER="/data/nlp/corpora/glove/glove_lemmas.840B.300d.txt"
+GLOVE_PATH_CLARA_SERVER="./glove_lemmas.840B.300d.txt"
 GLOVE_PATH_LOCAL="./glove_bottom10.txt"
 
 words_embeddings={}
 def read_from_glove_assimilate():
-    df = pd.read_csv(GLOVE_PATH_CLARA_SERVER)
+    df = pd.read_csv(GLOVE_PATH_CLARA_SERVER,skiprows=365405,header=None)
     for index,line in df.iterrows():
             all_words=line[0].split()
             word=all_words[0]
