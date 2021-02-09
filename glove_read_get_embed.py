@@ -10,7 +10,7 @@ GLOVE_PATH_LOCAL="./glove_bottom10.txt"
 
 words_embeddings={}
 def read_from_glove_assimilate():
-    df = pd.read_csv(GLOVE_PATH_CLARA_SERVER,skiprows=365405,header=None)
+    df = pd.read_csv(GLOVE_PATH_CLARA_SERVER,skiprows=[365405,365679],header=None)
     #df = pd.read_csv(GLOVE_PATH_LOCAL)
     for index,line in df.iterrows():
             all_words=line[0].split()
