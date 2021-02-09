@@ -65,6 +65,7 @@ for index,cause in enumerate(causes):
 
 
 
+print(f"total number of oov tokens/total tokens={str(total_oov_words)}/{str(total_tokens)}")
 
 
 
@@ -73,12 +74,11 @@ X=np.asarray(X)
 
 
 #the engine part which does clustering and plotting. will need cosine similarities of each concept as input
-model=AgglomerativeClustering(n_clusters=None, distance_threshold=3, linkage='average',compute_full_tree=True)
+model=AgglomerativeClustering(n_clusters=None, distance_threshold=3, linkage='average',compute_full_tree=True,affinity='cosine')
 clustering =model.fit(X)
 labels=model.labels_
 cluster_count=clustering.n_clusters_
 
-print(f"total number of oov tokens/total tokens={str(total_oov_words)}/{str(total_tokens)}")
 print(f"total number of concepts is {index}")
 print(f"total number of clusters is {cluster_count}")
 
@@ -136,7 +136,6 @@ write_to_csv(clusterid_to_concept_text,'clusterid_to_concept_text.csv')
 assert len(cluster_id_cluster_name.keys()) > 0
 write_to_csv(cluster_id_cluster_name,'cluster_id_cluster_name.csv')
 
-sys.exit()
 
 for k,v in clusterid_to_concept_text.items():
     plt.scatter(X[labels==k, 0], X[labels==k, 1], s=50)
