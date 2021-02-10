@@ -15,7 +15,7 @@ words_embeddings={}
 
 
 def read_from_glove():
-    lines=open(GLOVE_PATH_CLARA_SERVER,mode='r')
+    lines=open(GLOVE_PATH_LOCAL,mode='r')
     for line in lines:
             all_words=line.split()
             word=all_words[0]

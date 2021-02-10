@@ -15,7 +15,16 @@ dataset=pd.read_csv('./senegal_africa.csv')
 causes = dataset.iloc[:, [2]].values
 
 #usee this if you want effeects instead of causes column
-#causes = dataset.iloc[:, [5]].values
+effects = dataset.iloc[:, [5]].values
+
+combined_causes_effects=[]
+
+
+for cause in causes:
+    combined_causes_effects.append(cause[0])
+for effect in effects:
+    combined_causes_effects.append(effect[0])
+
 
 # effects = dataset.iloc[:, [5]].values
 # assert causes.shape == effects.shape
@@ -57,8 +66,8 @@ def split_concept_get_average_embedding(concept_name):
 
 
 
-for index,cause in enumerate(causes):
-    concept_name=cause[0]
+for index,(concepts) in enumerate(combined_causes_effects):
+    concept_name=concepts
     avg_emb=split_concept_get_average_embedding(concept_name)
     concept_emb[concept_name]=avg_emb
     map_concept_name_to_id[concept_name]=index
