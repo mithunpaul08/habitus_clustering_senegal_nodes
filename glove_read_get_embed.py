@@ -8,14 +8,14 @@ import pandas as pd
 GLOVE_PATH_CLARA_SERVER="/data/nlp/corpora/glove/glove.840B.300d.10f.txt"
 GLOVE_PATH_LOCAL="./glove_bottom10.txt"
 
-random.seed(3)
+
 
 words_embeddings={}
 
 
 
 def read_from_glove():
-    lines=open(GLOVE_PATH_CLARA_SERVER,mode='r')
+    lines=open(GLOVE_PATH_LOCAL,mode='r')
     for line in lines:
             all_words=line.split()
             word=all_words[0]
