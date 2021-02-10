@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 import sys
 from glove_read_get_embed import get_embedding_given_token
 import csv
+import cfg
 #read causes and effects
 
 dataset=pd.read_csv('./senegal_africa.csv')
@@ -38,28 +39,27 @@ map_concept_name_to_id={}
 map_id_to_concept_name={}
 
 
-def split_concept_get_average_embedding(concept_name,total_tokens,total_oov_words):
+def split_concept_get_average_embedding(concept_name):
     z = np.zeros(300)
     emb_total = z.reshape(1, -1)
     cause_split_tokens = concept_name.split()
     #for each sub token, get embedding of them, and get the average of all n token embeddings as the concepts overall embedding value
     for each_token in cause_split_tokens:
-        total_tokens+=1
+        cfg.total_tokens+=1
         emb=get_embedding_given_token(each_token)
         if emb is None:
-            total_oov_words += 1
+            cfg.total_oov_words += 1
             continue
         else:
             emb_total+=emb
     avg_emb=np.average(emb_total)
-    return avg_emb,total_tokens,total_oov_words
+    return avg_emb
 
-total_oov_words=0
-total_tokens=0
+
 
 for index,cause in enumerate(causes):
     concept_name=cause[0]
-    avg_emb,total_tokens,total_oov_words=split_concept_get_average_embedding(concept_name,total_tokens,total_oov_words)
+    avg_emb=split_concept_get_average_embedding(concept_name)
     concept_emb[concept_name]=avg_emb
     map_concept_name_to_id[concept_name]=index
     map_id_to_concept_name[index]=concept_name
@@ -68,7 +68,7 @@ for index,cause in enumerate(causes):
 
 
 
-print(f"total number of oov tokens/total tokens={str(total_oov_words)}/{str(total_tokens)}")
+print(f"total number of oov tokens/total tokens={str(cfg.total_oov_words)}/{str(cfg.total_tokens)}")
 
 
 
@@ -124,7 +124,7 @@ cluster_id_cluster_name={}
 for cluster_id,list_concepts in clusterid_to_concept_text.items():
     average_emb_all_concepts_for_this_clusterid=[]
     for each_concept in list_concepts:
-        average_emb=split_concept_get_average_embedding(each_concept,0,0)
+        average_emb=split_concept_get_average_embedding(each_concept)
         average_emb_all_concepts_for_this_clusterid.append(average_emb)
     avg_of_concept_names=sum(average_emb_all_concepts_for_this_clusterid)/len(average_emb_all_concepts_for_this_clusterid)
     index_of_element_closest_to_average=find_nearest(average_emb_all_concepts_for_this_clusterid,avg_of_concept_names)

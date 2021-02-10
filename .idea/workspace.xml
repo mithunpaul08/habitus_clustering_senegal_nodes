@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4c37fce7-66be-46ee-a946-19bf0c223be9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/concept_clusterid.csv" beforeDir="false" afterPath="$PROJECT_DIR$/concept_clusterid.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cluster_id_cluster_name.csv" beforeDir="false" afterPath="$PROJECT_DIR$/cluster_id_cluster_name.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/glove_read_get_embed.py" beforeDir="false" afterPath="$PROJECT_DIR$/glove_read_get_embed.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/read_senegal_concepts.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/run_hac_senegal.py" beforeDir="false" afterPath="$PROJECT_DIR$/run_hac_senegal.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -22,27 +24,27 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="py" value="9" />
+          <entry key="py" value="10" />
           <entry key="txt" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="PLAIN_TEXT" value="1" />
-          <entry key="Python" value="9" />
+          <entry key="Python" value="10" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="45" />
-          <entry key="py" value="5423" />
+          <entry key="py" value="5455" />
           <entry key="txt" value="25" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="70" />
-          <entry key="Python" value="5423" />
+          <entry key="Python" value="5455" />
         </counts>
       </usages-collector>
     </session>
@@ -61,15 +63,24 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/run_hac_senegal.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="319">
-              <caret line="52" column="26" selection-start-line="52" selection-start-column="26" selection-end-line="52" selection-end-column="26" />
+            <state relative-caret-position="169">
+              <caret line="126" column="68" selection-start-line="126" selection-start-column="68" selection-end-line="126" selection-end-column="68" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
-                <marker date="1612923992997" expanded="true" signature="649:910" ph="..." />
+                <marker date="1612924889535" expanded="true" signature="660:921" ph="..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/cfg.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="15">
+              <caret line="1" column="14" selection-start-line="1" selection-start-column="14" selection-end-line="1" selection-end-column="14" />
             </state>
           </provider>
         </entry>
@@ -101,14 +112,14 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/glove_read_get_embed.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="179">
-              <caret line="42" selection-start-line="42" selection-end-line="42" />
+            <state relative-caret-position="255">
+              <caret line="17" column="38" selection-start-line="17" selection-start-column="38" selection-end-line="17" selection-end-column="38" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
-                <marker date="1612923633443" expanded="true" signature="665:670" ph="..." />
+                <marker date="1612924912192" expanded="true" signature="672:677" ph="..." />
               </folding>
             </state>
           </provider>
@@ -121,11 +132,6 @@
               <caret line="2" column="10" selection-start-line="2" selection-start-column="10" selection-end-line="2" selection-end-column="10" />
             </state>
           </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/read_senegal_concepts.py">
-          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -156,8 +162,9 @@
         <option value="$PROJECT_DIR$/hac_scikit_atelier.py" />
         <option value="$PROJECT_DIR$/clustering_atelier.py" />
         <option value="$PROJECT_DIR$/requirements.txt" />
-        <option value="$PROJECT_DIR$/glove_read_get_embed.py" />
+        <option value="$PROJECT_DIR$/cfg.py" />
         <option value="$PROJECT_DIR$/run_hac_senegal.py" />
+        <option value="$PROJECT_DIR$/glove_read_get_embed.py" />
       </list>
     </option>
   </component>
@@ -303,7 +310,7 @@
     <editor active="true" />
     <layout>
       <window_info id="Favorites" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24960506" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24960506" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Version Control" show_stripe_button="false" />
       <window_info anchor="bottom" id="Python Console" />
@@ -312,8 +319,8 @@
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32951945" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32837528" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.43020594" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32837528" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.43020594" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -383,6 +390,11 @@
           <line>123</line>
           <option name="timeStamp" value="80" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/run_hac_senegal.py</url>
+          <line>61</line>
+          <option name="timeStamp" value="81" />
+        </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
@@ -439,9 +451,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/read_senegal_concepts.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file:///opt/miniconda3/envs/huggingface/lib/python3.8/site-packages/sklearn/utils/validation.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="149">
@@ -463,13 +472,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/requirements.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="10" selection-start-line="2" selection-start-column="10" selection-end-line="2" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///opt/miniconda3/envs/huggingface/lib/python3.8/codecs.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="179">
@@ -487,24 +489,41 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/glove_read_get_embed.py">
+    <entry file="file://$PROJECT_DIR$/cfg.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="42" selection-start-line="42" selection-end-line="42" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-            <marker date="1612923633443" expanded="true" signature="665:670" ph="..." />
-          </folding>
+        <state relative-caret-position="15">
+          <caret line="1" column="14" selection-start-line="1" selection-start-column="14" selection-end-line="1" selection-end-column="14" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/run_hac_senegal.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="319">
-          <caret line="52" column="26" selection-start-line="52" selection-start-column="26" selection-end-line="52" selection-end-column="26" />
+        <state relative-caret-position="169">
+          <caret line="126" column="68" selection-start-line="126" selection-start-column="68" selection-end-line="126" selection-end-column="68" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
-            <marker date="1612923992997" expanded="true" signature="649:910" ph="..." />
+            <marker date="1612924889535" expanded="true" signature="660:921" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/read_senegal_concepts.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/requirements.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="10" selection-start-line="2" selection-start-column="10" selection-end-line="2" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/glove_read_get_embed.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="38" selection-start-line="17" selection-start-column="38" selection-end-line="17" selection-end-column="38" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+            <marker date="1612924912192" expanded="true" signature="672:677" ph="..." />
           </folding>
         </state>
       </provider>
