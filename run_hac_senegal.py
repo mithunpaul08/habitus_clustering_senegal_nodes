@@ -9,9 +9,11 @@ import sys
 from glove_read_get_embed import get_embedding_given_token
 import csv
 import cfg
-import nltk
-from nltk.corpus import stopwords
 
+import nltk
+nltk.download('stopwords')
+
+from nltk.corpus import stopwords
 
 
 
@@ -96,7 +98,7 @@ X=np.asarray(X)
 
 
 #the engine part which does clustering and plotting. will need cosine similarities of each concept as input
-model=AgglomerativeClustering(n_clusters=None, distance_threshold=0.9, linkage='average',compute_full_tree=True,affinity='cosine')
+model=AgglomerativeClustering(n_clusters=None, distance_threshold=0.01, linkage='average',compute_full_tree=True,affinity='cosine')
 clustering =model.fit(X)
 labels=model.labels_
 cluster_count=clustering.n_clusters_
