@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4c37fce7-66be-46ee-a946-19bf0c223be9" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/glove_read_get_embed.py" beforeDir="false" afterPath="$PROJECT_DIR$/glove_read_get_embed.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run_hac_senegal.py" beforeDir="false" afterPath="$PROJECT_DIR$/run_hac_senegal.py" afterDir="false" />
     </list>
@@ -34,14 +35,14 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="45" />
-          <entry key="py" value="5566" />
+          <entry key="py" value="5624" />
           <entry key="txt" value="25" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="70" />
-          <entry key="Python" value="5566" />
+          <entry key="Python" value="5624" />
         </counts>
       </usages-collector>
     </session>
@@ -60,14 +61,14 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/run_hac_senegal.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="25" column="41" selection-start-line="25" selection-start-column="41" selection-end-line="25" selection-end-column="41" />
+            <state relative-caret-position="974">
+              <caret line="89" column="69" selection-start-line="89" selection-start-column="69" selection-end-line="89" selection-end-column="69" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
-                <marker date="1612925251939" expanded="true" signature="826:1087" ph="..." />
+                <marker date="1612926104792" expanded="true" signature="826:1087" ph="..." />
               </folding>
             </state>
           </provider>
@@ -109,14 +110,14 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/glove_read_get_embed.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="255">
-              <caret line="17" column="31" selection-start-line="17" selection-start-column="31" selection-end-line="17" selection-end-column="31" />
+              <caret line="17" column="38" selection-start-line="17" selection-start-column="38" selection-end-line="17" selection-end-column="38" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
-                <marker date="1612925117041" expanded="true" signature="665:670" ph="..." />
+                <marker date="1612926104796" expanded="true" signature="672:677" ph="..." />
               </folding>
             </state>
           </provider>
@@ -160,8 +161,8 @@
         <option value="$PROJECT_DIR$/clustering_atelier.py" />
         <option value="$PROJECT_DIR$/requirements.txt" />
         <option value="$PROJECT_DIR$/cfg.py" />
-        <option value="$PROJECT_DIR$/glove_read_get_embed.py" />
         <option value="$PROJECT_DIR$/run_hac_senegal.py" />
+        <option value="$PROJECT_DIR$/glove_read_get_embed.py" />
       </list>
     </option>
   </component>
@@ -316,8 +317,8 @@
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32951945" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32837528" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.43020594" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32837528" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.43020594" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -339,58 +340,73 @@
         </line-breakpoint>
         <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/run_hac_senegal.py</url>
-          <line>90</line>
+          <line>91</line>
           <option name="timeStamp" value="31" />
         </line-breakpoint>
         <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/run_hac_senegal.py</url>
-          <line>88</line>
+          <line>89</line>
           <option name="timeStamp" value="33" />
         </line-breakpoint>
         <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/run_hac_senegal.py</url>
-          <line>89</line>
+          <line>90</line>
           <option name="timeStamp" value="36" />
         </line-breakpoint>
         <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/run_hac_senegal.py</url>
-          <line>97</line>
+          <line>98</line>
           <option name="timeStamp" value="37" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+        <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/run_hac_senegal.py</url>
           <line>152</line>
           <option name="timeStamp" value="63" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+        <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/glove_read_get_embed.py</url>
           <line>48</line>
           <option name="timeStamp" value="67" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+        <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/glove_read_get_embed.py</url>
           <line>47</line>
           <option name="timeStamp" value="73" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+        <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/run_hac_senegal.py</url>
-          <line>79</line>
+          <line>80</line>
           <option name="timeStamp" value="78" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+        <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/run_hac_senegal.py</url>
-          <line>137</line>
+          <line>138</line>
           <option name="timeStamp" value="79" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+        <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/run_hac_senegal.py</url>
-          <line>132</line>
+          <line>133</line>
           <option name="timeStamp" value="80" />
+        </line-breakpoint>
+        <line-breakpoint suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/run_hac_senegal.py</url>
+          <line>32</line>
+          <option name="timeStamp" value="85" />
+        </line-breakpoint>
+        <line-breakpoint suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/run_hac_senegal.py</url>
+          <line>58</line>
+          <option name="timeStamp" value="86" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/run_hac_senegal.py</url>
-          <line>70</line>
-          <option name="timeStamp" value="81" />
+          <line>136</line>
+          <option name="timeStamp" value="91" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/run_hac_senegal.py</url>
+          <line>71</line>
+          <option name="timeStamp" value="92" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
@@ -400,6 +416,16 @@
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateCodeFragment">
+      <expression>
+        <expression-string>np.ptp(emb)</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>np.min(emb)</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
       <expression>
         <expression-string>lines</expression-string>
         <language-id>Python</language-id>
@@ -432,16 +458,6 @@
       </expression>
       <expression>
         <expression-string>concept_text_cluster_id</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>clustering.n_clusters_</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>clustering</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
@@ -503,24 +519,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/glove_read_get_embed.py">
+    <entry file="file://$PROJECT_DIR$/run_hac_senegal.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="31" selection-start-line="17" selection-start-column="31" selection-end-line="17" selection-end-column="31" />
+        <state relative-caret-position="974">
+          <caret line="89" column="69" selection-start-line="89" selection-start-column="69" selection-end-line="89" selection-end-column="69" />
           <folding>
-            <element signature="e#0#10#0" expanded="true" />
-            <marker date="1612925117041" expanded="true" signature="665:670" ph="..." />
+            <element signature="e#0#14#0" expanded="true" />
+            <marker date="1612926104792" expanded="true" signature="826:1087" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/run_hac_senegal.py">
+    <entry file="file://$PROJECT_DIR$/glove_read_get_embed.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="25" column="41" selection-start-line="25" selection-start-column="41" selection-end-line="25" selection-end-column="41" />
+        <state relative-caret-position="255">
+          <caret line="17" column="38" selection-start-line="17" selection-start-column="38" selection-end-line="17" selection-end-column="38" />
           <folding>
-            <element signature="e#0#14#0" expanded="true" />
-            <marker date="1612925251939" expanded="true" signature="826:1087" ph="..." />
+            <element signature="e#0#10#0" expanded="true" />
+            <marker date="1612926104796" expanded="true" signature="672:677" ph="..." />
           </folding>
         </state>
       </provider>

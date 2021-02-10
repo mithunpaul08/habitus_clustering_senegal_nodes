@@ -55,12 +55,13 @@ def split_concept_get_average_embedding(concept_name):
     #for each sub token, get embedding of them, and get the average of all n token embeddings as the concepts overall embedding value
     for each_token in cause_split_tokens:
         cfg.total_tokens+=1
-        emb=get_embedding_given_token(each_token)
-        if emb is None:
+        emb_raw=get_embedding_given_token(each_token)
+        if emb_raw is None:
             cfg.total_oov_words += 1
             continue
         else:
-            emb_total+=emb
+            emb_normalized = (emb_raw - np.min(emb_raw)) / np.ptp(emb_raw)
+            emb_total+=emb_normalized
     avg_emb=np.average(emb_total)
     return avg_emb
 
@@ -86,7 +87,7 @@ X=np.asarray(X)
 
 
 #the engine part which does clustering and plotting. will need cosine similarities of each concept as input
-model=AgglomerativeClustering(n_clusters=None, distance_threshold=0.03, linkage='average',compute_full_tree=True,affinity='cosine')
+model=AgglomerativeClustering(n_clusters=None, distance_threshold=0.9, linkage='average',compute_full_tree=True,affinity='cosine')
 clustering =model.fit(X)
 labels=model.labels_
 cluster_count=clustering.n_clusters_
@@ -148,7 +149,6 @@ write_to_csv(clusterid_to_concept_text,'clusterid_to_concept_text.csv')
 assert len(cluster_id_cluster_name.keys()) > 0
 write_to_csv(cluster_id_cluster_name,'cluster_id_cluster_name.csv')
 
-exit()
 
 for k,v in clusterid_to_concept_text.items():
     plt.scatter(X[labels==k, 0], X[labels==k, 1], s=50)
