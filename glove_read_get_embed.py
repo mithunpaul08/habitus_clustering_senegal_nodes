@@ -5,7 +5,7 @@ from numpy import random
 import pandas as pd
 
 
-GLOVE_PATH_CLARA_SERVER="/data/nlp/corpora/glove/glove_lemmas.840B.300d.txt"
+GLOVE_PATH_CLARA_SERVER="/data/nlp/corpora/glove/glove.840B.300d.10f.txt"
 GLOVE_PATH_LOCAL="./glove_bottom10.txt"
 
 random.seed(3)
