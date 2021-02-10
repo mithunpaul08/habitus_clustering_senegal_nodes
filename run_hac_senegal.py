@@ -31,8 +31,7 @@ def write_to_csv(data,filename):
 
 # for each token in cause and effect, get their glove embedding
 # Average embeddings for multi-word concepts
-total_oov_words=0
-total_tokens=0
+
 concept_emb={}
 X=[]
 map_concept_name_to_id={}
@@ -52,14 +51,15 @@ def split_concept_get_average_embedding(concept_name,total_tokens,total_oov_word
             continue
         else:
             emb_total+=emb
-
     avg_emb=np.average(emb_total)
-    return avg_emb
+    return avg_emb,total_tokens,total_oov_words
 
+total_oov_words=0
+total_tokens=0
 
 for index,cause in enumerate(causes):
     concept_name=cause[0]
-    avg_emb=split_concept_get_average_embedding(concept_name,total_tokens,total_oov_words)
+    avg_emb,total_tokens,total_oov_words=split_concept_get_average_embedding(concept_name,total_tokens,total_oov_words)
     concept_emb[concept_name]=avg_emb
     map_concept_name_to_id[concept_name]=index
     map_id_to_concept_name[index]=concept_name
