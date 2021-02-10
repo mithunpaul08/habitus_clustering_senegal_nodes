@@ -46,10 +46,13 @@ def split_concept_get_average_embedding(concept_name,total_tokens,total_oov_word
     #for each sub token, get embedding of them, and get the average of all n token embeddings as the concepts overall embedding value
     for each_token in cause_split_tokens:
         total_tokens+=1
-        emb,flag_oov=get_embedding_given_token(each_token)
-        emb_total+=emb
-        if (flag_oov==True):
-            total_oov_words+=1
+        emb=get_embedding_given_token(each_token)
+        if emb is None:
+            total_oov_words += 1
+            continue
+        else:
+            emb_total+=emb
+
     avg_emb=np.average(emb_total)
     return avg_emb
 
