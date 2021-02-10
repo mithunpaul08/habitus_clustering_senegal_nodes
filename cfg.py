@@ -1,0 +1,2 @@
+total_oov_words=0
+total_tokens=0
