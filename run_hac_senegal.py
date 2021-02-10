@@ -9,6 +9,7 @@ import sys
 from glove_read_get_embed import get_embedding_given_token
 import csv
 import cfg
+from sklearn.metrics.pairwise import cosine_similarity
 
 import nltk
 nltk.download('stopwords')
@@ -71,20 +72,29 @@ def split_concept_get_average_embedding(concept_name):
             cfg.total_oov_words += 1
             continue
         else:
-            emb_normalized = (emb_raw - np.min(emb_raw)) / np.ptp(emb_raw)
-            emb_total+=emb_normalized
-    avg_emb=np.average(emb_total)
-    return avg_emb
+            emb_total+=emb_raw
 
 
+            #todo2: return embeddings   , not average
+    #avg_emb=np.average(emb_total)
+     #todo: do embedding by dividing with total magnitude of the vector
+    #emb_normalized = (emb_total - np.min(emb_total)) / np.ptp(emb_total)
 
+    return emb_total
+
+
+emb1=None
+emb2=None
 for index,(concepts) in enumerate(combined_causes_effects):
     concept_name=concepts
-    avg_emb=split_concept_get_average_embedding(concept_name)
-    concept_emb[concept_name]=avg_emb
+    all_embeddings=split_concept_get_average_embedding(concept_name)
+    concept_emb[concept_name]=all_embeddings
     map_concept_name_to_id[concept_name]=index
     map_id_to_concept_name[index]=concept_name
-    X.append([index, avg_emb])
+    X.append(all_embeddings)
+
+
+cos=cosine_similarity(concept_emb['climate information village'], concept_emb['climate extreme appear be hazard'])
 
 
 
@@ -99,7 +109,7 @@ X=np.asarray(X)
 
 #the engine part which does clustering and plotting. will need cosine similarities of each concept as input
 model=AgglomerativeClustering(n_clusters=None, distance_threshold=0.01, linkage='average',compute_full_tree=True,affinity='cosine')
-clustering =model.fit(X)
+clustering =model.fit(X[0])
 labels=model.labels_
 cluster_count=clustering.n_clusters_
 
