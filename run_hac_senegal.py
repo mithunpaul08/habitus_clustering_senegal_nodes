@@ -53,7 +53,7 @@ def write_to_csv(data,filename):
 # Average embeddings for multi-word concepts
 
 concept_emb={}
-X=[]
+all_data=np.zeros([1,300])
 map_concept_name_to_id={}
 map_id_to_concept_name={}
 
@@ -80,7 +80,7 @@ def split_concept_get_average_embedding(concept_name):
      #todo: do embedding by dividing with total magnitude of the vector
     #emb_normalized = (emb_total - np.min(emb_total)) / np.ptp(emb_total)
 
-    return emb_total
+    return emb_total[0]
 
 
 emb1=None
@@ -91,25 +91,27 @@ for index,(concepts) in enumerate(combined_causes_effects):
     concept_emb[concept_name]=all_embeddings
     map_concept_name_to_id[concept_name]=index
     map_id_to_concept_name[index]=concept_name
-    X.append(all_embeddings)
+    all_embeddings=all_embeddings.reshape(1,-1)
+    all_data=np.append(all_data,all_embeddings,axis=0)
 
 
-cos=cosine_similarity(concept_emb['climate information village'], concept_emb['climate extreme appear be hazard'])
+#cos=cosine_similarity(concept_emb['climate information village'], concept_emb['climate extreme appear be hazard'])
 
 
 
 
 print(f"total number of oov tokens/total tokens={str(cfg.total_oov_words)}/{str(cfg.total_tokens)}")
 
+#remove the first row of zeros
+all_data = np.delete(all_data,0,axis=0)
 
 
-X=np.asarray(X)
 
 
 
 #the engine part which does clustering and plotting. will need cosine similarities of each concept as input
 model=AgglomerativeClustering(n_clusters=None, distance_threshold=0.01, linkage='average',compute_full_tree=True,affinity='cosine')
-clustering =model.fit(X[0])
+clustering =model.fit(all_data)
 labels=model.labels_
 cluster_count=clustering.n_clusters_
 
