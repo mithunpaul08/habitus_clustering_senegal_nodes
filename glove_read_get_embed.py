@@ -1,8 +1,4 @@
-import sys
-
 import numpy as np
-from numpy import random
-import pandas as pd
 from sklearn.metrics.pairwise import cosine_similarity
 
 GLOVE_PATH_CLARA_SERVER="/data/nlp/corpora/glove/glove.840B.300d.10f.txt"
@@ -22,17 +18,6 @@ def read_from_glove():
             emb=emb.astype(np.float)
             embdash=np.reshape(emb, [1, -1])
             words_embeddings[word]=embdash
-
-# def read_from_glove_assimilate_using_pandas():
-#     df = pd.read_csv(GLOVE_PATH_CLARA_SERVER,skiprows=[0],header=None)
-#     #df = pd.read_csv(GLOVE_PATH_LOCAL)
-#     for index,line in df.iterrows():
-#             all_words=line[0].split()
-#             word=all_words[0]
-#             emb=np.array(all_words[1:len(all_words)])
-#             emb=emb.astype(np.float)
-#             embdash=np.reshape(emb, [1, -1])
-#             words_embeddings[word]=embdash
 
 
 read_from_glove()
