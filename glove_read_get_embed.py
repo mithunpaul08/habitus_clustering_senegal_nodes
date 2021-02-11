@@ -13,7 +13,6 @@ GLOVE_PATH_LOCAL="./small_glove10f.txt"
 words_embeddings={}
 
 
-
 def read_from_glove():
     lines=open(GLOVE_PATH_CLARA_SERVER,mode='r')
     for line in lines:

@@ -57,6 +57,9 @@ all_data=np.zeros([1,300])
 map_concept_name_to_id={}
 map_id_to_concept_name={}
 
+def normalize(vector):
+    norms=np.apply_along_axis(np.linalg.norm,0,vector)
+    return vector/norms
 
 def split_concept_get_combined_embedding(concept_name):
     #z = np.zeros(300)
@@ -80,7 +83,8 @@ def split_concept_get_combined_embedding(concept_name):
     if np.count_nonzero(emb_total[0])==0:
         return None
     else:
-        return emb_total[0]
+        emb_total=normalize(emb_total[0])
+        return emb_total
 
 
 
