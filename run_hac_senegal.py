@@ -24,7 +24,7 @@ random.seed(3)
 dataset=pd.read_csv('./senegal_africa.csv')
 causes = dataset.iloc[:, [2]].values
 
-#usee this if you want effeects instead of causes column
+#usee this if you want effeects  column
 effects = dataset.iloc[:, [5]].values
 
 combined_causes_effects=[]
@@ -36,8 +36,6 @@ for effect in effects:
     combined_causes_effects.append(effect[0])
 
 
-# effects = dataset.iloc[:, [5]].values
-# assert causes.shape == effects.shape
 
 
 def write_to_csv(data,filename):
