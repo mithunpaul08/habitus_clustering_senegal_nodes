@@ -16,7 +16,7 @@ nltk.download('stopwords')
 from nltk.corpus import stopwords
 
 
-THRESHOLD=0.5
+THRESHOLD=0.9
 
 random.seed(3)
 
@@ -124,7 +124,7 @@ cluster_count=clustering.n_clusters_
 print(f"total number of concepts is {index}")
 print(f"total number of clusters is {cluster_count}")
 print(f"final labels are  {labels}")
-print(f"distances are{clustering.distances_}")
+#print(f"distances are{clustering.distances_}")
 
 # plot the dendrogram before clustering process
 
