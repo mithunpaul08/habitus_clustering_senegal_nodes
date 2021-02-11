@@ -50,5 +50,3 @@ def return_pairwise_cosine_similarity(word1,word2):
     return cosine_similarity(emb_word1, emb_word2)
 
 
-#cos=return_pairwise_cosine_similarity('zulchzulu','wried')
-#print(cos)

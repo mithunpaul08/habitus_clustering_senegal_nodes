@@ -13,10 +13,10 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 import nltk
 nltk.download('stopwords')
-
 from nltk.corpus import stopwords
 
 
+THRESHOLD=0.6
 
 random.seed(3)
 
@@ -112,7 +112,7 @@ all_data = np.delete(all_data,0,axis=0)
 
 
 #the engine part which does clustering and plotting. will need cosine similarities of each concept as input
-model=AgglomerativeClustering(n_clusters=None, distance_threshold=0.3, linkage='average',compute_full_tree=True,affinity='cosine')
+model=AgglomerativeClustering(n_clusters=None, distance_threshold=THRESHOLD, linkage='average',compute_full_tree=True,affinity='cosine')
 clustering =model.fit(all_data)
 labels=model.labels_
 cluster_count=clustering.n_clusters_
@@ -151,9 +151,9 @@ for index,label in enumerate(labels):
         clusterid_to_concept_text[label] = list_concepts_under_this_id
 
 
-
+filename='concept_clusterid_threshold'+str(THRESHOLD)+".csv"
 assert len(concept_text_cluster_id.keys()) > 0
-write_to_csv(concept_text_cluster_id,'concept_clusterid.csv')
+write_to_csv(concept_text_cluster_id,filename)
 
 #to find the namee of the ]cluster
 
@@ -183,12 +183,14 @@ for cluster_id,list_concepts in clusterid_to_concept_text.items():
 
 
 assert len(cluster_id_cluster_name.keys()) > 0
-write_to_csv(clusterid_to_concept_text,'clusterid_to_concept_text.csv')
+filename='clusterid_to_all_sub_concepts_threshold'+str(THRESHOLD)+".csv"
+write_to_csv(clusterid_to_concept_text,filename)
 
 
 
+filename='cluster_id_cluster_name_threshold'+str(THRESHOLD)+".csv"
 assert len(cluster_id_cluster_name.keys()) > 0
-write_to_csv(cluster_id_cluster_name,'cluster_id_cluster_name.csv')
+write_to_csv(cluster_id_cluster_name,filename)
 
 for k,v in clusterid_to_concept_text.items():
     plt.scatter(all_data[labels==k, 0], all_data[labels==k, 1], s=50)
@@ -196,4 +198,4 @@ for k,v in clusterid_to_concept_text.items():
 
 plt.figure(figsize=(15, 12))
 dendo=sch.dendrogram(sch.linkage(all_data,method='average'))
-plt.show()
+#plt.show()
