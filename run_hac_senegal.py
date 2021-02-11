@@ -112,7 +112,7 @@ all_data = np.delete(all_data,0,axis=0)
 
 
 #the engine part which does clustering and plotting. will need cosine similarities of each concept as input
-model=AgglomerativeClustering(n_clusters=None, distance_threshold=0.8, linkage='average',compute_full_tree=True,affinity='cosine')
+model=AgglomerativeClustering(n_clusters=None, distance_threshold=0.3, linkage='average',compute_full_tree=True,affinity='cosine')
 clustering =model.fit(all_data)
 labels=model.labels_
 cluster_count=clustering.n_clusters_
@@ -125,9 +125,9 @@ print(f"distances are{clustering.distances_}")
 # plot the dendrogram before clustering process
 
 
-plt.figure(figsize=(15, 12))
-dendo=sch.dendrogram(sch.linkage(all_data,method='average'))
-#plt.show()
+
+
+
 
 #to map which cluster did finally each concept end up
 concept_text_cluster_id={}
@@ -190,9 +190,10 @@ write_to_csv(clusterid_to_concept_text,'clusterid_to_concept_text.csv')
 assert len(cluster_id_cluster_name.keys()) > 0
 write_to_csv(cluster_id_cluster_name,'cluster_id_cluster_name.csv')
 
-sys.exit()
-
 for k,v in clusterid_to_concept_text.items():
-    plt.scatter(X[labels==k, 0], X[labels==k, 1], s=50)
+    plt.scatter(all_data[labels==k, 0], all_data[labels==k, 1], s=50)
 
 
+plt.figure(figsize=(15, 12))
+dendo=sch.dendrogram(sch.linkage(all_data,method='average'))
+plt.show()
