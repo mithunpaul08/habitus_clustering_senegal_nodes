@@ -117,7 +117,7 @@ cluster_count=clustering.n_clusters_
 
 print(f"total number of concepts is {index}")
 print(f"total number of clusters is {cluster_count}")
-print(f"final labels are  {labels}")
+#print(f"final labels are  {labels}")
 #print(f"distances are{clustering.distances_}")
 
 # plot the dendrogram before clustering process
