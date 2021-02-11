@@ -62,11 +62,10 @@ def normalize(vector):
     return vector/norms
 
 def split_concept_get_combined_embedding(concept_name):
-    #z = np.zeros(300)
-    #emb_total = z.reshape(1,-1)
-
     emb_total=np.full([1,300],0.00000001)
     cause_split_tokens = concept_name.split()
+    total_no_of_tokens=len(cause_split_tokens)
+
     #for each sub token, get embedding of them, and get the average of all n token embeddings as the concepts overall embedding value
     for each_token in cause_split_tokens:
         if each_token in stopwords.words('english'):
@@ -78,13 +77,8 @@ def split_concept_get_combined_embedding(concept_name):
             continue
         else:
             emb_total+=emb_raw
-
-#todo: do normalization by embedding by dividing with total magnitude of the vector
-    if np.count_nonzero(emb_total[0])==0:
-        return None
-    else:
-        emb_total=normalize(emb_total[0])
-        return emb_total
+    emb_total=emb_total/total_no_of_tokens #divide by number of tokens to get average embedding for this concept
+    return emb_total
 
 
 
