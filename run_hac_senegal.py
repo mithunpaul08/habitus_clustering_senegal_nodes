@@ -58,9 +58,11 @@ map_concept_name_to_id={}
 map_id_to_concept_name={}
 
 
-def split_concept_get_average_embedding(concept_name):
-    z = np.zeros(300)
-    emb_total = z.reshape(1, -1)
+def split_concept_get_combined_embedding(concept_name):
+    #z = np.zeros(300)
+    #emb_total = z.reshape(1,-1)
+
+    emb_total=np.full([1,300],0.00000001)
     cause_split_tokens = concept_name.split()
     #for each sub token, get embedding of them, and get the average of all n token embeddings as the concepts overall embedding value
     for each_token in cause_split_tokens:
@@ -74,28 +76,28 @@ def split_concept_get_average_embedding(concept_name):
         else:
             emb_total+=emb_raw
 
+#todo: do normalization by embedding by dividing with total magnitude of the vector
+    if np.count_nonzero(emb_total[0])==0:
+        return None
+    else:
+        return emb_total[0]
 
-            #todo2: return embeddings   , not average
-    #avg_emb=np.average(emb_total)
-     #todo: do embedding by dividing with total magnitude of the vector
-    #emb_normalized = (emb_total - np.min(emb_total)) / np.ptp(emb_total)
-
-    return emb_total[0]
 
 
 emb1=None
 emb2=None
 for index,(concepts) in enumerate(combined_causes_effects):
     concept_name=concepts
-    all_embeddings=split_concept_get_average_embedding(concept_name)
-    concept_emb[concept_name]=all_embeddings
-    map_concept_name_to_id[concept_name]=index
-    map_id_to_concept_name[index]=concept_name
-    all_embeddings=all_embeddings.reshape(1,-1)
-    all_data=np.append(all_data,all_embeddings,axis=0)
+    all_embeddings=split_concept_get_combined_embedding(concept_name)
+    if all_embeddings is not None:
+        concept_emb[concept_name]=all_embeddings
+        map_concept_name_to_id[concept_name]=index
+        map_id_to_concept_name[index]=concept_name
+        all_embeddings=all_embeddings.reshape(1,-1)
+        all_data=np.append(all_data,all_embeddings,axis=0)
+    else:
+        print(f"found that the concept at index {index} and concept={concepts} had a zero embedding")
 
-
-#cos=cosine_similarity(concept_emb['climate information village'], concept_emb['climate extreme appear be hazard'])
 
 
 
@@ -110,17 +112,29 @@ all_data = np.delete(all_data,0,axis=0)
 
 
 #the engine part which does clustering and plotting. will need cosine similarities of each concept as input
-model=AgglomerativeClustering(n_clusters=None, distance_threshold=0.01, linkage='average',compute_full_tree=True,affinity='cosine')
+model=AgglomerativeClustering(n_clusters=None, distance_threshold=0.8, linkage='average',compute_full_tree=True,affinity='cosine')
 clustering =model.fit(all_data)
 labels=model.labels_
 cluster_count=clustering.n_clusters_
 
 print(f"total number of concepts is {index}")
 print(f"total number of clusters is {cluster_count}")
+print(f"final labels are  {labels}")
+print(f"distances are{clustering.distances_}")
+
+# plot the dendrogram before clustering process
+
+
+plt.figure(figsize=(15, 12))
+dendo=sch.dendrogram(sch.linkage(all_data,method='average'))
+#plt.show()
 
 #to map which cluster did finally each concept end up
 concept_text_cluster_id={}
 clusterid_to_concept_text={}
+
+
+
 for index,label in enumerate(labels):
     concept_name=map_id_to_concept_name.get(index,None)
     assert concept_name is not None
@@ -157,11 +171,15 @@ cluster_id_cluster_name={}
 for cluster_id,list_concepts in clusterid_to_concept_text.items():
     average_emb_all_concepts_for_this_clusterid=[]
     for each_concept in list_concepts:
-        average_emb=split_concept_get_average_embedding(each_concept)
+        average_emb=split_concept_get_combined_embedding(each_concept)
         average_emb_all_concepts_for_this_clusterid.append(average_emb)
     avg_of_concept_names=sum(average_emb_all_concepts_for_this_clusterid)/len(average_emb_all_concepts_for_this_clusterid)
     index_of_element_closest_to_average=find_nearest(average_emb_all_concepts_for_this_clusterid,avg_of_concept_names)
-    cluster_id_cluster_name[cluster_id]=list_concepts[index_of_element_closest_to_average]
+
+
+    #all clusters will be temporarily given the name of the first guy in th cluster. this is to test how good teh clusters are before we go itno naming them
+    # todo, uncomment thiscluster_id_cluster_name[cluster_id]=list_concepts[index_of_element_closest_to_average]
+    cluster_id_cluster_name[cluster_id]=list_concepts[0]
 
 
 assert len(cluster_id_cluster_name.keys()) > 0
@@ -176,12 +194,5 @@ sys.exit()
 
 for k,v in clusterid_to_concept_text.items():
     plt.scatter(X[labels==k, 0], X[labels==k, 1], s=50)
-
-# plot the dendrogram before clustering process
-plt.figure(figsize=(15, 12))
-dendo=sch.dendrogram(sch.linkage(X,method='average'))
-
-
-plt.show()
 
 

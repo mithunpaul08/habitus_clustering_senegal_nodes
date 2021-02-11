@@ -6,7 +6,7 @@ import pandas as pd
 from sklearn.metrics.pairwise import cosine_similarity
 
 GLOVE_PATH_CLARA_SERVER="/data/nlp/corpora/glove/glove.840B.300d.10f.txt"
-GLOVE_PATH_LOCAL="./glove_bottom10.txt"
+GLOVE_PATH_LOCAL="./small_glove10f.txt"
 
 
 
@@ -15,7 +15,7 @@ words_embeddings={}
 
 
 def read_from_glove():
-    lines=open(GLOVE_PATH_LOCAL,mode='r')
+    lines=open(GLOVE_PATH_CLARA_SERVER,mode='r')
     for line in lines:
             all_words=line.split()
             word=all_words[0]
@@ -45,11 +45,10 @@ def get_embedding_given_token(tk):
 
 
 def return_pairwise_cosine_similarity(word1,word2):
-    read_from_glove()
     emb_word1=get_embedding_given_token(word1)
     emb_word2 = get_embedding_given_token(word2)
     return cosine_similarity(emb_word1, emb_word2)
 
 
-cos=return_pairwise_cosine_similarity('zulchzulu','wried')
-print(cos)
+#cos=return_pairwise_cosine_similarity('zulchzulu','wried')
+#print(cos)
