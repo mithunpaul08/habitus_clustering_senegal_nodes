@@ -16,7 +16,7 @@ nltk.download('stopwords')
 from nltk.corpus import stopwords
 
 
-THRESHOLD=0.4
+THRESHOLD=0.5
 
 random.seed(3)
 
