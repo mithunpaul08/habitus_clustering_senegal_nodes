@@ -1,2 +1,4 @@
 __pycache__
+cluster*.csv
+concept*.csv
 .idea/

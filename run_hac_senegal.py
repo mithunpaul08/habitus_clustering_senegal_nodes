@@ -35,7 +35,9 @@ for cause in causes:
 for effect in effects:
     combined_causes_effects.append(effect[0])
 
-
+#get only unique values out
+combined_causes_effects=set(combined_causes_effects)
+combined_causes_effects=list(combined_causes_effects)
 
 
 def write_to_csv(data,filename):
