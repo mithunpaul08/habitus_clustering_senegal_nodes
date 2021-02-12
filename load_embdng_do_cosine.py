@@ -71,11 +71,11 @@ def get_embedding_given_token(tk):
     return words_embeddings.get(tk,None)
 
 
-
-def return_pairwise_cosine_similarity(word1,word2):
-    emb_word1=get_embedding_given_token(word1)
-    emb_word2 = get_embedding_given_token(word2)
-    return cosine_similarity(emb_word1, emb_word2)
+#
+# def return_pairwise_cosine_similarity(word1,word2):
+#     emb_word1=get_embedding_given_token(word1)
+#     emb_word2 = get_embedding_given_token(word2)
+#     return cosine_similarity(emb_word1, emb_word2)
 
 
 
@@ -84,12 +84,8 @@ for index,(concepts) in enumerate(combined_causes_effects):
     all_embeddings=split_concept_get_combined_embedding(concept_name)
     if all_embeddings is not None:
         pass
-        #do whatever
+        #do whatever- storee the embeeddings in a dictionary, and theen use this:
+        #cosine_similarity(emb_word1, emb_word2)
     else:
         print(f"found that the concept at index {index} and concept={concepts} had a zero embedding")
 
-
-
-# use this code if you want to calculate cosinee similarity between the concepts you find above
-cos1 = return_pairwise_cosine_similarity('long', 'longer')
-print(cos1)
