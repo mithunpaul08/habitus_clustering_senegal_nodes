@@ -16,7 +16,7 @@ nltk.download('stopwords')
 from nltk.corpus import stopwords
 
 
-THRESHOLD=0.4
+THRESHOLD=0.7
 
 random.seed(3)
 
@@ -43,7 +43,7 @@ combined_causes_effects=list(combined_causes_effects)
 def write_to_csv(data,filename):
     with open(filename,'w',newline='') as myfile:
         for k,v in  data.items():
-            row=([k,v])
+            row=([k,"\t",v])
             mywriter=csv.writer(myfile,delimiter='\t')
             mywriter.writerow(row)
 
