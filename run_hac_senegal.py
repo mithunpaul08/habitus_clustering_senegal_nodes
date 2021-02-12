@@ -16,7 +16,7 @@ nltk.download('stopwords')
 from nltk.corpus import stopwords
 
 
-THRESHOLD=0.7
+THRESHOLD=0.6
 
 random.seed(3)
 
@@ -43,7 +43,7 @@ combined_causes_effects=list(combined_causes_effects)
 def write_to_csv(data,filename):
     with open(filename,'w',newline='') as myfile:
         for k,v in  data.items():
-            row=([k,"\t",v])
+            row=([k,v])
             mywriter=csv.writer(myfile,delimiter='\t')
             mywriter.writerow(row)
 
@@ -161,7 +161,10 @@ def find_nearest(array, value):
     return idx
 
 '''
-pick the concept that’s closest to the avg embedding of the cluster: For example: (women, female, wives ) PROMOTE (production, rice growing)
+Qn) how to name the new clusters you are creating?
+
+Ans:/pick the concept that’s closest to the avg embedding of the cluster: 
+For example: (women, female, wives ) PROMOTE (production, rice growing)
 emb(women) closest to avg(emb(women), emb(female), emb(wives)) => “women” becomes the name of the cluster
 women 17'''
 cluster_id_cluster_name={}
