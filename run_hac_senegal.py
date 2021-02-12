@@ -16,7 +16,42 @@ nltk.download('stopwords')
 from nltk.corpus import stopwords
 
 
-THRESHOLD=0.6
+DISTANCE_THRESHOLD_CLUSTERING=0.3
+SIMILARITY_THRESHOLD=0.7
+
+#list of queries that were taken from tomek's model, and were in turn used to run queries on google to download the pdf files from which CONCEPTS were extracted using odin
+QUERIES_AKA_VARIABLES =[
+"climate information village", #dummy query variable to be used for testing purposes
+
+    "Food Insecurity" ,
+   "Agricultural yield" ,
+    "Fertilizers" ,
+    "Fertilizers" ,
+    "Pesticides" ,
+    "Flood timing" ,
+    "Credit worthiness time" ,
+    "Loan interest rate" ,
+    "Planting time" ,
+    "Personal Capital" ,
+    "Field Size" ,
+    "Workforce quality" ,
+    "Weather" ,
+    "Economic features" ,
+    "Weather" ,
+    "Food Insecurity" ,
+    "Economic features" ,
+    "Fertilizers" ,
+    "Fertilizers" ,
+    "Pesticides" ,
+    "Workforce age" ,
+    "Flood timing" ,
+    "Credit worthiness time" ,
+    "Loan interest rate" ,
+    "Planting time" ,
+    "Loan availability" ,
+    "Loan availability"
+     "Agricultural profit",
+]
 
 random.seed(3)
 
@@ -61,7 +96,7 @@ def normalize(vector):
     norms=np.apply_along_axis(np.linalg.norm,0,vector)
     return vector/norms
 
-def split_concept_get_combined_embedding(concept_name):
+def split_concept_get_average_embedding(concept_name):
     emb_total=np.full([1,300],0.00000001)
     cause_split_tokens = concept_name.split()
     total_no_of_tokens=len(cause_split_tokens)
@@ -86,7 +121,7 @@ emb1=None
 emb2=None
 for index,(concepts) in enumerate(combined_causes_effects):
     concept_name=concepts
-    all_embeddings=split_concept_get_combined_embedding(concept_name)
+    all_embeddings=split_concept_get_average_embedding(concept_name)
     if all_embeddings is not None:
         concept_emb[concept_name]=all_embeddings
         map_concept_name_to_id[concept_name]=index
@@ -110,7 +145,7 @@ all_data = np.delete(all_data,0,axis=0)
 
 
 #the engine part which does clustering and plotting. will need cosine similarities of each concept as input
-model=AgglomerativeClustering(n_clusters=None, distance_threshold=THRESHOLD, linkage='average',compute_full_tree=True,affinity='cosine')
+model=AgglomerativeClustering(n_clusters=None, distance_threshold=DISTANCE_THRESHOLD_CLUSTERING, linkage='average', compute_full_tree=True, affinity='cosine')
 clustering =model.fit(all_data)
 labels=model.labels_
 cluster_count=clustering.n_clusters_
@@ -138,7 +173,7 @@ for index,label in enumerate(labels):
     assert concept_name is not None
     concept_text_cluster_id[concept_name]=label
 
-    #to get the list of concepts clusterd under same cluster id
+    #to get tfhe list of concepts clusterd under same cluster id
     list_concepts_under_this_id=clusterid_to_concept_text.get(label,None)
     if list_concepts_under_this_id is None:
         new_list=[concept_name]
@@ -149,7 +184,7 @@ for index,label in enumerate(labels):
         clusterid_to_concept_text[label] = list_concepts_under_this_id
 
 
-filename='concept_clusterid_threshold'+str(THRESHOLD)+".csv"
+filename='concept_clusterid_threshold' + str(DISTANCE_THRESHOLD_CLUSTERING) + ".csv"
 assert len(concept_text_cluster_id.keys()) > 0
 write_to_csv(concept_text_cluster_id,filename)
 
@@ -167,36 +202,124 @@ Ans:/pick the concept that’s closest to the avg embedding of the cluster:
 For example: (women, female, wives ) PROMOTE (production, rice growing)
 emb(women) closest to avg(emb(women), emb(female), emb(wives)) => “women” becomes the name of the cluster
 women 17'''
+
+def given_multi_token_concept_get_average_embedding(cluster_of_concepts):
+    average_emb_all_concepts_for_this_clusterid = []
+    for each_concept in cluster_of_concepts:
+        average_emb=split_concept_get_average_embedding(each_concept)
+        average_emb_all_concepts_for_this_clusterid.append(average_emb)
+    return average_emb_all_concepts_for_this_clusterid
+
+def get_average_emb_of_a_cluster(cluster_of_concepts):
+    average_emb_all_concepts_for_this_clusterid = given_multi_token_concept_get_average_embedding(cluster_of_concepts)
+    avg_emb_of_this_cluster_of_concepts = sum(average_emb_all_concepts_for_this_clusterid) / len(cluster_of_concepts)
+    return avg_emb_of_this_cluster_of_concepts
+
 cluster_id_cluster_name={}
 #go through the dict clusterid_to_concept_text. for each key, get all the list of names. for each name, calculate its embeddings, pick the embedding which is in the middle and call it the name of the cluster
-for cluster_id,list_concepts in clusterid_to_concept_text.items():
-    average_emb_all_concepts_for_this_clusterid=[]
-    for each_concept in list_concepts:
-        average_emb=split_concept_get_combined_embedding(each_concept)
-        average_emb_all_concepts_for_this_clusterid.append(average_emb)
-    avg_of_concept_names=sum(average_emb_all_concepts_for_this_clusterid)/len(average_emb_all_concepts_for_this_clusterid)
-    index_of_element_closest_to_average=find_nearest(average_emb_all_concepts_for_this_clusterid,avg_of_concept_names)
+for cluster_id, cluster_of_concepts in clusterid_to_concept_text.items():
+    avg_emb_of_this_cluster_of_concepts=get_average_emb_of_a_cluster(cluster_of_concepts)
+
+
 
 
     #all clusters will be temporarily given the name of the first guy in th cluster. this is to test how good teh clusters are before we go itno naming them
-    # todo, uncomment thiscluster_id_cluster_name[cluster_id]=list_concepts[index_of_element_closest_to_average]
-    cluster_id_cluster_name[cluster_id]=list_concepts[0]
+    # todo, fix+uncomment thesee
+    # index_of_element_closest_to_average=find_nearest(average_emb_all_concepts_for_this_clusterid,avg_of_concept_names)
+    #cluster_id_cluster_name[cluster_id] = list_concepts[index_of_element_closest_to_average]
+    cluster_id_cluster_name[cluster_id]=cluster_of_concepts[0]
 
 
-assert len(cluster_id_cluster_name.keys()) > 0
-filename='clusterid_to_all_sub_concepts_threshold'+str(THRESHOLD)+".csv"
+assert len(clusterid_to_concept_text.keys()) > 0
+filename='clusterid_to_all_sub_concepts_threshold' + str(DISTANCE_THRESHOLD_CLUSTERING) + ".csv"
 write_to_csv(clusterid_to_concept_text,filename)
 
 
 
-filename='cluster_id_cluster_name_threshold'+str(THRESHOLD)+".csv"
+filename='cluster_id_cluster_name_threshold' + str(DISTANCE_THRESHOLD_CLUSTERING) + ".csv"
 assert len(cluster_id_cluster_name.keys()) > 0
 write_to_csv(cluster_id_cluster_name,filename)
 
-for k,v in clusterid_to_concept_text.items():
-    plt.scatter(all_data[labels==k, 0], all_data[labels==k, 1], s=50)
-
-
-plt.figure(figsize=(15, 12))
-dendo=sch.dendrogram(sch.linkage(all_data,method='average'))
+#all plotting related stuff
+##### plot clusters
+# for k,v in clusterid_to_concept_text.items():
+#    plt.scatter(all_data[labels==k, 0], all_data[labels==k, 1], s=50)
+######plot dendrograms
+#plt.figure(figsize=(15, 12))
+#dendo=sch.dendrogram(sch.linkage(all_data,method='average'))
 #plt.show()
+
+
+'''check if all the query variables exist in concepts, or atleast are close in embedding space
+# This is to check the efficacy of our clustering algo. i.e of the starting queries, how many were we able to retrieve back, in full or atleast close to it in embedding space.
+steps:
+-.  
+take each of the query we used initially in google search,..
+- find its embedding.
+- if the phrase exists as is in a cluster, we are done..
+
+else:
+- now go through each of these clusters
+- go through each of the sub concepts in each cluster
+- get average embedding for each sub concept
+- get average embedding for a given cluster
+
+- get a cosine similarity betweeen average embedding of a given cluster with teh average embedding of each query. 
+- If they have a cosine similarity of greater than similarity threshold, then add them to a list...
+- then find the cluster with the highest similarity score to the given query.
+'''
+
+def find_best_matching_cluster_for_a_given_query(clusterid_to_concept_text, query_variable):
+    emb_query_variable = split_concept_get_average_embedding(query_variable)
+    clusterid_to_cosine_sim_value_with_query={}
+    for cluster_id,cluster in  clusterid_to_concept_text.items():
+        total_no_of_concepts_in_this_cluster = len(cluster)
+        all_emb_of_concepts_in_a_cluster = []
+        for each_sub_concept in cluster:
+            if each_sub_concept.lower()==query_variable.lower(): #check if there is an exact string match.
+                print(f"found exact match between a query variable and a concept == {query_variable}")
+                return cluster_id , clusterid_to_concept_text[cluster_id],0
+
+        #else:sum of all embeddings of all concepts in a cluster, divided by the number of concepts in a cluster. note that this is not a scalar value but instead an embedding itself
+        average_embedding_of_a_cluster=get_average_emb_of_a_cluster(cluster) # get average embedding of all concepts in this cluster
+
+        #- now get a cosine similarity betweeen average embedding of a given cluster with teh average embedding of each query.
+        cos=cosine_similarity(average_embedding_of_a_cluster, emb_query_variable)
+
+        #- If they have a cosine similarity of greater than similarity threshold, then add thAT cosine sim value  to a dict{cluster_id,cosine similarity value }...
+        if cos > SIMILARITY_THRESHOLD:
+            clusterid_to_cosine_sim_value_with_query[cluster_id]=cos
+
+    #- then find the cluster with the highest similarity score to the given query.
+    assert len(clusterid_to_cosine_sim_value_with_query.keys()) > 0
+    best_cosine_sim_value=0
+    best_cluster_cluster_id=0
+    for k,v in clusterid_to_cosine_sim_value_with_query.items():
+        if v > best_cosine_sim_value:
+            best_cosine_sim_value = v
+            best_cluster_cluster_id=k
+
+    return best_cluster_cluster_id, clusterid_to_concept_text[best_cluster_cluster_id],best_cosine_sim_value
+
+
+
+
+
+for query_variable in QUERIES_AKA_VARIABLES:
+    cluster_id_of_best_match_cluster, best_match_cluster,best_cosine_sim_value=find_best_matching_cluster_for_a_given_query(clusterid_to_concept_text, query_variable)
+
+    if best_cosine_sim_value==0:
+        print(
+            f"Closest cluster for the given query variable: {query_variable} : is cluster id:{cluster_id_of_best_match_cluster} . Also it"
+            f" had an exact string match with a concept")
+
+    else:
+        if type(best_cosine_sim_value) == np.ndarray:
+            best_cosine_sim_value=best_cosine_sim_value[0][0]
+        print(
+            f"Closest cluster for the given query variable {query_variable} ..is cluster id:{cluster_id_of_best_match_cluster} with a cosine sim value of {best_cosine_sim_value}.  The concepts in that cluster are:"
+            f"{best_match_cluster}")
+
+
+
+
