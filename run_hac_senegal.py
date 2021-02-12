@@ -21,8 +21,6 @@ SIMILARITY_THRESHOLD=0.7
 
 #list of queries that were taken from tomek's model, and were in turn used to run queries on google to download the pdf files from which CONCEPTS were extracted using odin
 QUERIES_AKA_VARIABLES =[
-"climate information village", #dummy query variable to be used for testing purposes
-
     "Food Insecurity" ,
    "Agricultural yield" ,
     "Fertilizers" ,
@@ -49,7 +47,7 @@ QUERIES_AKA_VARIABLES =[
     "Loan interest rate" ,
     "Planting time" ,
     "Loan availability" ,
-    "Loan availability"
+    "Loan availability",
      "Agricultural profit",
 ]
 
@@ -289,6 +287,12 @@ def find_best_matching_cluster_for_a_given_query(clusterid_to_concept_text, quer
         #- If they have a cosine similarity of greater than similarity threshold, then add thAT cosine sim value  to a dict{cluster_id,cosine similarity value }...
         if cos > SIMILARITY_THRESHOLD:
             clusterid_to_cosine_sim_value_with_query[cluster_id]=cos
+        else:
+            print(f"for the given queery {query_variable} cosine sim value was less than 0.7. the value of cosine sim was {cos} against"
+                  f"the cluster with members:{cluster}")
+
+
+
 
     best_cosine_sim_value = 0
     best_cluster_cluster_id = 0
@@ -299,6 +303,8 @@ def find_best_matching_cluster_for_a_given_query(clusterid_to_concept_text, quer
             if v > best_cosine_sim_value:
                 best_cosine_sim_value = v
                 best_cluster_cluster_id=k
+    else:
+        print(f"the length of clusterid_to_cosine_sim_value_with_query dictionary was zero")
 
     return best_cluster_cluster_id, clusterid_to_concept_text[best_cluster_cluster_id],best_cosine_sim_value, False
 
