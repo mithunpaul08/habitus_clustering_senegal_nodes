@@ -270,6 +270,9 @@ else:
 def find_best_matching_cluster_for_a_given_query(clusterid_to_concept_text, query_variable):
     emb_query_variable = split_concept_get_average_embedding(query_variable)
     clusterid_to_cosine_sim_value_with_query={}
+
+    best_cosine_sim_value_below_similarity_threshold=0
+
     for cluster_id,cluster in  clusterid_to_concept_text.items():
         total_no_of_concepts_in_this_cluster = len(cluster)
         all_emb_of_concepts_in_a_cluster = []
@@ -287,8 +290,10 @@ def find_best_matching_cluster_for_a_given_query(clusterid_to_concept_text, quer
         #- If they have a cosine similarity of greater than similarity threshold, then add thAT cosine sim value  to a dict{cluster_id,cosine similarity value }...
         if cos > SIMILARITY_THRESHOLD:
             clusterid_to_cosine_sim_value_with_query[cluster_id]=cos
-        else:
-            print(f"for the given queery {query_variable} cosine sim value was less than 0.7. the value of cosine sim was {cos} against"
+        if cos > best_cosine_sim_value_below_similarity_threshold:
+            cos= best_cosine_sim_value_below_similarity_threshold
+
+    print(f"for the given queery {query_variable} the highest value of cosine sim was {cos} against"
                   f"the cluster with members:{cluster}")
 
 
