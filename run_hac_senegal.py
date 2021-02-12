@@ -278,7 +278,7 @@ def find_best_matching_cluster_for_a_given_query(clusterid_to_concept_text, quer
         for each_sub_concept in cluster:
             if each_sub_concept.lower()==query_variable.lower(): #check if there is an exact string match.
                 print(f"found exact match between a query variable and a concept == {query_variable}")
-                return cluster_id , clusterid_to_concept_text[cluster_id],0
+                return cluster_id , clusterid_to_concept_text[cluster_id],0, True
 
         #else:sum of all embeddings of all concepts in a cluster, divided by the number of concepts in a cluster. note that this is not a scalar value but instead an embedding itself
         average_embedding_of_a_cluster=get_average_emb_of_a_cluster(cluster) # get average embedding of all concepts in this cluster
@@ -290,35 +290,41 @@ def find_best_matching_cluster_for_a_given_query(clusterid_to_concept_text, quer
         if cos > SIMILARITY_THRESHOLD:
             clusterid_to_cosine_sim_value_with_query[cluster_id]=cos
 
-    #- then find the cluster with the highest similarity score to the given query.
-    assert len(clusterid_to_cosine_sim_value_with_query.keys()) > 0
-    best_cosine_sim_value=0
-    best_cluster_cluster_id=0
-    for k,v in clusterid_to_cosine_sim_value_with_query.items():
-        if v > best_cosine_sim_value:
-            best_cosine_sim_value = v
-            best_cluster_cluster_id=k
+    best_cosine_sim_value = 0
+    best_cluster_cluster_id = 0
 
-    return best_cluster_cluster_id, clusterid_to_concept_text[best_cluster_cluster_id],best_cosine_sim_value
+    #- then find the cluster with the highest similarity score to the given query.
+    if len(clusterid_to_cosine_sim_value_with_query.keys()) > 0 :
+        for k,v in clusterid_to_cosine_sim_value_with_query.items():
+            if v > best_cosine_sim_value:
+                best_cosine_sim_value = v
+                best_cluster_cluster_id=k
+
+    return best_cluster_cluster_id, clusterid_to_concept_text[best_cluster_cluster_id],best_cosine_sim_value, False
 
 
 
 
 
 for query_variable in QUERIES_AKA_VARIABLES:
-    cluster_id_of_best_match_cluster, best_match_cluster,best_cosine_sim_value=find_best_matching_cluster_for_a_given_query(clusterid_to_concept_text, query_variable)
+    cluster_id_of_best_match_cluster, best_match_cluster,best_cosine_sim_value,found_string_match=find_best_matching_cluster_for_a_given_query(clusterid_to_concept_text, query_variable)
 
-    if best_cosine_sim_value==0:
+    if found_string_match:
         print(
             f"Closest cluster for the given query variable: {query_variable} : is cluster id:{cluster_id_of_best_match_cluster} . Also it"
             f" had an exact string match with a concept")
 
     else:
-        if type(best_cosine_sim_value) == np.ndarray:
-            best_cosine_sim_value=best_cosine_sim_value[0][0]
-        print(
-            f"Closest cluster for the given query variable {query_variable} ..is cluster id:{cluster_id_of_best_match_cluster} with a cosine sim value of {best_cosine_sim_value}.  The concepts in that cluster are:"
-            f"{best_match_cluster}")
+        if best_cosine_sim_value==0:
+            print(
+            f"No matching cluster found for the given query variable: {query_variable} ")
+
+        else:
+            if type(best_cosine_sim_value) == np.ndarray:
+                best_cosine_sim_value=best_cosine_sim_value[0][0]
+            print(
+                f"Closest cluster for the given query variable {query_variable} ..is cluster id:{cluster_id_of_best_match_cluster} with a cosine sim value of {best_cosine_sim_value}.  The concepts in that cluster are:"
+                f"{best_match_cluster}")
 
 
 
