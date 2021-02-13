@@ -2,3 +2,4 @@ pandas
 sklearn
 matplotlib
 nltk
+stanza

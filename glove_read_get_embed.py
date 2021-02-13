@@ -1,7 +1,7 @@
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 
-GLOVE_PATH_CLARA_SERVER="/data/nlp/corpora/glove/glove.840B.300d.no_proc_header.txt"
+GLOVE_PATH_CLARA_SERVER="/data/nlp/corpora/glove/glove.840B.300d.10f.txt"
 GLOVE_PATH_LOCAL="./small_glove10f.txt"
 EIDOS_STOP_WORDS='./eidos_stopwords.txt'
 
@@ -22,7 +22,7 @@ def read_eidos_stopwords():
     return eidos_stopwords
 
 def read_from_glove():
-    lines=read_file_python_way(GLOVE_PATH_LOCAL)
+    lines=read_file_python_way(GLOVE_PATH_CLARA_SERVER)
     for line in lines:
             all_words=line.split()
             word=all_words[0]

@@ -15,11 +15,13 @@ import nltk
 nltk.download('stopwords')
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
+import stanza
+stanza.download('en',processors='tokenize,lemma')
+nlp=stanza.Pipeline('en',processors='tokenize,lemma')
 
 
 DISTANCE_THRESHOLD_CLUSTERING=0.3
 SIMILARITY_THRESHOLD=0.7
-
 eidos_stop_words = read_eidos_stopwords()
 
 #list of queries that were taken from tomek's model, and were in turn used to run queries on google to download the pdf files from which CONCEPTS were extracted using odin
@@ -326,13 +328,15 @@ lemmatizer = WordNetLemmatizer()
 eidos_stop_words = read_eidos_stopwords()
 
 for query_variable in QUERIES_AKA_VARIABLES:
-    if query_variable in eidos_stop_words:
-        continue
-    tokens_query_variable=query_variable.split()
-    for token in tokens_query_variable:
-        if token  in eidos_stop_words:
-            continue
-    query_variable = lemmatizer.lemmatize(query_variable.lower())
+    doc = nlp(query_variable.lower())
+    query_variable_list=[]
+    for sent in doc.sentences:
+        for word in sent.words:
+            if word not in eidos_stop_words:
+                query_variable_list.append(word.lemma.strip())
+    query_variable=" ".join(query_variable_list)
+
+
     print(f"*****starting a new query ={query_variable}")
     cluster_id_of_best_match_cluster, best_match_cluster,best_cosine_sim_value,found_string_match=find_best_matching_cluster_for_a_given_query(clusterid_to_concept_text, query_variable)
 
