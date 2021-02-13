@@ -21,7 +21,6 @@ SIMILARITY_THRESHOLD=0.7
 
 #list of queries that were taken from tomek's model, and were in turn used to run queries on google to download the pdf files from which CONCEPTS were extracted using odin
 QUERIES_AKA_VARIABLES =[
-    "dummy value village information",
     "Food Insecurity" ,
    "Agricultural yield" ,
     "Fertilizers" ,
@@ -317,7 +316,7 @@ def find_best_matching_cluster_for_a_given_query(clusterid_to_concept_text, quer
 
 
 
-
+query_assigned_to_cluster_count=0
 for query_variable in QUERIES_AKA_VARIABLES:
     print(f"*****starting a new query ={query_variable}")
     cluster_id_of_best_match_cluster, best_match_cluster,best_cosine_sim_value,found_string_match=find_best_matching_cluster_for_a_given_query(clusterid_to_concept_text, query_variable)
@@ -329,6 +328,7 @@ for query_variable in QUERIES_AKA_VARIABLES:
 
     else:
         if (best_cosine_sim_value > 0):
+            query_assigned_to_cluster_count+=1
             if type(best_cosine_sim_value) == np.ndarray:
                 best_cosine_sim_value=best_cosine_sim_value[0][0]
             print(
@@ -336,6 +336,9 @@ for query_variable in QUERIES_AKA_VARIABLES:
                 f"is:{cluster_id_of_best_match_cluster} with a cosine sim value of {best_cosine_sim_value}. "
                 f" The concepts in that cluster are:"
                 f"{best_match_cluster}")
+print(f"--------END OF RUN\n")
+
+print(f"total number of queries that were assigned to a cluster was {query_assigned_to_cluster_count} out of a totoal of {len(QUERIES_AKA_VARIABLES)}")
 
 
 
