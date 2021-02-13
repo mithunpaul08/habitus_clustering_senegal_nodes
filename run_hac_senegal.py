@@ -14,10 +14,13 @@ import os
 import nltk
 nltk.download('stopwords')
 from nltk.corpus import stopwords
+from nltk.stem import WordNetLemmatizer
 
 
 DISTANCE_THRESHOLD_CLUSTERING=0.3
 SIMILARITY_THRESHOLD=0.7
+
+eidos_stop_words = read_eidos_stopwords()
 
 #list of queries that were taken from tomek's model, and were in turn used to run queries on google to download the pdf files from which CONCEPTS were extracted using odin
 QUERIES_AKA_VARIABLES =[
@@ -100,11 +103,11 @@ def split_concept_get_average_embedding(concept_name):
     cause_split_tokens = concept_name.split()
     total_no_of_tokens=len(cause_split_tokens)
 
+
     #for each sub token, get embedding of them, and get the average of all n token embeddings as the concepts overall embedding value
+    assert len(eidos_stop_words)>0
     for each_token in cause_split_tokens:
-        stop_words=read_eidos_stopwords()
-        if each_token in stop_words:
-            #if each_token in stopwords.words('english'):
+        if each_token in stopwords.words('english') :
             continue
         cfg.total_tokens+=1
         emb_raw=get_embedding_given_token(each_token)
@@ -319,7 +322,17 @@ def find_best_matching_cluster_for_a_given_query(clusterid_to_concept_text, quer
 
 
 query_assigned_to_cluster_count=0
+lemmatizer = WordNetLemmatizer()
+eidos_stop_words = read_eidos_stopwords()
+
 for query_variable in QUERIES_AKA_VARIABLES:
+    if query_variable in eidos_stop_words:
+        continue
+    tokens_query_variable=query_variable.split()
+    for token in tokens_query_variable:
+        if token  in eidos_stop_words:
+            continue
+    query_variable = lemmatizer.lemmatize(query_variable.lower())
     print(f"*****starting a new query ={query_variable}")
     cluster_id_of_best_match_cluster, best_match_cluster,best_cosine_sim_value,found_string_match=find_best_matching_cluster_for_a_given_query(clusterid_to_concept_text, query_variable)
 

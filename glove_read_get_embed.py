@@ -17,12 +17,12 @@ def read_eidos_stopwords():
     eidos_stopwords = []
     lines = read_file_python_way(EIDOS_STOP_WORDS)
     for line in lines:
-        eidos_stopwords.append(line)
+        if not line.startswith("#"):
+            eidos_stopwords.append(line.rstrip())
     return eidos_stopwords
 
 def read_from_glove():
-    lines=read_file_python_way(GLOVE_PATH_CLARA_SERVER)
-    #lines=open(GLOVE_PATH_CLARA_SERVER,mode='r')
+    lines=read_file_python_way(GLOVE_PATH_LOCAL)
     for line in lines:
             all_words=line.split()
             word=all_words[0]
