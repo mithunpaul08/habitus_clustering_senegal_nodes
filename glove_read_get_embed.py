@@ -1,7 +1,7 @@
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 
-GLOVE_PATH_CLARA_SERVER="/data/nlp/corpora/glove/glove.840B.300d.txt"
+GLOVE_PATH_CLARA_SERVER="/data/nlp/corpora/glove/glove.840B.300d.no_proc_header.txt"
 GLOVE_PATH_LOCAL="./small_glove10f.txt"
 
 
