@@ -19,7 +19,7 @@ import stanza
 stanza.download('en',processors='tokenize,lemma')
 nlp=stanza.Pipeline('en',processors='tokenize,lemma')
 
-  
+
 DISTANCE_THRESHOLD_CLUSTERING=0.3
 SIMILARITY_THRESHOLD=0.7
 eidos_stop_words = read_eidos_stopwords()
@@ -78,7 +78,7 @@ combined_causes_effects=set(combined_causes_effects)
 combined_causes_effects=list(combined_causes_effects)
 
 
-def write_to_csv(data,filename):
+def write_dict_to_csv(data, filename):
     folder_file=os.path.join("outputs",filename)
     with open(folder_file,'w',newline='') as myfile:
         for k,v in  data.items():
@@ -87,6 +87,16 @@ def write_to_csv(data,filename):
             mywriter.writerow(row)
 
 
+def write_query_cluster_similarity_dict_csv(data, filename):
+    folder_file=os.path.join("outputs",filename)
+    with open(folder_file,'w',newline='') as myfile:
+        row = (['query variable', 'cluster', 'similarity'])
+        mywriter = csv.writer(myfile, delimiter='\t')
+        mywriter.writerow(row)
+        for k,v in  data.items():
+            row=([k,v[0],v[1]])
+            mywriter=csv.writer(myfile,delimiter='\t')
+            mywriter.writerow(row)
 
 # for each token in cause and effect, get their glove embedding
 # Average embeddings for multi-word concepts
@@ -190,9 +200,9 @@ for index,label in enumerate(labels):
         clusterid_to_concept_text[label] = list_concepts_under_this_id
 
 
-filename='concept_clusterid_threshold' + str(DISTANCE_THRESHOLD_CLUSTERING) + ".csv"
+filename='concept_clusterid_distthreshold' + str(DISTANCE_THRESHOLD_CLUSTERING) + ".csv"
 assert len(concept_text_cluster_id.keys()) > 0
-write_to_csv(concept_text_cluster_id,filename)
+write_dict_to_csv(concept_text_cluster_id, filename)
 
 #to find the namee of the ]cluster
 
@@ -237,14 +247,14 @@ for cluster_id, cluster_of_concepts in clusterid_to_concept_text.items():
 
 
 assert len(clusterid_to_concept_text.keys()) > 0
-filename='clusterid_to_all_sub_concepts_threshold' + str(DISTANCE_THRESHOLD_CLUSTERING) + ".csv"
-write_to_csv(clusterid_to_concept_text,filename)
+filename='clusterid_to_all_sub_concepts_distthreshold' + str(DISTANCE_THRESHOLD_CLUSTERING) + ".csv"
+write_dict_to_csv(clusterid_to_concept_text, filename)
 
 
 
-filename='cluster_id_cluster_name_threshold' + str(DISTANCE_THRESHOLD_CLUSTERING) + ".csv"
+filename='cluster_id_cluster_name_distthreshold' + str(DISTANCE_THRESHOLD_CLUSTERING) + ".csv"
 assert len(cluster_id_cluster_name.keys()) > 0
-write_to_csv(cluster_id_cluster_name,filename)
+write_dict_to_csv(cluster_id_cluster_name, filename)
 
 #all plotting related stuff
 ##### plot clusters
@@ -327,6 +337,8 @@ query_assigned_to_cluster_count=0
 lemmatizer = WordNetLemmatizer()
 eidos_stop_words = read_eidos_stopwords()
 
+query_cluster_similarity_score={}
+
 for query_variable in QUERIES_AKA_VARIABLES:
     doc = nlp(query_variable.lower())
     query_variable_list=[]
@@ -350,15 +362,17 @@ for query_variable in QUERIES_AKA_VARIABLES:
             query_assigned_to_cluster_count+=1
             if type(best_cosine_sim_value) == np.ndarray:
                 best_cosine_sim_value=best_cosine_sim_value[0][0]
-            print(
+                print(
                 f"Found a matching cluster to the query with similarity threshold > 0.7...whose cluster id "
                 f"is:{cluster_id_of_best_match_cluster} with a cosine sim value of {best_cosine_sim_value}. "
                 f" The concepts in that cluster are:"
                 f"{best_match_cluster}")
+                query_cluster_similarity_score[query_variable]=[cluster_id_of_best_match_cluster,best_cosine_sim_value]
 print(f"--------END OF RUN\n")
 
 print(f"total number of queries that were assigned to a cluster was {query_assigned_to_cluster_count} out of a totoal of {len(QUERIES_AKA_VARIABLES)}")
 
+write_query_cluster_similarity_dict_csv(query_cluster_similarity_score,"query_cluster_similarity_score.csv")
 
 
 
