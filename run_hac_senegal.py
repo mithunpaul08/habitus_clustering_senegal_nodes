@@ -6,7 +6,7 @@ from numpy import random
 import pandas as pd
 import matplotlib.pyplot as plt
 import sys
-from glove_read_get_embed import get_embedding_given_token
+from glove_read_get_embed import *
 import csv
 import cfg
 from sklearn.metrics.pairwise import cosine_similarity
@@ -102,7 +102,9 @@ def split_concept_get_average_embedding(concept_name):
 
     #for each sub token, get embedding of them, and get the average of all n token embeddings as the concepts overall embedding value
     for each_token in cause_split_tokens:
-        if each_token in stopwords.words('english'):
+        stop_words=read_eidos_stopwords()
+        if each_token in stop_words:
+            #if each_token in stopwords.words('english'):
             continue
         cfg.total_tokens+=1
         emb_raw=get_embedding_given_token(each_token)
