@@ -328,6 +328,7 @@ for query_variable in QUERIES_AKA_VARIABLES:
             f" had an exact string match with a concept")
 
     else:
+        if (best_cosine_sim_value > 0):
             if type(best_cosine_sim_value) == np.ndarray:
                 best_cosine_sim_value=best_cosine_sim_value[0][0]
             print(
