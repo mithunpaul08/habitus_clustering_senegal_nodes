@@ -309,8 +309,8 @@ def find_best_matching_cluster_for_a_given_query(clusterid_to_concept_text, quer
                 best_cosine_sim_value = v
                 best_cluster_cluster_id=k
     else:
-        print(f"There was no match with any cluster for this query, which was more than a similarity threshold of 0.7")
-        print(f"However the best match (below 0.7) for the given query {query_variable} was with "
+        print(f"There was no match with any cluster for this query {query_variable}, which was more than a similarity threshold of 0.7. However the "
+              f"beest match was with "
               f"the cluster with clusterid={best_cluster_id_below_similarity_threshold} , the highest value of cosine sim was {cos}and members:{best_cluster_below_similarity_threshold}")
 
     return best_cluster_cluster_id, clusterid_to_concept_text[best_cluster_cluster_id],best_cosine_sim_value, False
