@@ -281,7 +281,7 @@ def find_best_matching_cluster_for_a_given_query(clusterid_to_concept_text, quer
         all_emb_of_concepts_in_a_cluster = []
         for each_sub_concept in cluster:
             if each_sub_concept.lower()==query_variable.lower(): #check if there is an exact string match.
-                print(f"found exact match between a query variable and a concept == {query_variable}")
+                #print(f"found exact match between a query variable and a concept == {query_variable}")
                 return cluster_id , clusterid_to_concept_text[cluster_id],0, True
 
         #else:sum of all embeddings of all concepts in a cluster, divided by the number of concepts in a cluster. note that this is not a scalar value but instead an embedding itself
@@ -310,8 +310,8 @@ def find_best_matching_cluster_for_a_given_query(clusterid_to_concept_text, quer
                 best_cluster_cluster_id=k
     else:
         print(f"There was no match with any cluster for this query, which was more than a similarity threshold of 0.7")
-        print(f"However the best match (below 0.7) for the given query {query_variable} the highest value of cosine sim was {cos} against"
-              f"the cluster with clusterid={clusterid_to_concept_text} and members:{best_cluster_below_similarity_threshold}")
+        print(f"However the best match (below 0.7) for the given query {query_variable} was with "
+              f"the cluster with clusterid={best_cluster_id_below_similarity_threshold} , the highest value of cosine sim was {cos}and members:{best_cluster_below_similarity_threshold}")
 
     return best_cluster_cluster_id, clusterid_to_concept_text[best_cluster_cluster_id],best_cosine_sim_value, False
 
@@ -324,14 +324,14 @@ for query_variable in QUERIES_AKA_VARIABLES:
 
     if found_string_match:
         print(
-            f"Closest cluster for the given query variable: {query_variable} : is cluster id:{cluster_id_of_best_match_cluster} . Also it"
+            f"Found a direct string match. Closest cluster for the given query variable: {query_variable} : is cluster id:{cluster_id_of_best_match_cluster} . Also it"
             f" had an exact string match with a concept")
 
     else:
             if type(best_cosine_sim_value) == np.ndarray:
                 best_cosine_sim_value=best_cosine_sim_value[0][0]
             print(
-                f"Found a mathing cluster to the query with similarity threshold > 0.7. query is: {query_variable} ..and cluster id "
+                f"Found a matching cluster to the query with similarity threshold > 0.7. query is: {query_variable} ..and cluster id "
                 f"is:{cluster_id_of_best_match_cluster} with a cosine sim value of {best_cosine_sim_value}. "
                 f" The concepts in that cluster are:"
                 f"{best_match_cluster}")
