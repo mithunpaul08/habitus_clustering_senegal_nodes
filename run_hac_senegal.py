@@ -10,7 +10,7 @@ from glove_read_get_embed import get_embedding_given_token
 import csv
 import cfg
 from sklearn.metrics.pairwise import cosine_similarity
-
+import os
 import nltk
 nltk.download('stopwords')
 from nltk.corpus import stopwords
@@ -21,6 +21,7 @@ SIMILARITY_THRESHOLD=0.7
 
 #list of queries that were taken from tomek's model, and were in turn used to run queries on google to download the pdf files from which CONCEPTS were extracted using odin
 QUERIES_AKA_VARIABLES =[
+    "dummy value village information",
     "Food Insecurity" ,
    "Agricultural yield" ,
     "Fertilizers" ,
@@ -74,7 +75,8 @@ combined_causes_effects=list(combined_causes_effects)
 
 
 def write_to_csv(data,filename):
-    with open(filename,'w',newline='') as myfile:
+    folder_file=os.path.join("outputs",filename)
+    with open(folder_file,'w',newline='') as myfile:
         for k,v in  data.items():
             row=([k,v])
             mywriter=csv.writer(myfile,delimiter='\t')
@@ -202,11 +204,11 @@ emb(women) closest to avg(emb(women), emb(female), emb(wives)) => “women” be
 women 17'''
 
 def given_multi_token_concept_get_average_embedding(cluster_of_concepts):
-    average_emb_all_concepts_for_this_clusterid = []
+    emb_all_concepts_for_this_clusterid = []
     for each_concept in cluster_of_concepts:
-        average_emb=split_concept_get_average_embedding(each_concept)
-        average_emb_all_concepts_for_this_clusterid.append(average_emb)
-    return average_emb_all_concepts_for_this_clusterid
+        emb_of_each_concept=split_concept_get_average_embedding(each_concept)
+        emb_all_concepts_for_this_clusterid.append(emb_of_each_concept)
+    return emb_all_concepts_for_this_clusterid
 
 def get_average_emb_of_a_cluster(cluster_of_concepts):
     average_emb_all_concepts_for_this_clusterid = given_multi_token_concept_get_average_embedding(cluster_of_concepts)
@@ -272,6 +274,7 @@ def find_best_matching_cluster_for_a_given_query(clusterid_to_concept_text, quer
     clusterid_to_cosine_sim_value_with_query={}
 
     best_cosine_sim_value_below_similarity_threshold=0
+    best_cluster_id_below_similarity_threshold = 0
 
     for cluster_id,cluster in  clusterid_to_concept_text.items():
         total_no_of_concepts_in_this_cluster = len(cluster)
@@ -282,7 +285,7 @@ def find_best_matching_cluster_for_a_given_query(clusterid_to_concept_text, quer
                 return cluster_id , clusterid_to_concept_text[cluster_id],0, True
 
         #else:sum of all embeddings of all concepts in a cluster, divided by the number of concepts in a cluster. note that this is not a scalar value but instead an embedding itself
-        average_embedding_of_a_cluster=get_average_emb_of_a_cluster(cluster) # get average embedding of all concepts in this cluster
+        average_embedding_of_a_cluster=get_average_emb_of_a_cluster(cluster)
 
         #- now get a cosine similarity betweeen average embedding of a given cluster with teh average embedding of each query.
         cos=cosine_similarity(average_embedding_of_a_cluster, emb_query_variable)
@@ -291,12 +294,9 @@ def find_best_matching_cluster_for_a_given_query(clusterid_to_concept_text, quer
         if cos > SIMILARITY_THRESHOLD:
             clusterid_to_cosine_sim_value_with_query[cluster_id]=cos
         if cos > best_cosine_sim_value_below_similarity_threshold:
-            cos= best_cosine_sim_value_below_similarity_threshold
-
-    print(f"for the given queery {query_variable} the highest value of cosine sim was {cos} against"
-                  f"the cluster with members:{cluster}")
-
-
+            best_cosine_sim_value_below_similarity_threshold=cos
+            best_cluster_id_below_similarity_threshold=cluster_id
+    best_cluster_below_similarity_threshold=clusterid_to_concept_text[best_cluster_id_below_similarity_threshold]
 
 
     best_cosine_sim_value = 0
@@ -309,7 +309,9 @@ def find_best_matching_cluster_for_a_given_query(clusterid_to_concept_text, quer
                 best_cosine_sim_value = v
                 best_cluster_cluster_id=k
     else:
-        print(f"the length of clusterid_to_cosine_sim_value_with_query dictionary was zero")
+        print(f"There was no match with any cluster for this query, which was more than a similarity threshold of 0.7")
+        print(f"However the best match (below 0.7) for the given query {query_variable} the highest value of cosine sim was {cos} against"
+              f"the cluster with clusterid={clusterid_to_concept_text} and members:{best_cluster_below_similarity_threshold}")
 
     return best_cluster_cluster_id, clusterid_to_concept_text[best_cluster_cluster_id],best_cosine_sim_value, False
 
@@ -326,15 +328,12 @@ for query_variable in QUERIES_AKA_VARIABLES:
             f" had an exact string match with a concept")
 
     else:
-        if best_cosine_sim_value==0:
-            print(
-            f"No matching cluster found for the given query variable: {query_variable} ")
-
-        else:
             if type(best_cosine_sim_value) == np.ndarray:
                 best_cosine_sim_value=best_cosine_sim_value[0][0]
             print(
-                f"Closest cluster for the given query variable {query_variable} ..is cluster id:{cluster_id_of_best_match_cluster} with a cosine sim value of {best_cosine_sim_value}.  The concepts in that cluster are:"
+                f"Found a mathing cluster to the query with similarity threshold > 0.7. query is: {query_variable} ..and cluster id "
+                f"is:{cluster_id_of_best_match_cluster} with a cosine sim value of {best_cosine_sim_value}. "
+                f" The concepts in that cluster are:"
                 f"{best_match_cluster}")
 
 
