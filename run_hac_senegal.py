@@ -213,29 +213,42 @@ women 17'''
 
 def given_multi_token_concept_get_average_embedding(cluster_of_concepts):
     emb_all_concepts_for_this_clusterid = []
+    name_of_all_concepts=[]
     for each_concept in cluster_of_concepts:
         emb_of_each_concept=split_concept_get_average_embedding(each_concept)
         emb_all_concepts_for_this_clusterid.append(emb_of_each_concept)
-    return emb_all_concepts_for_this_clusterid
+        name_of_all_concepts.append(each_concept)
+    return emb_all_concepts_for_this_clusterid, name_of_all_concepts
+
+def get_concept_closest_to_average_in_a_cluster(avg_emb_of_this_cluster_of_concepts,emb_all_concepts_for_this_clusterid,name_of_all_concepts):
+
+    highest_cosine_sim=0
+    concept_closest_to_average=None
+    assert len(name_of_all_concepts) == len(emb_all_concepts_for_this_clusterid)
+    for concept_name, emb in zip(name_of_all_concepts,emb_all_concepts_for_this_clusterid):
+        cos = cosine_similarity(avg_emb_of_this_cluster_of_concepts, emb)
+        if cos > highest_cosine_sim:
+            highest_cosine_sim =cos
+            concept_closest_to_average=concept_name
+    return concept_closest_to_average
+    #find which of these conceepts in the cluster is closest to the average eembedding value
+
 
 def get_average_emb_of_a_cluster(cluster_of_concepts):
-    average_emb_all_concepts_for_this_clusterid = given_multi_token_concept_get_average_embedding(cluster_of_concepts)
-    avg_emb_of_this_cluster_of_concepts = sum(average_emb_all_concepts_for_this_clusterid) / len(cluster_of_concepts)
-    return avg_emb_of_this_cluster_of_concepts
+    emb_all_concepts_for_this_clusterid,name_of_all_concepts = given_multi_token_concept_get_average_embedding(cluster_of_concepts)
+    avg_emb_of_this_cluster_of_concepts = sum(emb_all_concepts_for_this_clusterid) / len(cluster_of_concepts)
+    return avg_emb_of_this_cluster_of_concepts,emb_all_concepts_for_this_clusterid, name_of_all_concepts
 
 cluster_id_cluster_name={}
-#go through the dict clusterid_to_concept_text. for each key, get all the list of names. for each name, calculate its embeddings, pick the embedding which is in the middle and call it the name of the cluster
+#get a good name for the cluster. the name must be the name of concept which is closeest to the average of all concepts in this cluster
+# steps:
+# go through the dict clusterid_to_concept_text. for each key, get all the list of names.
+# for each name, calculate its embeddings, pick the embedding which is in the middle and call it the name of the cluster
+
 for cluster_id, cluster_of_concepts in clusterid_to_concept_text.items():
-    avg_emb_of_this_cluster_of_concepts=get_average_emb_of_a_cluster(cluster_of_concepts)
-
-
-
-
-    #all clusters will be temporarily given the name of the first guy in th cluster. this is to test how good teh clusters are before we go itno naming them
-    # todo, fix+uncomment thesee
-    # index_of_element_closest_to_average=find_nearest(average_emb_all_concepts_for_this_clusterid,avg_of_concept_names)
-    #cluster_id_cluster_name[cluster_id] = list_concepts[index_of_element_closest_to_average]
-    cluster_id_cluster_name[cluster_id]=cluster_of_concepts[0]
+    avg_emb_of_this_cluster_of_concepts,emb_all_concepts_for_this_clusterid,name_of_all_concepts=get_average_emb_of_a_cluster(cluster_of_concepts)
+    concept_closest_to_average=get_concept_closest_to_average_in_a_cluster(avg_emb_of_this_cluster_of_concepts,emb_all_concepts_for_this_clusterid,name_of_all_concepts)
+    cluster_id_cluster_name[cluster_id]=concept_closest_to_average
 
 
 assert len(clusterid_to_concept_text.keys()) > 0
@@ -292,7 +305,7 @@ def find_best_matching_cluster_for_a_given_query(clusterid_to_concept_text, quer
                 return cluster_id , clusterid_to_concept_text[cluster_id],0, True
 
         #else:sum of all embeddings of all concepts in a cluster, divided by the number of concepts in a cluster. note that this is not a scalar value but instead an embedding itself
-        average_embedding_of_a_cluster=get_average_emb_of_a_cluster(cluster)
+        average_embedding_of_a_cluster,_,_=get_average_emb_of_a_cluster(cluster)
 
         #- now get a cosine similarity betweeen average embedding of a given cluster with teh average embedding of each query.
         cos=cosine_similarity(average_embedding_of_a_cluster, emb_query_variable)
