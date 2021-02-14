@@ -192,7 +192,7 @@ for index,label in enumerate(labels):
         clusterid_to_concept_text[label] = list_concepts_under_this_id
 
 
-filename='concept_clusterid_distthreshold' + str(DISTANCE_THRESHOLD_CLUSTERING) + ".csv"
+filename='concept_clusterid_distthreshold' + str(DISTANCE_THRESHOLD_CLUSTERING) + ".tsv"
 assert len(concept_text_cluster_id.keys()) > 0
 write_dict_to_csv(concept_text_cluster_id, filename)
 
@@ -239,12 +239,12 @@ for cluster_id, cluster_of_concepts in clusterid_to_concept_text.items():
 
 
 assert len(clusterid_to_concept_text.keys()) > 0
-filename='clusterid_to_all_sub_concepts_distthreshold' + str(DISTANCE_THRESHOLD_CLUSTERING) + ".csv"
+filename='clusterid_to_all_sub_concepts_distthreshold' + str(DISTANCE_THRESHOLD_CLUSTERING) + ".tsv"
 write_dict_to_csv(clusterid_to_concept_text, filename)
 
 
 
-filename='cluster_id_cluster_name_distthreshold' + str(DISTANCE_THRESHOLD_CLUSTERING) + ".csv"
+filename='cluster_id_cluster_name_distthreshold' + str(DISTANCE_THRESHOLD_CLUSTERING) + ".tsv"
 assert len(cluster_id_cluster_name.keys()) > 0
 write_dict_to_csv(cluster_id_cluster_name, filename)
 
@@ -316,10 +316,12 @@ def find_best_matching_cluster_for_a_given_query(clusterid_to_concept_text, quer
                 best_cosine_sim_value = v
                 best_cluster_cluster_id=k
     else:
+        best_cosine_sim_value = cos[0][0]
+
         print(f"There was no match with any cluster for this query, which was more than a similarity threshold of 0.7. However the "
               f"beest match was with "
               f"the cluster with clusterid={best_cluster_id_below_similarity_threshold} , the highest value of cosine sim was {cos}and members:{best_cluster_below_similarity_threshold}")
-        query_cluster_similarity_score[query_variable]=[best_cluster_id_below_similarity_threshold,cos]
+        query_cluster_similarity_score[query_variable]=[best_cluster_id_below_similarity_threshold,best_cosine_sim_value]
 
     return best_cluster_cluster_id, clusterid_to_concept_text[best_cluster_cluster_id],best_cosine_sim_value, False
 
@@ -366,7 +368,7 @@ print(f"--------END OF RUN\n")
 
 print(f"total number of queries that were assigned to a cluster was {query_assigned_to_cluster_count} out of a totoal of {len(QUERIES_AKA_VARIABLES)}")
 
-write_query_cluster_similarity_dict_csv(query_cluster_similarity_score,"query_cluster_similarity_score.csv")
+write_query_cluster_similarity_dict_csv(query_cluster_similarity_score,"query_cluster_similarity_score.tsv")
 
 
 
