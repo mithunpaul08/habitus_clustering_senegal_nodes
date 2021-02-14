@@ -29,29 +29,21 @@ QUERIES_AKA_VARIABLES =[
     "Food Insecurity" ,
    "Agricultural yield" ,
     "Fertilizers" ,
-    "Fertilizers" ,
-    "Pesticides" ,
     "Flood timing" ,
     "Credit worthiness time" ,
     "Loan interest rate" ,
-    "Planting time" ,
     "Personal Capital" ,
     "Field Size" ,
     "Workforce quality" ,
     "Weather" ,
     "Economic features" ,
     "Weather" ,
-    "Food Insecurity" ,
-    "Economic features" ,
-    "Fertilizers" ,
     "Fertilizers" ,
     "Pesticides" ,
     "Workforce age" ,
     "Flood timing" ,
     "Credit worthiness time" ,
-    "Loan interest rate" ,
     "Planting time" ,
-    "Loan availability" ,
     "Loan availability",
      "Agricultural profit",
 ]
@@ -285,7 +277,7 @@ else:
 - then find the cluster with the highest similarity score to the given query.
 '''
 
-def find_best_matching_cluster_for_a_given_query(clusterid_to_concept_text, query_variable):
+def find_best_matching_cluster_for_a_given_query(clusterid_to_concept_text, query_variable,query_cluster_similarity_score):
     emb_query_variable = split_concept_get_average_embedding(query_variable)
     clusterid_to_cosine_sim_value_with_query={}
 
@@ -327,6 +319,7 @@ def find_best_matching_cluster_for_a_given_query(clusterid_to_concept_text, quer
         print(f"There was no match with any cluster for this query, which was more than a similarity threshold of 0.7. However the "
               f"beest match was with "
               f"the cluster with clusterid={best_cluster_id_below_similarity_threshold} , the highest value of cosine sim was {cos}and members:{best_cluster_below_similarity_threshold}")
+        query_cluster_similarity_score[query_variable]=[best_cluster_id_below_similarity_threshold,cos]
 
     return best_cluster_cluster_id, clusterid_to_concept_text[best_cluster_cluster_id],best_cosine_sim_value, False
 
@@ -350,7 +343,8 @@ for query_variable in QUERIES_AKA_VARIABLES:
 
 
     print(f"*****starting a new query ={query_variable}")
-    cluster_id_of_best_match_cluster, best_match_cluster,best_cosine_sim_value,found_string_match=find_best_matching_cluster_for_a_given_query(clusterid_to_concept_text, query_variable)
+    cluster_id_of_best_match_cluster, best_match_cluster,best_cosine_sim_value,found_string_match = \
+        find_best_matching_cluster_for_a_given_query(clusterid_to_concept_text, query_variable,query_cluster_similarity_score)
 
     if found_string_match:
         print(
