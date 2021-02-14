@@ -1,3 +1,4 @@
+from unittest import TestCase
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 
@@ -22,7 +23,7 @@ def read_eidos_stopwords():
     return eidos_stopwords
 
 def read_from_glove():
-    lines=read_file_python_way(GLOVE_PATH_CLARA_SERVER)
+    lines=read_file_python_way(GLOVE_PATH_LOCAL)
     for line in lines:
             all_words=line.split()
             word=all_words[0]
