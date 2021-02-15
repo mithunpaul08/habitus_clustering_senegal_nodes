@@ -79,6 +79,17 @@ def write_dict_to_csv(data, filename):
             mywriter.writerow(row)
 
 
+def write_dict_csv_with_value_as_list(data, filename):
+    folder_file=os.path.join("outputs",filename)
+    with open(folder_file,'w',newline='') as myfile:
+        for k,v in  data.items():
+            list_elements=[k]
+            for each_element in v:
+                list_elements.append(each_element)
+            row=(list_elements)
+            mywriter=csv.writer(myfile,delimiter='\t')
+            mywriter.writerow(row)
+
 def write_query_cluster_similarity_dict_csv(data, filename):
     folder_file=os.path.join("outputs",filename)
     with open(folder_file,'w',newline='') as myfile:
@@ -253,7 +264,7 @@ for cluster_id, cluster_of_concepts in clusterid_to_concept_text.items():
 
 assert len(clusterid_to_concept_text.keys()) > 0
 filename='clusterid_to_all_sub_concepts_distthreshold' + str(DISTANCE_THRESHOLD_CLUSTERING) + ".tsv"
-write_dict_to_csv(clusterid_to_concept_text, filename)
+write_dict_csv_with_value_as_list(clusterid_to_concept_text, filename)
 
 
 
