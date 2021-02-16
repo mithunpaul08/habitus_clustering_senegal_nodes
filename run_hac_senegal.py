@@ -84,7 +84,6 @@ QUERIES_AKA_VARIABLES =[
    "Agricultural yield" ,
     "Fertilizers" ,
     "Flood timing" ,
-    "Credit worthiness time" ,
     "Loan interest rate" ,
     "Personal Capital" ,
     "Field Size" ,
@@ -278,7 +277,7 @@ for index,label in enumerate(labels):
         clusterid_to_concept_text[label] = list_concepts_under_this_id
 
 
-filename='concept_clusterid_distthreshold' + str(DISTANCE_THRESHOLD_CLUSTERING) + ".tsv"
+filename='cluster_assignment' + ".tsv"
 assert len(concept_text_cluster_id.keys()) > 0
 write_dict_to_csv(concept_text_cluster_id, filename)
 
@@ -338,12 +337,12 @@ for cluster_id, cluster_of_concepts in clusterid_to_concept_text.items():
 
 
 assert len(clusterid_to_concept_text.keys()) > 0
-filename='clusterid_to_all_sub_concepts_distthreshold' + str(DISTANCE_THRESHOLD_CLUSTERING) + ".tsv"
+filename='cluster_members'  + ".tsv"
 write_dict_csv_with_value_as_list(clusterid_to_concept_text, filename)
 
 
 
-filename='cluster_id_cluster_name_distthreshold' + str(DISTANCE_THRESHOLD_CLUSTERING) + ".tsv"
+filename='clusternames' + ".tsv"
 assert len(cluster_id_cluster_name.keys()) > 0
 write_dict_to_csv(cluster_id_cluster_name, filename)
 
@@ -460,7 +459,7 @@ for query_variable in QUERIES_AKA_VARIABLES:
 print(f"--------END OF cluster assignments\n")
 print(f"total number of queries that were assigned to a cluster was {query_assigned_to_cluster_count} out of a totoal of {len(QUERIES_AKA_VARIABLES)}")
 
-write_query_cluster_similarity_dict_csv(query_cluster_similarity_score,"query_cluster_similarity_score.tsv")
+write_query_cluster_similarity_dict_csv(query_cluster_similarity_score,"tomek_variable_to_clusters_mapping.tsv")
 
 #all plotting related stuff
 ##### plot clusters
