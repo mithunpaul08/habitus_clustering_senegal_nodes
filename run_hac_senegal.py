@@ -26,6 +26,7 @@ import stanza
 stanza.download('en',processors='tokenize,lemma')
 nlp=stanza.Pipeline('en',processors='tokenize,lemma')
 import os
+import shutil
 
 DISTANCE_THRESHOLD_CLUSTERING=0.2
 SIMILARITY_THRESHOLD=0.8
@@ -103,7 +104,9 @@ if not os.path.exists('outputs'):
     os.mkdir("outputs")
 name_of_subfolder="dist_threshold"+str(DISTANCE_THRESHOLD_CLUSTERING)+"sim_threshold"+str(SIMILARITY_THRESHOLD)
 output_folder_path = os.path.join("outputs", name_of_subfolder)
-if not os.path.exists(output_folder_path):
+#remove that subfolder if it exists. we want fresh output files eveery time
+if os.path.exists(output_folder_path):
+    shutil.rmtree(output_folder_path)
     os.mkdir(output_folder_path)
 
 
