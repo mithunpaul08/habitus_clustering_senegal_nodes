@@ -111,9 +111,22 @@ combined_causes_effects=[]
 
 
 for cause in causes:
-    combined_causes_effects.append(cause[0])
+    #hoang said remove concepts which have less than or equal to 2 tokens
+    cause_name=str(cause[0])
+    cause_name=cause_name.split(" ")
+    if len(cause_name)>2:
+        combined_causes_effects.append(cause[0])
+    else:
+        print(f"found a cause will less than 2 tokens:{cause_name}")
+
 for effect in effects:
-    combined_causes_effects.append(effect[0])
+    effect_name = str(effect[0])
+    effect_name = effect_name.split(" ")
+    if len(effect_name) > 2:
+        combined_causes_effects.append(effect[0])
+    else:
+        print(f"found a cause will less than 2 tokens:{effect_name}")
+
 
 #get only unique values out
 combined_causes_effects=set(combined_causes_effects)
