@@ -109,6 +109,9 @@ if os.path.exists(output_folder_path):
     shutil.rmtree(output_folder_path)
     os.mkdir(output_folder_path)
 
+else:
+    os.mkdir(output_folder_path)
+
 
 #read causes and effects
 dataset=pd.read_csv('./senegal_africa.csv')
