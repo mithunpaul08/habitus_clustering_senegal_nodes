@@ -25,10 +25,10 @@ from nltk.stem import WordNetLemmatizer
 import stanza
 stanza.download('en',processors='tokenize,lemma')
 nlp=stanza.Pipeline('en',processors='tokenize,lemma')
+import math
 
-
-DISTANCE_THRESHOLD_CLUSTERING=0.3
-SIMILARITY_THRESHOLD=0.7
+DISTANCE_THRESHOLD_CLUSTERING=0.1
+SIMILARITY_THRESHOLD=0.8
 eidos_stop_words = read_eidos_stopwords()
 
 #list of queries that were taken from tomek's model, and were in turn used to run queries on google to download the pdf files from which CONCEPTS were extracted using odin
@@ -79,7 +79,7 @@ QUERIES_AKA_VARIABLES =[
     "credit worthiness",
     "personal capital",
     "Food security",
-                                           "Fertilizer in",
+    "Fertilizer in",
     "Pesticides in",
    "Agricultural yield" ,
     "Fertilizers" ,
@@ -110,22 +110,34 @@ effects = dataset.iloc[:, [5]].values
 combined_causes_effects=[]
 
 
-for cause in causes:
-    #hoang said remove concepts which have less than or equal to 2 tokens
-    cause_name=str(cause[0])
-    cause_name=cause_name.split(" ")
-    if len(cause_name)>2:
-        combined_causes_effects.append(cause[0])
-    else:
-        print(f"found a cause will less than 2 tokens:{cause_name}")
+def check_add_concept(list_concepts,combined_causes_effects):
+    for cause in list_concepts:
+        #or not (math.isnan(cause[0]))
+        if (type(cause[0]) is str):
+            cause_name=str(cause[0])
+            cause_name=cause_name.split(" ")
+            if len(cause_name)>0:
+                cause_name_trimmed=[]
+                #remove tokens which have less than or equal to 2 characters
+                for each_token in cause_name:
+                    if len(each_token)>2:
+                        cause_name_trimmed.append(each_token)
+                    else:
+                        print(f"found a token which has less than 2 characters:{each_token}")
+                if len(cause_name_trimmed)>0:
+                    cause_name_trimmed=" ".join(cause_name_trimmed)
+                    combined_causes_effects.append(cause_name_trimmed)
+                else:
+                    print(f"after token removal this concept was eempty :{cause}")
+            else:
+                print(f"found a cause with notokens:{cause_name}")
+        else:
+            print(f"found a cause with nan:{cause}")
 
-for effect in effects:
-    effect_name = str(effect[0])
-    effect_name = effect_name.split(" ")
-    if len(effect_name) > 2:
-        combined_causes_effects.append(effect[0])
-    else:
-        print(f"found a cause will less than 2 tokens:{effect_name}")
+check_add_concept(causes,combined_causes_effects)
+check_add_concept(effects,combined_causes_effects)
+
+
 
 
 #get only unique values out
@@ -439,7 +451,7 @@ for query_variable in QUERIES_AKA_VARIABLES:
             if type(best_cosine_sim_value) == np.ndarray:
                 best_cosine_sim_value=best_cosine_sim_value[0][0]
                 print(
-                f"Found a matching cluster to the query with similarity threshold > 0.7...whose cluster id "
+                f"Found a matching cluster to the query with similarity threshold > {SIMILARITY_THRESHOLD}...whose cluster id "
                 f"is:{cluster_id_of_best_match_cluster} with a cosine sim value of {best_cosine_sim_value}. "
                 f" The concepts in that cluster are:"
                 f"{best_match_cluster}")
