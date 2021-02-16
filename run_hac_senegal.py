@@ -122,16 +122,20 @@ def check_add_concept(list_concepts,combined_causes_effects):
                     if len(each_token)>2:
                         cause_name_trimmed.append(each_token)
                     else:
-                        print(f"found a token which has less than 2 characters:{each_token}")
+                        pass
+                        #print(f"found a token which has less than 2 characters:{each_token}")
                 if len(cause_name_trimmed)>0:
                     cause_name_trimmed=" ".join(cause_name_trimmed)
                     combined_causes_effects.append(cause_name_trimmed)
                 else:
-                    print(f"after token removal this concept was eempty :{cause}")
+                    pass
+                    #print(f"after token removal this concept was eempty :{cause}")
             else:
-                print(f"found a cause with notokens:{cause_name}")
+                pass
+                #print(f"found a cause with notokens:{cause_name}")
         else:
-            print(f"found a cause with nan:{cause}")
+            pass
+            #print(f"found a cause with nan:{cause}")
 
 check_add_concept(causes,combined_causes_effects)
 check_add_concept(effects,combined_causes_effects)
@@ -412,7 +416,7 @@ def find_best_matching_cluster_for_a_given_query(clusterid_to_concept_text, quer
         print(f"There was no match with any cluster for this query, which was more than a similarity threshold of 0.7. However the "
               f"beest match was with "
               f"the cluster with clusterid={best_cluster_id_below_similarity_threshold} , the highest value of cosine sim was {cos}and members:{best_cluster_below_similarity_threshold}")
-        query_cluster_similarity_score[query_variable]=[best_cluster_id_below_similarity_threshold,best_cosine_sim_value]
+        query_cluster_similarity_score[query_variable]=[best_cluster_id_below_similarity_threshold,best_cosine_sim_value,cluster_id_cluster_name[best_cluster_id_below_similarity_threshold]]
 
     return best_cluster_cluster_id, clusterid_to_concept_text[best_cluster_cluster_id],best_cosine_sim_value, False
 
@@ -454,12 +458,12 @@ for query_variable in QUERIES_AKA_VARIABLES:
                 f"is:{cluster_id_of_best_match_cluster} with a cosine sim value of {best_cosine_sim_value}. "
                 f" The concepts in that cluster are:"
                 f"{best_match_cluster}")
-                query_cluster_similarity_score[query_variable]=[cluster_id_of_best_match_cluster,best_cosine_sim_value]
+                query_cluster_similarity_score[query_variable]=[cluster_id_of_best_match_cluster,best_cosine_sim_value,cluster_id_cluster_name[cluster_id_of_best_match_cluster]]
 
 print(f"--------END OF cluster assignments\n")
 print(f"total number of queries that were assigned to a cluster was {query_assigned_to_cluster_count} out of a totoal of {len(QUERIES_AKA_VARIABLES)}")
 
-write_query_cluster_similarity_dict_csv(query_cluster_similarity_score,"tomek_variable_to_clusters_mapping.tsv")
+write_dict_csv_with_value_as_list(query_cluster_similarity_score,"tomek_variable_to_clusters_mapping.tsv")
 
 #all plotting related stuff
 ##### plot clusters
