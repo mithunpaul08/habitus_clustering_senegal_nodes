@@ -27,7 +27,7 @@ stanza.download('en',processors='tokenize,lemma')
 nlp=stanza.Pipeline('en',processors='tokenize,lemma')
 import math
 
-DISTANCE_THRESHOLD_CLUSTERING=0.1
+DISTANCE_THRESHOLD_CLUSTERING=0.2
 SIMILARITY_THRESHOLD=0.8
 eidos_stop_words = read_eidos_stopwords()
 
