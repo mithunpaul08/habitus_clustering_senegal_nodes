@@ -28,7 +28,7 @@ nlp=stanza.Pipeline('en',processors='tokenize,lemma')
 import os
 import shutil
 
-DISTANCE_THRESHOLD_CLUSTERING=0.2
+DISTANCE_THRESHOLD_CLUSTERING=0.1
 SIMILARITY_THRESHOLD=0.8
 eidos_stop_words = read_eidos_stopwords()
 
