@@ -1,3 +1,10 @@
+'''
+run this using python run_hac_senegal.py
+
+log is storeed in variable_cluster_assignment.log at same location as this file.
+
+cluster id related files are stored in ./outputs/
+'''
 import sklearn
 from sklearn.cluster import AgglomerativeClustering
 import scipy.cluster.hierarchy as sch
@@ -26,7 +33,54 @@ eidos_stop_words = read_eidos_stopwords()
 
 #list of queries that were taken from tomek's model, and were in turn used to run queries on google to download the pdf files from which CONCEPTS were extracted using odin
 QUERIES_AKA_VARIABLES =[
-    "Food Insecurity" ,
+"Regulation",
+    "Culture",
+"interest rate",
+    "crop",
+    "profitability",
+    "economic features",
+    "contract",
+    "field size",
+    "workforce features",
+    "biophysical fees",
+    "weather",
+    "fertilizer",
+    "pesticides",
+    "planting time",
+    "agrochemical utility",
+    "flooding timing",
+    "yield",
+    "side sell",
+    "economic demand",
+    "economic supply",
+    "dual crop",
+    "Union profit",
+    "village-centric structures",
+    "union-centric structures",
+    "social network measures",
+    "local cartel",
+    "weak local governments",
+    "fair sell prices",
+    "local mafia",
+    "water access",
+    "stability",
+    "hired workforce",
+    "child workforce",
+    "economic security",
+    "interest rate",
+    "Fertilizer pre",
+    "Pesticides pre",
+    "loan capital",
+    "Risk aversion",
+    "Education",
+    "Disease",
+    "Reputation",
+    "experience",
+    "credit worthiness",
+    "personal capital",
+    "Food security",
+                                           "Fertilizer in",
+    "Pesticides in",
    "Agricultural yield" ,
     "Fertilizers" ,
     "Flood timing" ,
@@ -268,14 +322,7 @@ filename='cluster_id_cluster_name_distthreshold' + str(DISTANCE_THRESHOLD_CLUSTE
 assert len(cluster_id_cluster_name.keys()) > 0
 write_dict_to_csv(cluster_id_cluster_name, filename)
 
-#all plotting related stuff
-##### plot clusters
-# for k,v in clusterid_to_concept_text.items():
-#    plt.scatter(all_data[labels==k, 0], all_data[labels==k, 1], s=50)
-######plot dendrograms
-#plt.figure(figsize=(15, 12))
-#dendo=sch.dendrogram(sch.linkage(all_data,method='average'))
-#plt.show()
+
 
 
 '''check if all the query variables exist in concepts, or atleast are close in embedding space
@@ -384,11 +431,21 @@ for query_variable in QUERIES_AKA_VARIABLES:
                 f" The concepts in that cluster are:"
                 f"{best_match_cluster}")
                 query_cluster_similarity_score[query_variable]=[cluster_id_of_best_match_cluster,best_cosine_sim_value]
-print(f"--------END OF RUN\n")
 
+print(f"--------END OF cluster assignments\n")
 print(f"total number of queries that were assigned to a cluster was {query_assigned_to_cluster_count} out of a totoal of {len(QUERIES_AKA_VARIABLES)}")
 
 write_query_cluster_similarity_dict_csv(query_cluster_similarity_score,"query_cluster_similarity_score.tsv")
 
+#all plotting related stuff
+##### plot clusters
+for k,v in clusterid_to_concept_text.items():
+   plt.scatter(all_data[labels==k, 0], all_data[labels==k, 1], s=50)
+
+######plot dendrograms
+#plt.figure(figsize=(15, 12))
+#dendo=sch.dendrogram(sch.linkage(all_data,method='average'))
+#plt.show()
 
 
+print(f"--------END OF RUN\n")

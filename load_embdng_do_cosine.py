@@ -1,3 +1,8 @@
+'''
+This code was written for hoang to do somee cosine similarity test
+ this is just a subseet of all functions i have. Dont usee it for clustering.
+'''
+
 import numpy as np
 import pandas as pd
 from sklearn.metrics.pairwise import cosine_similarity
