@@ -165,9 +165,11 @@ def write_dict_to_csv(data, filename):
             mywriter.writerow(row)
 
 
-def write_dict_csv_with_value_as_list(data, filename):
+def write_dict_csv_with_value_as_list(data, filename,column_names=[]):
     folder_file=os.path.join(output_folder_path,filename)
     with open(folder_file,'w',newline='') as myfile:
+        mywriter = csv.writer(myfile, delimiter='\t')
+        mywriter.writerow(column_names)
         for k,v in  data.items():
             list_elements=[k]
             for each_element in v:
@@ -350,7 +352,8 @@ for cluster_id, cluster_of_concepts in clusterid_to_concept_text.items():
 
 assert len(clusterid_to_concept_text.keys()) > 0
 filename='cluster_members'  + ".tsv"
-write_dict_csv_with_value_as_list(clusterid_to_concept_text, filename)
+column_names=["clusterid","members"]
+write_dict_csv_with_value_as_list(clusterid_to_concept_text, filename,column_names)
 
 
 
@@ -470,8 +473,8 @@ for query_variable in QUERIES_AKA_VARIABLES:
 
 print(f"--------END OF cluster assignments\n")
 print(f"total number of queries that were assigned to a cluster was {query_assigned_to_cluster_count} out of a totoal of {len(QUERIES_AKA_VARIABLES)}")
-
-write_dict_csv_with_value_as_list(query_cluster_similarity_score,"tomek_variable_to_clusters_mapping.tsv")
+column_names=["query_variable","cluster","similarity_score","cluster_name"]
+write_dict_csv_with_value_as_list(query_cluster_similarity_score,"tomek_variable_to_clusters_mapping.tsv",column_names)
 
 #all plotting related stuff
 ##### plot clusters
