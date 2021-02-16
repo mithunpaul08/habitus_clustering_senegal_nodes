@@ -25,10 +25,10 @@ from nltk.stem import WordNetLemmatizer
 import stanza
 stanza.download('en',processors='tokenize,lemma')
 nlp=stanza.Pipeline('en',processors='tokenize,lemma')
-import math
+import os
 
-DISTANCE_THRESHOLD_CLUSTERING=0.3
-SIMILARITY_THRESHOLD=0.7
+DISTANCE_THRESHOLD_CLUSTERING=0.2
+SIMILARITY_THRESHOLD=0.8
 eidos_stop_words = read_eidos_stopwords()
 
 #list of queries that were taken from tomek's model, and were in turn used to run queries on google to download the pdf files from which CONCEPTS were extracted using odin
@@ -99,6 +99,14 @@ QUERIES_AKA_VARIABLES =[
 
 random.seed(3)
 
+if not os.path.exists('outputs'):
+    os.mkdir("outputs")
+name_of_subfolder="dist_threshold"+str(DISTANCE_THRESHOLD_CLUSTERING)+"sim_threshold"+str(SIMILARITY_THRESHOLD)
+output_folder_path = os.path.join("outputs", name_of_subfolder)
+if not os.path.exists(output_folder_path):
+    os.mkdir(output_folder_path)
+
+
 #read causes and effects
 dataset=pd.read_csv('./senegal_africa.csv')
 causes = dataset.iloc[:, [2]].values
@@ -149,7 +157,7 @@ combined_causes_effects=list(combined_causes_effects)
 
 
 def write_dict_to_csv(data, filename):
-    folder_file=os.path.join("outputs",filename)
+    folder_file=os.path.join(output_folder_path,filename)
     with open(folder_file,'w',newline='') as myfile:
         for k,v in  data.items():
             row=([k,v])
@@ -158,7 +166,7 @@ def write_dict_to_csv(data, filename):
 
 
 def write_dict_csv_with_value_as_list(data, filename):
-    folder_file=os.path.join("outputs",filename)
+    folder_file=os.path.join(output_folder_path,filename)
     with open(folder_file,'w',newline='') as myfile:
         for k,v in  data.items():
             list_elements=[k]
@@ -169,7 +177,7 @@ def write_dict_csv_with_value_as_list(data, filename):
             mywriter.writerow(row)
 
 def write_query_cluster_similarity_dict_csv(data, filename):
-    folder_file=os.path.join("outputs",filename)
+    folder_file=os.path.join(output_folder_path,filename)
     with open(folder_file,'w',newline='') as myfile:
         row = (['query variable', 'cluster', 'similarity'])
         mywriter = csv.writer(myfile, delimiter='\t')
