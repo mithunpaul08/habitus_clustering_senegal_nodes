@@ -27,8 +27,8 @@ stanza.download('en',processors='tokenize,lemma')
 nlp=stanza.Pipeline('en',processors='tokenize,lemma')
 import math
 
-DISTANCE_THRESHOLD_CLUSTERING=0.2
-SIMILARITY_THRESHOLD=0.8
+DISTANCE_THRESHOLD_CLUSTERING=0.3
+SIMILARITY_THRESHOLD=0.7
 eidos_stop_words = read_eidos_stopwords()
 
 #list of queries that were taken from tomek's model, and were in turn used to run queries on google to download the pdf files from which CONCEPTS were extracted using odin
