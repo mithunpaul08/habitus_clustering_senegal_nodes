@@ -28,7 +28,7 @@ nlp=stanza.Pipeline('en',processors='tokenize,lemma')
 import os
 import shutil
 
-DISTANCE_THRESHOLD_CLUSTERING=0.2
+DISTANCE_THRESHOLD_CLUSTERING=0.1
 SIMILARITY_THRESHOLD=0.8
 eidos_stop_words = read_eidos_stopwords()
 
@@ -162,9 +162,11 @@ combined_causes_effects=set(combined_causes_effects)
 combined_causes_effects=list(combined_causes_effects)
 
 
-def write_dict_to_csv(data, filename):
+def write_dict_to_csv(data, filename,column_names=[]):
     folder_file=os.path.join(output_folder_path,filename)
     with open(folder_file,'w',newline='') as myfile:
+        mywriter = csv.writer(myfile, delimiter='\t')
+        mywriter.writerow(column_names)
         for k,v in  data.items():
             row=([k,v])
             mywriter=csv.writer(myfile,delimiter='\t')
@@ -299,7 +301,7 @@ for index,label in enumerate(labels):
 
 filename='cluster_assignment' + ".tsv"
 assert len(concept_text_cluster_id.keys()) > 0
-write_dict_to_csv(concept_text_cluster_id, filename)
+write_dict_to_csv(concept_text_cluster_id, filename,["concept_text, cluster_id"])
 
 #to find the namee of the ]cluster
 
@@ -365,7 +367,7 @@ write_dict_csv_with_value_as_list(clusterid_to_concept_text, filename,column_nam
 
 filename='clusternames' + ".tsv"
 assert len(cluster_id_cluster_name.keys()) > 0
-write_dict_to_csv(cluster_id_cluster_name, filename)
+write_dict_to_csv(cluster_id_cluster_name, filename,["cluster_id","cluster_name"])
 
 
 
