@@ -270,8 +270,6 @@ print(f"total number of clusters is {cluster_count}")
 #print(f"final labels are  {labels}")
 #print(f"distances are{clustering.distances_}")
 
-# plot the dendrogram before clustering process
-
 
 
 
@@ -302,6 +300,22 @@ for index,label in enumerate(labels):
 filename='cluster_assignment' + ".tsv"
 assert len(concept_text_cluster_id.keys()) > 0
 write_dict_to_csv(concept_text_cluster_id, filename,["concept_text", "cluster_id"])
+
+
+# plot the dendrogram before clustering process
+
+#all plotting related stuff
+##### plot clusters
+for k,v in clusterid_to_concept_text.items():
+   plt.scatter(all_data[labels==k, 0], all_data[labels==k, 1], s=50)
+
+######plot dendrograms
+#plt.figure(figsize=(15, 12))
+#dendo=sch.dendrogram(sch.linkage(all_data,method='average'))
+plt.show()
+
+sys.exit()
+
 
 #to find the namee of the ]cluster
 
@@ -483,16 +497,6 @@ print(f"--------END OF cluster assignments\n")
 print(f"total number of queries that were assigned to a cluster was {query_assigned_to_cluster_count} out of a totoal of {len(QUERIES_AKA_VARIABLES)}")
 column_names=["query_variable","cluster","similarity_score","cluster_name"]
 write_dict_csv_with_value_as_list(query_cluster_similarity_score,"tomek_variable_to_clusters_mapping.tsv",column_names)
-
-#all plotting related stuff
-##### plot clusters
-for k,v in clusterid_to_concept_text.items():
-   plt.scatter(all_data[labels==k, 0], all_data[labels==k, 1], s=50)
-
-######plot dendrograms
-#plt.figure(figsize=(15, 12))
-#dendo=sch.dendrogram(sch.linkage(all_data,method='average'))
-#plt.show()
 
 
 print(f"--------END OF RUN\n")
