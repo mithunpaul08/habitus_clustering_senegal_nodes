@@ -11,6 +11,8 @@ import sys
 from numpy import random
 from glove_read_get_embed import read_file_python_way
 
+GRID_EDGES_WIDTH=10
+GRID_EDGES_HEIGHT=8
 
 dataset_cluster_namees=pd.read_csv('./outputs_from_clara/cluster_names.csv')
 cluster_ids = dataset_cluster_namees.iloc[:, [0]].values
@@ -30,35 +32,34 @@ for index,line in enumerate(cluster_members):
         split_line=line.split("\t")
         id=split_line[0]
         members=split_line[1:]
-        if(len(members)>3):
+        if(len(members)>1):
             for each_member in members:
                 if not each_member in ["","\n"]:
                     if each_member in dict_clusterid_names:
-                        dict_concepts[each_member]=1000
+                        dict_concepts[each_member]=100000
                     else:
                         dict_concepts[each_member] = 1
             list_dict_concepts.append(dict_concepts)
-
+#senegal_flag.png
 
 
 def display_wordcloud(list_dict_concepts, title, n_components):
     plt.figure(figsize=(40, 10), facecolor='white')
-    j=n_components
-    #j = np.ceil(n_components/4)
+    #j=i=GRID_EDGES
+
+
     for t in range(n_components):
-        #i=t+1
-        i = n_components
-        index = random.randint(1, n_components*n_components)
-        plt.subplot(j, i, index)
+        index = random.randint(1, GRID_EDGES_WIDTH*GRID_EDGES_HEIGHT)
+        plt.subplot(GRID_EDGES_WIDTH, GRID_EDGES_HEIGHT, index)
         plt.plot()
         oval_mask = np.array(Image.open("img/phploeBuh.png"))
-
+        no_of_cluster_members=len(list_dict_concepts[t])
         wordcloud = WordCloud(prefer_horizontal=1, width=444, height=444,
                               mask=oval_mask,
                               background_color='white',
-                              contour_width=1, contour_color='white',
-                              max_font_size=500,
-                              # min_font_size=4
+                              contour_width=5, contour_color='red',
+                              max_font_size=no_of_cluster_members*500,
+                              min_font_size=4,
                               ).generate_from_frequencies(list_dict_concepts[t])
 
 
