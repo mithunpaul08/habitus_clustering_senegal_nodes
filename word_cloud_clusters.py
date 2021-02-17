@@ -42,19 +42,21 @@ for index,line in enumerate(cluster_members):
 
 
 def display_wordcloud(list_dict_concepts, title, n_components):
-    #plt.figure()
     plt.figure(figsize=(40, 10), facecolor='white')
-    j = np.ceil(n_components/4)
+    j=n_components
+    #j = np.ceil(n_components/4)
     for t in range(n_components):
-        i=t+1
-        plt.subplot(j, 4, i)
+        #i=t+1
+        i = n_components
+        index = random.randint(1, n_components*n_components)
+        plt.subplot(j, i, index)
         plt.plot()
         oval_mask = np.array(Image.open("img/phploeBuh.png"))
 
         wordcloud = WordCloud(prefer_horizontal=1, width=444, height=444,
                               mask=oval_mask,
                               background_color='white',
-                              contour_width=5, contour_color='black',
+                              contour_width=1, contour_color='white',
                               max_font_size=500,
                               # min_font_size=4
                               ).generate_from_frequencies(list_dict_concepts[t])
