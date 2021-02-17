@@ -301,7 +301,7 @@ for index,label in enumerate(labels):
 
 filename='cluster_assignment' + ".tsv"
 assert len(concept_text_cluster_id.keys()) > 0
-write_dict_to_csv(concept_text_cluster_id, filename,["concept_text, cluster_id"])
+write_dict_to_csv(concept_text_cluster_id, filename,["concept_text", "cluster_id"])
 
 #to find the namee of the ]cluster
 
