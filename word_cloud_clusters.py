@@ -9,52 +9,65 @@ from PIL import Image
 from wordcloud import WordCloud, STOPWORDS, ImageColorGenerator
 import sys
 from numpy import random
+from glove_read_get_embed import read_file_python_way
 
-def display_wordcloud(dict_concepts, title, n_components):
+
+dataset_cluster_namees=pd.read_csv('./outputs_from_clara/cluster_names.csv')
+cluster_ids = dataset_cluster_namees.iloc[:, [0]].values
+cluster_names = dataset_cluster_namees.iloc[:, [1]].values
+assert len(cluster_ids)== len(cluster_names)
+dict_clusterid_names={}
+for i,n in zip(cluster_ids,cluster_names):
+    dict_clusterid_names[n[0]]=i[0]
+
+
+list_dict_concepts=[]
+cluster_members=read_file_python_way('./outputs_from_clara/cluster_members.csv')
+for index,line in enumerate(cluster_members):
+    dict_concepts = {}
+    if not index ==0:
+        line = line.strip()
+        split_line=line.split("\t")
+        id=split_line[0]
+        members=split_line[1:]
+        if(len(members)>3):
+            for each_member in members:
+                if not each_member in ["","\n"]:
+                    if each_member in dict_clusterid_names:
+                        dict_concepts[each_member]=1000
+                    else:
+                        dict_concepts[each_member] = 1
+            list_dict_concepts.append(dict_concepts)
+
+
+
+def display_wordcloud(list_dict_concepts, title, n_components):
     #plt.figure()
-    plt.figure(figsize=(40, 10), facecolor='black')
+    plt.figure(figsize=(40, 10), facecolor='white')
     j = np.ceil(n_components/4)
     for t in range(n_components):
         i=t+1
         plt.subplot(j, 4, i)
-            #.set_title("Topic #" + str(t))
         plt.plot()
         oval_mask = np.array(Image.open("img/phploeBuh.png"))
 
-        wordcloud = WordCloud(prefer_horizontal=1, width=4444, height=4444,
+        wordcloud = WordCloud(prefer_horizontal=1, width=444, height=444,
                               mask=oval_mask,
                               background_color='white',
                               contour_width=5, contour_color='black',
-                              # max_font_size=500,
+                              max_font_size=500,
                               # min_font_size=4
-                              ).generate_from_frequencies(dict_concepts)
+                              ).generate_from_frequencies(list_dict_concepts[t])
 
-        # Display the generated image:
 
         plt.imshow(wordcloud, interpolation='bilinear')
-        # plt.axis("off")
-        # plt.show()
-
-        #plt.imshow(WordCloud().fit_words(top_words[t]))
         plt.axis("off")
-    #fig.suptitle(title)
     plt.show()
 
 
-dict_concepts={}
-dict_concepts["rice "]=1
-dict_concepts["rice hullers"]=1
-dict_concepts["rice productivity"]=1330
-dict_concepts["more rice"]=1
 
 
-top_words={}
-top_words[0]=["rice","rice","rice","rice","rice","rice",]
-top_words[1]=["corn","corn","corn","corn"]
-top_words[2]=["cnn","abc","nbs","fox"]
-top_words[3]=["donkey","monkey","giraffe","dog","cat","lizard",]
-
-display_wordcloud(dict_concepts,"name of plot", 4)
+display_wordcloud(list_dict_concepts,"name of plot", len(list_dict_concepts))
 sys.exit()
 
 oval_mask = np.array(Image.open("img/phploeBuh.png"))
