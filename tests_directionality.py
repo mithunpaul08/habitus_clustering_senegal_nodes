@@ -14,3 +14,9 @@ class tests_directionality(TestCase):
     def test_find_average_causal_mlm(self):
             avg = self.obj_direction_validation.find_average_causal_mlm(all_promote_adverbs, self.input_tokens)
             assert avg == 0.00013738061534240842
+            avg = self.obj_direction_validation.find_average_causal_mlm(all_inhibits_adverbs, self.input_tokens)
+            assert avg == 9.93180219666101e-05
+            avg = self.obj_direction_validation.find_average_causal_mlm(all_causal_adverbs, self.input_tokens)
+            assert avg ==0.0003280365199316293
+
+
