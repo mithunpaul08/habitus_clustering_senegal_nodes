@@ -13,6 +13,17 @@ from data.verbs import *
 
 import logging
 
+'''
+to run: 
+-pip install -r requirements.txt
+-pick name of the MLM model you want to use:MODEL_NAME e.g.,:[distilbert-base-uncased]
+-pick the two words you want to check probability for @INPUT_TOKENS
+python direction_validation.py
+'''
+
+MODEL_NAME="distilbert-base-uncased"
+INPUT_TOKENS = ["education", "stability"]
+
 class DirectionValidation:
 
     def __init__(self,model_name):
@@ -47,7 +58,6 @@ class DirectionValidation:
         for token_index, prob in zip(alltoken_indices[0], all_token_probs[0][0]):
             token = self.tokenizer.decode(token_index)
             token_probs[token] = prob
-        self.logger.debug(f"prob_dict['income']={token_probs['income']}")
         return token_probs,sequence
 
 
@@ -217,39 +227,52 @@ class DirectionValidation:
 
         return adverb_prob
 
-    def find_highest_prob_between_adverb_donot_adverb(self,dict_adverb_prob_a2b,key1, key2,overall_highest_accuracies_relations):
+    def find_highest_prob_between_adverb_donot_adverb(self,dict_adverb_prob_a2b,key1, key2,overall_highest_accuracies_relations,direction_string):
         prob_key1=dict_adverb_prob_a2b[key1]
         prob_key2=dict_adverb_prob_a2b[key2]
         if (prob_key1 > prob_key2):
-            print(f"{key1}>{key2}")
-            overall_highest_accuracies_relations[]
+            who_is_bigger=f"{key1}>{key2}"
+            print(who_is_bigger)
+            overall_highest_accuracies_relations[prob_key1]=(who_is_bigger,direction_string)
 
 
 def main():
 
-    obj_direction_validation = DirectionValidation("distilbert-base-uncased")
+    obj_direction_validation = DirectionValidation(MODEL_NAME)
 
-    input_tokens = ["education", "stability"]
-    adverb_prob_a2b=obj_direction_validation.all_queries(input_tokens)
+
+    adverb_prob_a2b=obj_direction_validation.all_queries(INPUT_TOKENS)
 
 
     overall_highest_accuracies_relations={}
 
     print(f"Extended Summary:")
-    print(f"From {input_tokens[0]} to {input_tokens[1]}")
-    obj_direction_validation.find_highest_prob_between_adverb_donot_adverb(adverb_prob_a2b,"PROMOTES","DOES_NOT_PROMOTE",overall_highest_accuracies_relations)
+    direction_string=f"From {input_tokens[0]} to {input_tokens[1]:}"
+    print(direction_string)
+    obj_direction_validation.find_highest_prob_between_adverb_donot_adverb(adverb_prob_a2b,"PROMOTES","DOES_NOT_PROMOTE",overall_highest_accuracies_relations,direction_string)
     obj_direction_validation.find_highest_prob_between_adverb_donot_adverb(adverb_prob_a2b, "INHIBITS",
-                                                                           "DOES_NOT_INHIBIT",overall_highest_accuracies_relations)
+                                                                           "DOES_NOT_INHIBIT",overall_highest_accuracies_relations,direction_string)
 
-    input_tokens = ["stability", "education"]
+    input_tokens = ["culture", "education"]
     adverb_prob_b2a = obj_direction_validation.all_queries(input_tokens)
     assert len(adverb_prob_a2b.keys()) == len(adverb_prob_b2a.keys())
 
-    print(f"From {input_tokens[0]} to {input_tokens[1]}")
+    direction_string_reverse = f"From {input_tokens[0]} to {input_tokens[1]:}"
+    print(direction_string_reverse)
     obj_direction_validation.find_highest_prob_between_adverb_donot_adverb(adverb_prob_b2a, "PROMOTES",
-                                                                           "DOES_NOT_PROMOTE",overall_highest_accuracies_relations)
+                                                                           "DOES_NOT_PROMOTE",overall_highest_accuracies_relations,direction_string_reverse)
     obj_direction_validation.find_highest_prob_between_adverb_donot_adverb(adverb_prob_b2a, "INHIBITS",
-                                                                           "DOES_NOT_INHIBIT",overall_highest_accuracies_relations)
+                                                                           "DOES_NOT_INHIBIT",overall_highest_accuracies_relations,direction_string_reverse)
+    print(f"Brief Summary:\n Overall_best=")
+
+    #find the higheest value and print it as the best overall
+
+    all_probs=[]
+    for kv in overall_highest_accuracies_relations.keys():
+        all_probs.append(kv)
+
+    print(overall_highest_accuracies_relations[max(all_probs)][1])
+    print(overall_highest_accuracies_relations[max(all_probs)][0])
 
     #########this is being hardcodeed for the reverse direction "rice production" todo:should make this general- i.e even if there are multiple tokens in one token, do recursively aveerage
 #     prob_adverb = {}
