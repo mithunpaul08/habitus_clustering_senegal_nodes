@@ -32,4 +32,4 @@ class tests_directionality(TestCase):
             token_probs, sequence = self.obj_direction_validation.create_prob_dict(mlm_first_query_token, mlm_causal_causal_adverb)
             prob= token_probs[mlm_second_query_token]
             assert prob == 0.0004211414197925478
-            
+

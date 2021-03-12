@@ -163,6 +163,8 @@ class DirectionValidation:
 
     def all_queries(self,input_tokens):
         all_averages = []
+
+        #mirror images of each other. dictionary maping probability to adverb and adverb to probability
         prob_adverb= {}
         adverb_prob = {}
 
@@ -244,7 +246,7 @@ def run_for_all_models(model_name):
 
         '''
               #if either of the tokens are multiworded tokens (e.g.; rice production) have to treat them separately.
-              # for example, "income improves rice production", below is the email in which mihai explained this
+              #  below is the email in which mihai explained this
               Qn) For "income" to "rice production", you had said, i should use average of
               p("rice"| "income") followed by p("production" | "income" and "rice").
               For the second one, p("production" | "income" and "rice"), i am a little confused as to how to create a query for this. 
@@ -263,9 +265,17 @@ def run_for_all_models(model_name):
                 index_of_other_part_token= len_input_tokens-1-index  #pick the other token...assuming one of the tokens is single word...e:g.,if "rice production" is second token, the other token is "income"
                 partner_token=input_tokens[index_of_other_part_token]
 
-                for each_sub_token in split_each_token:
-                    new_input_tokens=[partner_token,each_sub_token] #e.g,:find probability for rice to fill 'income promotes [MASK] '
-                    adverb_prob_a2b = obj_direction_validation.all_queries(new_input_tokens)
+                list_all_avg_probabilities=[]
+                for index,each_sub_token in enumerate(split_each_token):
+
+                    if index==0:
+                        new_input_tokens=[partner_token,each_sub_token] #e.g,:find probability for the token 'rice' to fill 'income promotes [MASK] '
+                        prob_of_each_sub_token = obj_direction_validation.find_average_causal_mlm(all_promote_adverbs, new_input_tokens)
+                    if index>0:
+                            #for subsequent indicies, after zero, you have to keep building up the sentence.
+                            # e.g now you have to find the probability of 'production' to fill 'income promotes rice [mask]'
+                            print()
+
 
                     print("one of the tokens has two or more sub tokens")
 
