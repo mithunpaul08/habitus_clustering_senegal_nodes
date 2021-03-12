@@ -23,8 +23,8 @@ vi ./log_directionality.log
 '''
 
 
-INPUT_TOKENS = [ "rice production","income"]
-LIST_MODEL_NAME=["bert-base-cased"]
+INPUT_TOKENS = [ "stability production","education"]
+LIST_MODEL_NAME=["distilbert-base-uncased"]
 class DirectionValidation:
 
     def __init__(self,model_name):
