@@ -19,17 +19,18 @@ to run:
 -pick name of the MLM model you want to use:MODEL_NAME e.g.,:[distilbert-base-uncased]
 -pick the two words you want to check probability for @INPUT_TOKENS
 python direction_validation.py
+vi ./log_directionality.log
 '''
 
-MODEL_NAME="distilbert-base-uncased"
-INPUT_TOKENS = ["education", "stability"]
 
+INPUT_TOKENS = ["rice production", "income"]
+LIST_MODEL_NAME=["bert-base-cased"]
 class DirectionValidation:
 
     def __init__(self,model_name):
 
         self.logger = logging.getLogger(__name__)
-        log_file_name = "log_directionality.log"
+        log_file_name = "log_"+model_name+".log"
         FORMAT='%(message)s'
         logging.basicConfig(
             format=FORMAT,
@@ -235,97 +236,75 @@ class DirectionValidation:
             print(who_is_bigger)
             overall_highest_accuracies_relations[prob_key1]=(who_is_bigger,direction_string)
 
+def run_for_all_models(model_name):
+
+        obj_direction_validation = DirectionValidation(model_name)
+
+        input_tokens = INPUT_TOKENS
+
+        '''
+              #if either of the tokens are multiworded tokens (e.g.; rice production) have to treat them separately.
+              # for example, "rice production improves income", below is the email in which mihai explained this
+              Qn) For "income" to "rice production", you had said, i should use average of
+              p("rice"| "income") followed by p("production" | "income" and "rice").
+              For the second one, p("production" | "income" and "rice"), i am a little confused as to how to create a query for this. 
+              e.g.,Right now the way my queries to MLM looks like this : "rice production promotes [MASK]". 
+              So for p(rice|income), i can rewrite it as "income promotes [MASK]" and calculate probability for rice. 
+              But for p("production" | "income" and "rice") can I frame the query as "income promotes rice [MASK]" and calculate the probability of production to fill the [MASK]?
+              Ans:Correct. For the second word start with:  income promotes rice [MASK]"
+              '''
+        adverb_prob_a2b=None
+        for each_token in input_tokens:
+            if (len(each_token.split(" ")) > 1):
+                print("one of the tokens has two or more sub tokens")
+
+            else:
+                adverb_prob_a2b = obj_direction_validation.all_queries(INPUT_TOKENS)
+
+        assert adverb_prob_a2b is not None
+        overall_highest_accuracies_relations = {}
+        print(f"Extended Summary:")
+        direction_string = f"From {input_tokens[0]} to {input_tokens[1]:}"
+        print(direction_string)
+        obj_direction_validation.find_highest_prob_between_adverb_donot_adverb(adverb_prob_a2b, "PROMOTES",
+                                                                               "DOES_NOT_PROMOTE",
+                                                                               overall_highest_accuracies_relations,
+                                                                               direction_string)
+        obj_direction_validation.find_highest_prob_between_adverb_donot_adverb(adverb_prob_a2b, "INHIBITS",
+                                                                               "DOES_NOT_INHIBIT",
+                                                                               overall_highest_accuracies_relations,
+                                                                               direction_string)
+
+        # opposite direction
+        input_tokens = [INPUT_TOKENS[1], INPUT_TOKENS[0]]
+        adverb_prob_b2a = obj_direction_validation.all_queries(input_tokens)
+        assert len(adverb_prob_a2b.keys()) == len(adverb_prob_b2a.keys())
+
+        direction_string_reverse = f"From {input_tokens[0]} to {input_tokens[1]:}"
+        print(direction_string_reverse)
+        obj_direction_validation.find_highest_prob_between_adverb_donot_adverb(adverb_prob_b2a, "PROMOTES",
+                                                                               "DOES_NOT_PROMOTE",
+                                                                               overall_highest_accuracies_relations,
+                                                                               direction_string_reverse)
+        obj_direction_validation.find_highest_prob_between_adverb_donot_adverb(adverb_prob_b2a, "INHIBITS",
+                                                                               "DOES_NOT_INHIBIT",
+                                                                               overall_highest_accuracies_relations,
+                                                                               direction_string_reverse)
+        print(f"Brief Summary:\n Overall_best=")
+
+        # find the higheest value and print it as the best overall
+
+        all_probs = []
+        for kv in overall_highest_accuracies_relations.keys():
+            all_probs.append(kv)
+
+        if(len(all_probs)>0):
+            print(overall_highest_accuracies_relations[max(all_probs)][1])
+            print(overall_highest_accuracies_relations[max(all_probs)][0])
 
 def main():
-
-    obj_direction_validation = DirectionValidation(MODEL_NAME)
-
-
-    adverb_prob_a2b=obj_direction_validation.all_queries(INPUT_TOKENS)
-
-
-    overall_highest_accuracies_relations={}
-
-    print(f"Extended Summary:")
-    direction_string=f"From {input_tokens[0]} to {input_tokens[1]:}"
-    print(direction_string)
-    obj_direction_validation.find_highest_prob_between_adverb_donot_adverb(adverb_prob_a2b,"PROMOTES","DOES_NOT_PROMOTE",overall_highest_accuracies_relations,direction_string)
-    obj_direction_validation.find_highest_prob_between_adverb_donot_adverb(adverb_prob_a2b, "INHIBITS",
-                                                                           "DOES_NOT_INHIBIT",overall_highest_accuracies_relations,direction_string)
-
-    input_tokens = ["culture", "education"]
-    adverb_prob_b2a = obj_direction_validation.all_queries(input_tokens)
-    assert len(adverb_prob_a2b.keys()) == len(adverb_prob_b2a.keys())
-
-    direction_string_reverse = f"From {input_tokens[0]} to {input_tokens[1]:}"
-    print(direction_string_reverse)
-    obj_direction_validation.find_highest_prob_between_adverb_donot_adverb(adverb_prob_b2a, "PROMOTES",
-                                                                           "DOES_NOT_PROMOTE",overall_highest_accuracies_relations,direction_string_reverse)
-    obj_direction_validation.find_highest_prob_between_adverb_donot_adverb(adverb_prob_b2a, "INHIBITS",
-                                                                           "DOES_NOT_INHIBIT",overall_highest_accuracies_relations,direction_string_reverse)
-    print(f"Brief Summary:\n Overall_best=")
-
-    #find the higheest value and print it as the best overall
-
-    all_probs=[]
-    for kv in overall_highest_accuracies_relations.keys():
-        all_probs.append(kv)
-
-    print(overall_highest_accuracies_relations[max(all_probs)][1])
-    print(overall_highest_accuracies_relations[max(all_probs)][0])
-
-    #########this is being hardcodeed for the reverse direction "rice production" todo:should make this general- i.e even if there are multiple tokens in one token, do recursively aveerage
-#     prob_adverb = {}
-#     all_averages = []
-#     input_tokens = [ "income","rice production"]
-#     avg=obj_direction_validation.rice_production_average_per_query_type(obj_direction_validation,all_promote_adverbs)
-#     all_averages.append(avg.item())
-#     prob_adverb[avg.item()]="PROMOTES"
-#     print(f"For {input_tokens[0]} to {input_tokens[1]}  avg probability  for all PROMOTES queries is {avg}")
-#
-#
-#     avg=obj_direction_validation.rice_production_average_per_query_type(obj_direction_validation,all_inhibits_adverbs)
-#     all_averages.append(avg.item())
-#     prob_adverb[avg.item()] = "INHIBITS"
-#     print(f"For {input_tokens[0]} to {input_tokens[1]}  avg probability  for all INHIBITS queries is {avg}")
-#
-#
-#     avg=obj_direction_validation.rice_production_average_per_query_type(obj_direction_validation,all_causal_adverbs)
-#     print(f"For {input_tokens[0]} to {input_tokens[1]}  avg probability  for all CAUSAL queries is {avg}")
-#     all_averages.append(avg.item())
-#     all_averages.sort(reverse=True)
-#     prob_adverb[avg.item()] = "NON_POLARIZED"
-#     combined_sorted_string_adverbs=[]
-#     for a in all_averages:
-#         pera=str(prob_adverb[a])+" > "
-#         combined_sorted_string_adverbs.append(pera)
-#     print("".join(combined_sorted_string_adverbs))
-#
-# ####income and rice production with negation
-#     prob_adverb = {}
-#     all_averages = []
-#     input_tokens = ["income", "rice production"]
-#     avg = obj_direction_validation.rice_production_average_per_query_type_with_negation(obj_direction_validation, all_promote_adverbs_for_negation)
-#     all_averages.append(avg.item())
-#     prob_adverb[avg.item()] = "DOES NOT PROMOTE"
-#     print(f"For {input_tokens[0]} to {input_tokens[1]}  avg probability  for all DOES NOT PROMOTES queries is {avg}")
-#
-#     avg = obj_direction_validation.rice_production_average_per_query_type_with_negation(obj_direction_validation,
-#                                                                           all_inhibits_adverbs_for_negation)
-#     all_averages.append(avg.item())
-#     prob_adverb[avg.item()] = "DOES NOT INHIBIT"
-#     print(f"For {input_tokens[0]} to {input_tokens[1]}  avg probability  for all DOES NOT INHIBITS queries is {avg}")
-#
-#     avg = obj_direction_validation.rice_production_average_per_query_type_with_negation(obj_direction_validation, all_causal_adverbs_for_negation)
-#     print(f"For {input_tokens[0]} to {input_tokens[1]}  avg probability  for all DOES NOT CAUSAL queries is {avg}")
-#     all_averages.append(avg.item())
-#     all_averages.sort(reverse=True)
-#     prob_adverb[avg.item()] = "DOES NOT NON_POLARIZED"
-#     combined_sorted_string_adverbs = []
-#     for a in all_averages:
-#         pera = str(prob_adverb[a]) + " > "
-#         combined_sorted_string_adverbs.append(pera)
-#     print("".join(combined_sorted_string_adverbs))
+    for each_model in LIST_MODEL_NAME:
+        run_for_all_models(each_model)
 
 
 if __name__ == "__main__":
