@@ -23,7 +23,7 @@ vi ./log_directionality.log
 '''
 
 
-INPUT_TOKENS = ["rice production", "income"]
+INPUT_TOKENS = [ "rice production","income"]
 LIST_MODEL_NAME=["bert-base-cased"]
 class DirectionValidation:
 
@@ -34,7 +34,7 @@ class DirectionValidation:
         FORMAT='%(message)s'
         logging.basicConfig(
             format=FORMAT,
-            level=logging.INFO,
+            level=logging.DEBUG,
             filename=log_file_name,
             filemode='w'
         )
@@ -244,7 +244,7 @@ def run_for_all_models(model_name):
 
         '''
               #if either of the tokens are multiworded tokens (e.g.; rice production) have to treat them separately.
-              # for example, "rice production improves income", below is the email in which mihai explained this
+              # for example, "income improves rice production", below is the email in which mihai explained this
               Qn) For "income" to "rice production", you had said, i should use average of
               p("rice"| "income") followed by p("production" | "income" and "rice").
               For the second one, p("production" | "income" and "rice"), i am a little confused as to how to create a query for this. 
@@ -254,12 +254,23 @@ def run_for_all_models(model_name):
               Ans:Correct. For the second word start with:  income promotes rice [MASK]"
               '''
         adverb_prob_a2b=None
-        for each_token in input_tokens:
-            if (len(each_token.split(" ")) > 1):
-                print("one of the tokens has two or more sub tokens")
 
-            else:
-                adverb_prob_a2b = obj_direction_validation.all_queries(INPUT_TOKENS)
+        len_input_tokens=len(input_tokens)
+        for index,each_token in enumerate(input_tokens):
+            split_each_token=each_token.split(" ")
+            if (len(split_each_token) > 1):
+
+                index_of_other_part_token= len_input_tokens-1-index  #pick the other token...assuming one of the tokens is single word...e:g.,if "rice production" is second token, the other token is "income"
+                partner_token=input_tokens[index_of_other_part_token]
+
+                for each_sub_token in split_each_token:
+                    new_input_tokens=[partner_token,each_sub_token] #e.g,:find probability for rice to fill 'income promotes [MASK] '
+                    adverb_prob_a2b = obj_direction_validation.all_queries(new_input_tokens)
+
+                    print("one of the tokens has two or more sub tokens")
+
+
+        adverb_prob_a2b = obj_direction_validation.all_queries(INPUT_TOKENS)
 
         assert adverb_prob_a2b is not None
         overall_highest_accuracies_relations = {}
