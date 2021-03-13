@@ -23,7 +23,7 @@ vi ./log_directionality.log
 '''
 
 
-INPUT_TOKENS = [ "income","rice production"]
+INPUT_TOKENS = [ "rice production","income"]
 LIST_MODEL_NAME=["distilbert-base-uncased"]
 class DirectionValidation:
 
@@ -89,32 +89,47 @@ class DirectionValidation:
         avg=sum_probs/len(list_adverbs)
         return avg
 
-    def find_average_causal_mlm(self,list_adverbs, input_tokens):
-        sum_probs=0
-        for adverb in list_adverbs:
+    def find_prob_for_each_query(self,adverb, input_tokens):
             mlm_first_query_token=input_tokens[0]
             mlm_causal_causal_adverb = adverb
             mlm_second_query_token = input_tokens[1]
             sequence = str(mlm_first_query_token) + " " + str(
                 mlm_causal_causal_adverb) + " " + self.tokenizer.mask_token
             token_probs,sequence=self.create_prob_dict(sequence)
-            sum_probs+=token_probs[mlm_second_query_token]
+            prob=token_probs[mlm_second_query_token]
             self.logger.debug(f"For the sentence {sequence} probability of the word {mlm_second_query_token} to occur at the end is {token_probs[mlm_second_query_token]}")
+            return prob
+
+    def find_average_causal_mlm(self,list_adverbs, input_tokens):
+        sum_probs=0
+        for adverb in list_adverbs:
+            prob=self.find_prob_for_each_query(adverb,input_tokens)
+            sum_probs=sum_probs+prob
         avg=sum_probs/len(list_adverbs)
         return avg
 
-
-    def find_average_causal_mlm_multiple_tokens(self, list_adverbs, left_token, all_tokens_in_between, query_token):
-        sum_probs=0
-        for adverb in list_adverbs:
-            mlm_causal_causal_adverb = adverb
+    def find_prob_multiple_tokens_per_verb(self,verb,flag_multi_word_token_goes_first,left_token,all_tokens_in_between,query_token):
+        mlm_causal_causal_adverb = verb
+        if (flag_multi_word_token_goes_first):
+            sequence = str(left_token) + " " + all_tokens_in_between + " " + str(
+                mlm_causal_causal_adverb) + " " + self.tokenizer.mask_token
+        else:
             sequence = str(left_token) + " " + str(
-                mlm_causal_causal_adverb) +" " + all_tokens_in_between + " " + self.tokenizer.mask_token
-            token_probs,sequence=self.create_prob_dict(sequence)
-            sum_probs+=token_probs[query_token]
-            self.logger.debug(
-                f"For the sentence {sequence} probability of the word {query_token} to occur at the end is {token_probs[query_token]}")
-        avg=sum_probs/len(list_adverbs)
+                mlm_causal_causal_adverb) + " " + all_tokens_in_between + " " + self.tokenizer.mask_token
+        token_probs, sequence = self.create_prob_dict(sequence)
+        prob= token_probs[query_token]
+        self.logger.debug(
+            f"For the sentence {sequence} probability of the word {query_token} to occur at the end is {token_probs[query_token]}")
+        return prob
+
+
+    def find_average_causal_mlm_multiple_tokens(self, list_verbs, left_token, all_tokens_in_between, query_token,flag_multi_word_token_goes_first):
+        sum_probs=0
+        for verb in list_verbs:
+            prob=self.find_prob_multiple_tokens_per_verb( verb, flag_multi_word_token_goes_first, left_token,
+                                               all_tokens_in_between, query_token)
+            sum_probs+=prob
+        avg=sum_probs/len(list_verbs)
         return avg
 
     def find_average_causal_mlm_with_negation(self,list_adverbs, input_tokens):
@@ -175,27 +190,27 @@ class DirectionValidation:
         return avg_rice_production_income
 
 
-    def all_queries(self,input_tokens):
+    def all_single_worded_queries(self, input_tokens):
         all_averages = []
 
         #mirror images of each other. dictionary maping probability to adverb and adverb to probability
         prob_adverb= {}
         adverb_prob = {}
 
-        avg = self.find_average_causal_mlm(all_promote_adverbs, input_tokens)
+        avg = self.find_average_causal_mlm(all_promote_verbs, input_tokens)
         all_averages.append(avg.item())
         prob_adverb[avg.item()] = "PROMOTES"
         adverb_prob["PROMOTES"]= avg.item()
         self.logger.info(f"For {input_tokens[0]} to {input_tokens[1]}  avg probability  for all PROMOTES queries is {avg}")
 
-        avg = self.find_average_causal_mlm(all_inhibits_adverbs, input_tokens)
+        avg = self.find_average_causal_mlm(all_inhibits_verbs, input_tokens)
         all_averages.append(avg.item())
         prob_adverb[avg.item()] = "INHIBITS"
         adverb_prob["INHIBITS"] = avg.item()
 
         self.logger.info(f"For {input_tokens[0]} to {input_tokens[1]}  avg probability  for all INHIBITS queries is {avg}")
 
-        avg = self.find_average_causal_mlm(all_causal_adverbs, input_tokens)
+        avg = self.find_average_causal_mlm(all_causal_verbs, input_tokens)
         self.logger.info(f"For {input_tokens[0]} to {input_tokens[1]}  avg probability  for all CAUSAL queries is {avg}")
         all_averages.append(avg.item())
         all_averages.sort(reverse=True)
@@ -211,23 +226,23 @@ class DirectionValidation:
 
         prob_adverb_doesnot = {}
         all_averages = []
-        avg = self.find_average_causal_mlm_with_negation(all_promote_adverbs_for_negation,
-                                                                             input_tokens)
+        avg = self.find_average_causal_mlm_with_negation(all_promote_verbs_for_negation,
+                                                         input_tokens)
         self.logger.info(f"For {input_tokens[0]} to {input_tokens[1]}  avg probability  for all DOES NOT PROMOTE queries is {avg}")
         all_averages.append(avg.item())
         prob_adverb_doesnot[avg.item()] = "DOES NOT PROMOTE"
         adverb_prob["DOES_NOT_PROMOTE"] = avg.item()
 
 
-        avg = self.find_average_causal_mlm_with_negation(all_inhibits_adverbs_for_negation,
-                                                                             input_tokens)
+        avg = self.find_average_causal_mlm_with_negation(all_inhibits_verbs_for_negation,
+                                                         input_tokens)
         self.logger.info(f"For {input_tokens[0]} to {input_tokens[1]}  avg probability  for all DOES NOT INHIBIT queries is {avg}")
         all_averages.append(avg.item())
         prob_adverb_doesnot[avg.item()] = "DOES NOT INHIBIT"
         adverb_prob["DOES_NOT_INHIBIT"] = avg.item()
 
-        avg = self.find_average_causal_mlm_with_negation(all_causal_adverbs_for_negation,
-                                                                             input_tokens)
+        avg = self.find_average_causal_mlm_with_negation(all_causal_verbs_for_negation,
+                                                         input_tokens)
         self.logger.info(f"For {input_tokens[0]} to {input_tokens[1]}  avg probability  for all DOES NOT CAUSE queries is {avg}")
         all_averages.append(avg.item())
         prob_adverb_doesnot[avg.item()] = "DOES NOT NON_POLARIZED"
@@ -243,6 +258,56 @@ class DirectionValidation:
         self.logger.info("".join(combined_sorted_string_adverbs))
 
         return adverb_prob
+
+
+    def give_adverbs_return_multi_word_query_averages(self,split_multi_word_token,flag_multi_word_token_goes_first,partner_token,list_type_of_adverbs):
+        list_all_avg_probabilities = []
+        word_buildup = []
+        prob_of_each_sub_token_to_appear_at_end = 0
+        for index, each_subtoken_in_multi_word_token in enumerate(split_multi_word_token):
+            if index == 0:
+                if (flag_multi_word_token_goes_first) == True:
+                    new_input_tokens = [each_subtoken_in_multi_word_token,
+                                        partner_token]  # e.g,:find probability for the token 'rice' to fill 'income promotes [MASK] '
+                else:
+                    new_input_tokens = [partner_token, each_subtoken_in_multi_word_token]
+                prob_of_each_sub_token_to_appear_at_end = self.find_average_causal_mlm(
+                    list_type_of_adverbs, new_input_tokens)
+
+            if index > 0:
+                # for subsequent indicies, after zero, you have to keep building up the sentence.
+                # e.g now you have to find the probability of 'production' to fill 'income promotes rice [mask]'
+                # find_average_causal_mlm_multiple_tokens(self, list_adverbs, left_token, all_tokens_in_between, query_token):
+                prob_of_each_sub_token_to_appear_at_end = self.find_average_causal_mlm_multiple_tokens(
+                    list_type_of_adverbs, " ".join(word_buildup), each_subtoken_in_multi_word_token, partner_token,
+                    flag_multi_word_token_goes_first)
+
+            word_buildup.append(each_subtoken_in_multi_word_token)
+            assert prob_of_each_sub_token_to_appear_at_end > 0
+            list_all_avg_probabilities.append(prob_of_each_sub_token_to_appear_at_end.item())
+        return list_all_avg_probabilities
+
+    def get_avg_of_multi_worded_queries(self, index, len_input_tokens,input_tokens,split_multi_word_token):
+        # at this point, either the first token in input_tokens or the second token can be the multiword_one. find which one
+        if index == 0:
+            flag_multi_word_token_goes_first = True
+        else:
+            flag_multi_word_token_goes_first=False
+
+        # pick the other token...assumption here is that one of the tokens is multiworded and the other one will be singleworded
+        # .e:g.,if "rice production" is one token, the other token is "income"
+        index_of_other_part_token = len_input_tokens - 1 - index
+        partner_token = input_tokens[index_of_other_part_token]
+
+
+        # for each sub token, find the probability of query token cumulatively.
+        # e.g: find probability of income to fill 'rice improves [mask]'
+        # then find probability of income to fill 'rice production improves [mask]'
+        list_all_avg_probabilities_promotes=self.give_adverbs_return_multi_word_query_averages(split_multi_word_token, flag_multi_word_token_goes_first,
+                                                                                               partner_token, all_promote_verbs)
+        all_avg_probabilities_promotes=sum(list_all_avg_probabilities_promotes)/len(list_all_avg_probabilities_promotes)
+
+        return all_avg_probabilities_promotes
 
     def find_highest_prob_between_adverb_donot_adverb(self,dict_adverb_prob_a2b,key1, key2,overall_highest_accuracies_relations,direction_string):
         prob_key1=dict_adverb_prob_a2b[key1]
@@ -272,39 +337,22 @@ def run_for_all_models(model_name):
         adverb_prob_a2b=None
 
         len_input_tokens=len(input_tokens)
+
+        #which token goes first in the query. ideally the order of the tokens must be same as what user gave us.
+        #however, i dont want to go into weird recurdsion code. so to find which token comes first, i am using a bool flag
+
+        flag_multi_word_token_goes_first=False
+
         for index,each_token in enumerate(input_tokens):
-            split_each_token=each_token.split(" ")
-            if (len(split_each_token) > 1):
-
-                index_of_other_part_token= len_input_tokens-1-index  #pick the other token...assuming one of the tokens is single word...e:g.,if "rice production" is second token, the other token is "income"
-                partner_token=input_tokens[index_of_other_part_token]
-
-                list_all_avg_probabilities=[]
-                word_buildup=[]
-                prob_of_each_sub_token_to_appear_at_end=0
-                for index,each_sub_token in enumerate(split_each_token):
-
-                    if index==0:
-                        new_input_tokens=[partner_token,each_sub_token] #e.g,:find probability for the token 'rice' to fill 'income promotes [MASK] '
-                        prob_of_each_sub_token_to_appear_at_end = obj_direction_validation.find_average_causal_mlm(all_promote_adverbs, new_input_tokens)
-
-
-                    if index>0:
-                        #for subsequent indicies, after zero, you have to keep building up the sentence.
-                        # e.g now you have to find the probability of 'production' to fill 'income promotes rice [mask]'
-                        prob_of_each_sub_token_to_appear_at_end = obj_direction_validation.find_average_causal_mlm_multiple_tokens(
-                                all_promote_adverbs, partner_token," ".join(word_buildup),each_sub_token)
-
-                    word_buildup.append(each_sub_token)
-                    assert prob_of_each_sub_token_to_appear_at_end >0
-                    list_all_avg_probabilities.append(prob_of_each_sub_token_to_appear_at_end.item())
-
-
-        print("end of multi token expts")
+            split_multi_word_token=each_token.split(" ")
+            if (len(split_multi_word_token) > 1):
+                list_all_avg_probabilities= obj_direction_validation.get_avg_of_multi_worded_queries(index, len_input_tokens, input_tokens, split_multi_word_token)
+                print("end of multi token expts")
         import sys
         sys.exit(1)
 
-        adverb_prob_a2b = obj_direction_validation.all_queries(INPUT_TOKENS)
+        #adverb_prob_a2b stores the type of query as key and the average of all sub queries as its average e.g.;["DOES_NOT_NON_POLARIZED"] = avg.item()
+        adverb_prob_a2b = obj_direction_validation.all_single_worded_queries(INPUT_TOKENS)
 
         assert adverb_prob_a2b is not None
         overall_highest_accuracies_relations = {}
@@ -322,7 +370,7 @@ def run_for_all_models(model_name):
 
         # opposite direction
         input_tokens = [INPUT_TOKENS[1], INPUT_TOKENS[0]]
-        adverb_prob_b2a = obj_direction_validation.all_queries(input_tokens)
+        adverb_prob_b2a = obj_direction_validation.all_single_worded_queries(input_tokens)
         assert len(adverb_prob_a2b.keys()) == len(adverb_prob_b2a.keys())
 
         direction_string_reverse = f"From {input_tokens[0]} to {input_tokens[1]:}"
