@@ -60,4 +60,9 @@ class tests_directionality(TestCase):
         split_multi_word_token=["rice","production"]
         avg=self.obj_direction_validation.get_avg_of_multi_worded_queries(0,len(input_tokens),input_tokens,split_multi_word_token)
         assert avg==0.0001023119330056943
+        input_tokens = ["income","rice production"]
+        split_multi_word_token = ["rice", "production"]
+        avg = self.obj_direction_validation.get_avg_of_multi_worded_queries(0, len(input_tokens), input_tokens,
+                                                                            split_multi_word_token)
+        assert avg == 0.03647934375840123
 

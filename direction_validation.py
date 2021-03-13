@@ -23,7 +23,7 @@ vi ./log_directionality.log
 '''
 
 
-INPUT_TOKENS = [ "rice production","income"]
+INPUT_TOKENS = ["income","rice production"]
 LIST_MODEL_NAME=["distilbert-base-uncased"]
 class DirectionValidation:
 
@@ -266,6 +266,7 @@ class DirectionValidation:
         word_buildup = []
         prob_of_each_sub_token_to_appear_at_end = 0
         for index, each_subtoken_in_multi_word_token in enumerate(split_multi_word_token):
+            self.logger.info("*******")
             if index == 0:
                 if (flag_multi_word_token_goes_first) == True:
                     new_input_tokens = [each_subtoken_in_multi_word_token,
@@ -279,14 +280,19 @@ class DirectionValidation:
                 # for subsequent indicies, after zero, you have to keep building up the sentence.
                 # e.g now you have to find the probability of 'production' to fill 'income promotes rice [mask]'
 
-                sequence=" ".join(word_buildup)
-                prob_of_each_sub_token_to_appear_at_end = self.find_average_causal_mlm_multiple_tokens(
-                    list_type_of_adverbs, sequence, each_subtoken_in_multi_word_token, partner_token,
+                first_part_of_multi_word_token=" ".join(word_buildup)
+                if (flag_multi_word_token_goes_first) == True:
+                    prob_of_each_sub_token_to_appear_at_end = self.find_average_causal_mlm_multiple_tokens(
+                        list_type_of_adverbs, first_part_of_multi_word_token, each_subtoken_in_multi_word_token, partner_token,
+                        flag_multi_word_token_goes_first)
+
+                else:
+#find_average_causal_mlm_multiple_tokens(self, list_verbs, left_token, all_tokens_in_between, query_token,flag_multi_word_token_goes_first):
+                    prob_of_each_sub_token_to_appear_at_end = self.find_average_causal_mlm_multiple_tokens(
+                    list_type_of_adverbs, partner_token,first_part_of_multi_word_token, each_subtoken_in_multi_word_token,
                     flag_multi_word_token_goes_first)
 
-                self.logger.debug(
-                    f"In the multiword query sentence {sequence} {each_subtoken_in_multi_word_token} the average "
-                    f"probability of the word {partner_token} to occur at the end is {prob_of_each_sub_token_to_appear_at_end}")
+
 
             word_buildup.append(each_subtoken_in_multi_word_token)
             assert prob_of_each_sub_token_to_appear_at_end > 0
@@ -313,6 +319,9 @@ class DirectionValidation:
                                                                                                partner_token, all_promote_verbs)
         all_avg_probabilities_promotes=sum(list_all_avg_probabilities_promotes)/len(list_all_avg_probabilities_promotes)
 
+        self.logger.debug(
+            f"In the multiword query sentence {split_multi_word_token} the average "
+            f"probability of the word {partner_token} to occur at the end with all_promote_verbs is {all_avg_probabilities_promotes}")
         return all_avg_probabilities_promotes
 
     def find_highest_prob_between_adverb_donot_adverb(self,dict_adverb_prob_a2b,key1, key2,overall_highest_accuracies_relations,direction_string):
