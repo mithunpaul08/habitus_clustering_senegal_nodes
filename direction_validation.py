@@ -23,7 +23,7 @@ vi ./log_directionality.log
 '''
 
 
-INPUT_TOKENS = ["primary crop","income"]
+INPUT_TOKENS = ["number of years of farming","income"]
 LIST_MODEL_NAME=["distilbert-base-uncased"]
 class DirectionValidation:
 
@@ -276,10 +276,16 @@ class DirectionValidation:
                 prob_of_each_sub_token_to_appear_at_end = self.find_average_causal_mlm(
                     list_type_of_adverbs, new_input_tokens)
 
+                self.logger.debug("--")
+                self.logger.debug(
+                    f"In the multiword query sub sentence: {each_subtoken_in_multi_word_token} :the average "
+                    f"probability of the word {partner_token} to occur at the end with all_promote_verbs is {prob_of_each_sub_token_to_appear_at_end}")
+
+
+
             if index > 0:
                 # for subsequent indicies, after zero, you have to keep building up the sentence.
                 # e.g now you have to find the probability of 'production' to fill 'income promotes rice [mask]'
-
                 first_part_of_multi_word_token=" ".join(word_buildup)
                 if (flag_multi_word_token_goes_first) == True:
                     prob_of_each_sub_token_to_appear_at_end = self.find_average_causal_mlm_multiple_tokens(
@@ -287,14 +293,14 @@ class DirectionValidation:
                         flag_multi_word_token_goes_first)
 
                 else:
-#find_average_causal_mlm_multiple_tokens(self, list_verbs, left_token, all_tokens_in_between, query_token,flag_multi_word_token_goes_first):
+                    #find_average_causal_mlm_multiple_tokens(self, list_verbs, left_token, all_tokens_in_between, query_token,flag_multi_word_token_goes_first):
                     prob_of_each_sub_token_to_appear_at_end = self.find_average_causal_mlm_multiple_tokens(
                     list_type_of_adverbs, partner_token,first_part_of_multi_word_token, each_subtoken_in_multi_word_token,
                     flag_multi_word_token_goes_first)
-
-            self.logger.debug(
-                f"In the multiword query sub sentence {split_multi_word_token} the average "
-                f"probability of the word {partner_token} to occur at the end with all_promote_verbs is {prob_of_each_sub_token_to_appear_at_end}")
+                self.logger.debug("--")
+                self.logger.debug(
+                    f"In the multiword query sub sentence: {first_part_of_multi_word_token} {each_subtoken_in_multi_word_token}:the average "
+                    f"probability of the word {partner_token} to occur at the end with all_promote_verbs is {prob_of_each_sub_token_to_appear_at_end}")
 
             word_buildup.append(each_subtoken_in_multi_word_token)
             assert prob_of_each_sub_token_to_appear_at_end > 0
