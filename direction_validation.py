@@ -23,7 +23,7 @@ vi ./log_directionality.log
 '''
 
 
-INPUT_TOKENS = ["income","rice production"]
+INPUT_TOKENS = ["primary crop","income"]
 LIST_MODEL_NAME=["distilbert-base-uncased"]
 class DirectionValidation:
 
@@ -292,7 +292,9 @@ class DirectionValidation:
                     list_type_of_adverbs, partner_token,first_part_of_multi_word_token, each_subtoken_in_multi_word_token,
                     flag_multi_word_token_goes_first)
 
-
+            self.logger.debug(
+                f"In the multiword query sub sentence {split_multi_word_token} the average "
+                f"probability of the word {partner_token} to occur at the end with all_promote_verbs is {prob_of_each_sub_token_to_appear_at_end}")
 
             word_buildup.append(each_subtoken_in_multi_word_token)
             assert prob_of_each_sub_token_to_appear_at_end > 0

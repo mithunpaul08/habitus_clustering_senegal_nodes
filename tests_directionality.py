@@ -2,6 +2,13 @@ from direction_validation import DirectionValidation
 from unittest import TestCase
 from data.verbs import *
 
+
+def get_avg_of_multi_worded_queries_given_input_tokens(assert_value, input_tokens, split_multi_word_token, index,
+                                                       obj_direction_validation):
+    avg = obj_direction_validation.get_avg_of_multi_worded_queries(index, len(input_tokens), input_tokens,
+                                                                   split_multi_word_token)
+    assert avg == assert_value
+
 class tests_directionality(TestCase):
 
     obj_direction_validation = DirectionValidation("distilbert-base-uncased")
@@ -58,11 +65,31 @@ class tests_directionality(TestCase):
     def test_get_avg_of_multi_worded_queries(self):
         input_tokens=["rice production","income"]
         split_multi_word_token=["rice","production"]
-        avg=self.obj_direction_validation.get_avg_of_multi_worded_queries(0,len(input_tokens),input_tokens,split_multi_word_token)
-        assert avg==0.0001023119330056943
+        assert_value=0.0001023119330056943
+        index=0
+        get_avg_of_multi_worded_queries_given_input_tokens(assert_value, input_tokens,split_multi_word_token,index,self.obj_direction_validation)
+
+
         input_tokens = ["income","rice production"]
         split_multi_word_token = ["rice", "production"]
-        avg = self.obj_direction_validation.get_avg_of_multi_worded_queries(0, len(input_tokens), input_tokens,
-                                                                            split_multi_word_token)
-        assert avg == 0.03647934375840123
+        #index must be 1 when the multiwordtoken comes second. e.g.;, income promotes rice production
+        index = 1
+        assert_value = 0.03647934375840123
+        get_avg_of_multi_worded_queries_given_input_tokens(assert_value, input_tokens, split_multi_word_token, index,
+                                                           self.obj_direction_validation)
+
+        input_tokens = ["rice production stability", "income"]
+        split_multi_word_token = ["rice", "production","stability"]
+        assert_value = 7.500293637955717e-05
+        index = 0
+        get_avg_of_multi_worded_queries_given_input_tokens(assert_value, input_tokens, split_multi_word_token, index,
+                                                           self.obj_direction_validation)
+
+        input_tokens = ["income", "rice production stability"]
+        split_multi_word_token = ["rice", "production","stability"]
+        # index must be 1 when the multiwordtoken comes second. e.g.;, income promotes rice production
+        index = 1
+        assert_value = 0.024320398707156226
+        get_avg_of_multi_worded_queries_given_input_tokens(assert_value, input_tokens, split_multi_word_token, index,
+                                                           self.obj_direction_validation)
 
