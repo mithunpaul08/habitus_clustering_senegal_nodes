@@ -7,7 +7,10 @@ class tests_directionality(TestCase):
     obj_direction_validation = DirectionValidation("distilbert-base-uncased")
 
     def test_create_prob_dict(self):
-            prob_dict,sequence=self.obj_direction_validation.create_prob_dict("rice production", "improves")
+            input_tokens = ["rice production", "income"]
+            mlm_causal_causal_adverb="improves"
+            sequence = str(input_tokens[0]) + " " + (mlm_causal_causal_adverb) + " " + self.obj_direction_validation.tokenizer.mask_token
+            prob_dict,sequence=self.obj_direction_validation.create_prob_dict(sequence)
             print(prob_dict['income'])
             assert prob_dict['income'] == 7.95996020315215e-05
 
@@ -29,7 +32,9 @@ class tests_directionality(TestCase):
             mlm_first_query_token="education"
             mlm_causal_causal_adverb="improves"
             mlm_second_query_token="stability"
-            token_probs, sequence = self.obj_direction_validation.create_prob_dict(mlm_first_query_token, mlm_causal_causal_adverb)
+            sequence = str(mlm_first_query_token) + " " + (
+                mlm_causal_causal_adverb) + " " + self.obj_direction_validation.tokenizer.mask_token
+            token_probs, sequence = self.obj_direction_validation.create_prob_dict(sequence)
             prob= token_probs[mlm_second_query_token]
             assert prob == 0.0004211414197925478
 

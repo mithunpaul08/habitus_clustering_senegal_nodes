@@ -23,7 +23,7 @@ vi ./log_directionality.log
 '''
 
 
-INPUT_TOKENS = [ "stability production","education"]
+INPUT_TOKENS = [ "rice production","income"]
 LIST_MODEL_NAME=["distilbert-base-uncased"]
 class DirectionValidation:
 
@@ -44,8 +44,7 @@ class DirectionValidation:
         self.tokenizer = AutoTokenizer.from_pretrained(self.MLM_MODEL)
         self.model = AutoModelForMaskedLM.from_pretrained(self.MLM_MODEL)
 
-    def create_prob_dict(self,mlm_first_query_token,mlm_causal_causal_adverb):
-        sequence = str(mlm_first_query_token) + " " + str(mlm_causal_causal_adverb) + " " + self.tokenizer.mask_token
+    def create_prob_dict(self,sequence):
         input = self.tokenizer.encode(sequence, return_tensors="pt")
         mask_token_index = torch.where(input == self.tokenizer.mask_token_id)[1]
         token_logits = self.model(input).logits
@@ -96,12 +95,27 @@ class DirectionValidation:
             mlm_first_query_token=input_tokens[0]
             mlm_causal_causal_adverb = adverb
             mlm_second_query_token = input_tokens[1]
-            token_probs,sequence=self.create_prob_dict(mlm_first_query_token,mlm_causal_causal_adverb)
+            sequence = str(mlm_first_query_token) + " " + str(
+                mlm_causal_causal_adverb) + " " + self.tokenizer.mask_token
+            token_probs,sequence=self.create_prob_dict(sequence)
             sum_probs+=token_probs[mlm_second_query_token]
             self.logger.debug(f"For the sentence {sequence} probability of the word {mlm_second_query_token} to occur at the end is {token_probs[mlm_second_query_token]}")
         avg=sum_probs/len(list_adverbs)
         return avg
 
+
+    def find_average_causal_mlm_multiple_tokens(self, list_adverbs, left_token, all_tokens_in_between, query_token):
+        sum_probs=0
+        for adverb in list_adverbs:
+            mlm_causal_causal_adverb = adverb
+            sequence = str(left_token) + " " + str(
+                mlm_causal_causal_adverb) +" " + all_tokens_in_between + " " + self.tokenizer.mask_token
+            token_probs,sequence=self.create_prob_dict(sequence)
+            sum_probs+=token_probs[query_token]
+            self.logger.debug(
+                f"For the sentence {sequence} probability of the word {query_token} to occur at the end is {token_probs[query_token]}")
+        avg=sum_probs/len(list_adverbs)
+        return avg
 
     def find_average_causal_mlm_with_negation(self,list_adverbs, input_tokens):
         sum_probs=0
@@ -266,18 +280,26 @@ def run_for_all_models(model_name):
                 partner_token=input_tokens[index_of_other_part_token]
 
                 list_all_avg_probabilities=[]
+                word_buildup=[]
+                prob_of_each_sub_token_to_appear_at_end=0
                 for index,each_sub_token in enumerate(split_each_token):
 
                     if index==0:
                         new_input_tokens=[partner_token,each_sub_token] #e.g,:find probability for the token 'rice' to fill 'income promotes [MASK] '
-                        prob_of_each_sub_token = obj_direction_validation.find_average_causal_mlm(all_promote_adverbs, new_input_tokens)
+                        prob_of_each_sub_token_to_appear_at_end = obj_direction_validation.find_average_causal_mlm(all_promote_adverbs, new_input_tokens)
+
+
                     if index>0:
-                            #for subsequent indicies, after zero, you have to keep building up the sentence.
-                            # e.g now you have to find the probability of 'production' to fill 'income promotes rice [mask]'
-                            print()
+                        #for subsequent indicies, after zero, you have to keep building up the sentence.
+                        # e.g now you have to find the probability of 'production' to fill 'income promotes rice [mask]'
+                        prob_of_each_sub_token_to_appear_at_end = obj_direction_validation.find_average_causal_mlm_multiple_tokens(
+                                all_promote_adverbs, partner_token," ".join(word_buildup),each_sub_token)
+
+                    word_buildup.append(each_sub_token)
+                    assert prob_of_each_sub_token_to_appear_at_end >0
+                    list_all_avg_probabilities.append(prob_of_each_sub_token_to_appear_at_end.item())
 
 
-                    print("one of the tokens has two or more sub tokens")
 
 
         adverb_prob_a2b = obj_direction_validation.all_queries(INPUT_TOKENS)
