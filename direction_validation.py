@@ -23,7 +23,7 @@ vi ./log_directionality.log
 '''
 
 
-INPUT_TOKENS = [ "rice production","income"]
+INPUT_TOKENS = [ "income","rice production"]
 LIST_MODEL_NAME=["distilbert-base-uncased"]
 class DirectionValidation:
 
@@ -300,7 +300,9 @@ def run_for_all_models(model_name):
                     list_all_avg_probabilities.append(prob_of_each_sub_token_to_appear_at_end.item())
 
 
-
+        print("end of multi token expts")
+        import sys
+        sys.exit(1)
 
         adverb_prob_a2b = obj_direction_validation.all_queries(INPUT_TOKENS)
 
