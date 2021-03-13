@@ -20,7 +20,7 @@ class tests_directionality(TestCase):
         left_token="rice"
         all_tokens_in_between="production"
         query_token="income"
-        prob = self.find_prob_multiple_tokens_per_verb(verb, flag_multi_word_token_goes_first, left_token,
+        prob = self.obj_direction_validation.find_prob_multiple_tokens_per_verb(verb, flag_multi_word_token_goes_first, left_token,
                                                        all_tokens_in_between, query_token)
         assert prob==0.0003901408636011183
 
