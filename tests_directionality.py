@@ -3,10 +3,18 @@ from unittest import TestCase
 from data.verbs import *
 
 
-def get_avg_of_multi_worded_queries_given_input_tokens(assert_value, input_tokens, split_multi_word_token, index,
-                                                       obj_direction_validation):
-    avg = obj_direction_validation.get_avg_of_multi_worded_queries(index, len(input_tokens), input_tokens,
-                                                                   split_multi_word_token)
+def get_avg_of_multi_worded_queries_given_input_tokens(assert_value, split_multi_word_token, index,
+                                                       obj_direction_validation,partner_token,input_tokens,all_verbs):
+    if index == 0:
+        flag_multi_word_token_goes_first = True
+    else:
+        flag_multi_word_token_goes_first = False
+
+
+    avg = obj_direction_validation.give_verb_types_return_multi_word_query_averages(split_multi_word_token, flag_multi_word_token_goes_first,
+        partner_token, all_verbs)
+
+
     assert avg == assert_value
 
 class tests_directionality(TestCase):
@@ -63,11 +71,13 @@ class tests_directionality(TestCase):
             assert prob == 0.0004211414197925478
 
     def test_get_avg_of_multi_worded_queries(self):
+
         input_tokens=["rice production","income"]
         split_multi_word_token=["rice","production"]
         assert_value=0.0001023119330056943
         index=0
-        get_avg_of_multi_worded_queries_given_input_tokens(assert_value, input_tokens,split_multi_word_token,index,self.obj_direction_validation)
+        partner_token="income"
+        get_avg_of_multi_worded_queries_given_input_tokens(assert_value,split_multi_word_token,index,self.obj_direction_validation,partner_token,input_tokens,all_promote_verbs)
 
 
         input_tokens = ["income","rice production"]
@@ -75,21 +85,67 @@ class tests_directionality(TestCase):
         #index must be 1 when the multiwordtoken comes second. e.g.;, income promotes rice production
         index = 1
         assert_value = 0.03647934375840123
-        get_avg_of_multi_worded_queries_given_input_tokens(assert_value, input_tokens, split_multi_word_token, index,
-                                                           self.obj_direction_validation)
+        partner_token = "income"
+        get_avg_of_multi_worded_queries_given_input_tokens(assert_value, split_multi_word_token, index,
+                                                           self.obj_direction_validation,partner_token,input_tokens,all_promote_verbs)
 
         input_tokens = ["rice production stability", "income"]
         split_multi_word_token = ["rice", "production","stability"]
         assert_value = 7.500293637955717e-05
         index = 0
-        get_avg_of_multi_worded_queries_given_input_tokens(assert_value, input_tokens, split_multi_word_token, index,
-                                                           self.obj_direction_validation)
+        partner_token = "income"
+        get_avg_of_multi_worded_queries_given_input_tokens(assert_value, split_multi_word_token, index,
+                                                           self.obj_direction_validation,partner_token,input_tokens,all_promote_verbs)
 
         input_tokens = ["income", "rice production stability"]
         split_multi_word_token = ["rice", "production","stability"]
         # index must be 1 when the multiwordtoken comes second. e.g.;, income promotes rice production
         index = 1
         assert_value = 0.024320398707156226
-        get_avg_of_multi_worded_queries_given_input_tokens(assert_value, input_tokens, split_multi_word_token, index,
-                                                           self.obj_direction_validation)
+        partner_token = "income"
+        get_avg_of_multi_worded_queries_given_input_tokens(assert_value, split_multi_word_token, index,
+                                                           self.obj_direction_validation, partner_token, input_tokens,
+                                                           all_promote_verbs)
+        ###tests for inhibit related queries
+        input_tokens = ["rice production", "income"]
+        split_multi_word_token = ["rice", "production"]
+        assert_value = 7.310948785743676e-05
+        index = 0
+        partner_token = "income"
+        get_avg_of_multi_worded_queries_given_input_tokens(assert_value, split_multi_word_token, index,
+                                                           self.obj_direction_validation, partner_token, input_tokens,
+                                                           all_inhibits_verbs)
+
+
+
+        input_tokens = ["income","rice production"]
+        split_multi_word_token = ["rice", "production"]
+        #index must be 1 when the multiwordtoken comes second. e.g.;, income promotes rice production
+        index = 1
+        assert_value = 0.03481978230411187
+        partner_token = "income"
+        get_avg_of_multi_worded_queries_given_input_tokens(assert_value, split_multi_word_token, index,
+                                                           self.obj_direction_validation,partner_token,input_tokens,all_inhibits_verbs)
+
+
+        input_tokens = ["rice production stability", "income"]
+        split_multi_word_token = ["rice", "production", "stability"]
+        assert_value = 9.413996061387782e-05
+        index = 0
+        partner_token = "income"
+        get_avg_of_multi_worded_queries_given_input_tokens(assert_value, split_multi_word_token, index,
+                                                           self.obj_direction_validation, partner_token, input_tokens,
+                                                           all_inhibits_verbs)
+
+
+        #pasting at 1113pm
+        input_tokens = ["income", "rice production stability"]
+        split_multi_word_token = ["rice", "production","stability"]
+        # index must be 1 when the multiwordtoken comes second. e.g.;, income promotes rice production
+        index = 1
+        assert_value = 0.023213260299703126
+        partner_token = "income"
+        get_avg_of_multi_worded_queries_given_input_tokens(assert_value, split_multi_word_token, index,
+                                                           self.obj_direction_validation, partner_token, input_tokens,
+                                                           all_inhibits_verbs)
 

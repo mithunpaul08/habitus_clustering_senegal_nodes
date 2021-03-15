@@ -23,7 +23,8 @@ vi ./log_directionality.log
 '''
 
 
-INPUT_TOKENS = ["number of years of farming","income"]
+
+INPUT_TOKENS = ["income", "rice production stability"]
 LIST_MODEL_NAME=["distilbert-base-uncased"]
 class DirectionValidation:
 
@@ -261,7 +262,7 @@ class DirectionValidation:
         return adverb_prob
 
 
-    def give_adverbs_return_multi_word_query_averages(self,split_multi_word_token,flag_multi_word_token_goes_first,partner_token,list_type_of_adverbs):
+    def give_verb_types_return_multi_word_query_averages(self, split_multi_word_token, flag_multi_word_token_goes_first, partner_token, list_type_of_adverbs):
         list_all_avg_probabilities = []
         word_buildup = []
         prob_of_each_sub_token_to_appear_at_end = 0
@@ -279,7 +280,7 @@ class DirectionValidation:
                 self.logger.debug("--")
                 self.logger.debug(
                     f"In the multiword query sub sentence: {each_subtoken_in_multi_word_token} :the average "
-                    f"probability of the word {partner_token} to occur at the end with all_promote_verbs is {prob_of_each_sub_token_to_appear_at_end}")
+                    f"probability of the word {partner_token} to occur at the end with all the given verb type is {prob_of_each_sub_token_to_appear_at_end}")
                 self.logger.debug("--")
 
 
@@ -300,13 +301,17 @@ class DirectionValidation:
                 self.logger.debug("--")
                 self.logger.debug(
                     f"In the multiword query sub sentence: {first_part_of_multi_word_token} {each_subtoken_in_multi_word_token}:the average "
-                    f"probability of the word {partner_token} to occur at the end with all_promote_verbs is {prob_of_each_sub_token_to_appear_at_end}")
+                    f"probability of the word {partner_token} to occur at the end with all the given verb type  is {prob_of_each_sub_token_to_appear_at_end}")
                 self.logger.debug("--")
 
             word_buildup.append(each_subtoken_in_multi_word_token)
             assert prob_of_each_sub_token_to_appear_at_end > 0
             list_all_avg_probabilities.append(prob_of_each_sub_token_to_appear_at_end.item())
-        return list_all_avg_probabilities
+
+        all_avg_probabilities = sum(list_all_avg_probabilities) / len(
+            list_all_avg_probabilities)
+
+        return all_avg_probabilities
 
     def get_avg_of_multi_worded_queries(self, index, len_input_tokens,input_tokens,split_multi_word_token):
         # at this point, either the first token in input_tokens or the second token can be the multiword_one. find which one
@@ -315,38 +320,37 @@ class DirectionValidation:
         else:
             flag_multi_word_token_goes_first=False
 
+
+
         # pick the other token...assumption here is that one of the tokens is multiworded and the other one will be singleworded
         # .e:g.,if "rice production" is one token, the other token is "income"
         index_of_other_part_token = len_input_tokens - 1 - index
         partner_token = input_tokens[index_of_other_part_token]
 
-
         # for each sub token, find the probability of query token cumulatively.
         # e.g: find probability of income to fill 'rice improves [mask]'
         # then find probability of income to fill 'rice production improves [mask]'
-        list_all_avg_probabilities_promotes=self.give_adverbs_return_multi_word_query_averages(split_multi_word_token, flag_multi_word_token_goes_first,
-                                                                                               partner_token, all_promote_verbs)
-        all_avg_probabilities_promotes=sum(list_all_avg_probabilities_promotes)/len(list_all_avg_probabilities_promotes)
-
-        self.logger.debug(
-            f"In the multiword query sentence {split_multi_word_token} the average "
-            f"probability of the word {partner_token} to occur at the end with all_promote_verbs is {all_avg_probabilities_promotes}")
+        # avg_prob_of_all_promote_queries=self.give_verb_types_return_multi_word_query_averages(split_multi_word_token, flag_multi_word_token_goes_first,
+        #                                                                                           partner_token, all_promote_verbs)
+        #
+        #
+        # self.logger.debug(
+        #     f"In the multiword query sentence {split_multi_word_token} the average "
+        #     f"probability of the word {partner_token} to occur at the end with all_promote_verbs is {avg_prob_of_all_promote_queries}")
 
         ########do the same but for inhibits verbs
 
-        list_all_avg_probabilities_promotes = self.give_adverbs_return_multi_word_query_averages(split_multi_word_token,
-                                                                                                 flag_multi_word_token_goes_first,
-                                                                                                 partner_token,
-                                                                                                 all_inhibits_verbs)
-        all_avg_probabilities_promotes = sum(list_all_avg_probabilities_promotes) / len(
-            list_all_avg_probabilities_promotes)
+        all_avg_probabilities_inhibits= self.give_verb_types_return_multi_word_query_averages(split_multi_word_token,
+                                                                                                    flag_multi_word_token_goes_first,
+                                                                                                    partner_token,
+                                                                                                    all_inhibits_verbs)
 
         self.logger.debug(
             f"In the multiword query sentence {split_multi_word_token} the average "
-            f"probability of the word {partner_token} to occur at the end with all_inhibits_verbs is {all_avg_probabilities_promotes}")
+            f"probability of the word {partner_token} to occur at the end with all_inhibits_verbs is {all_avg_probabilities_inhibits}")
 
-
-        return all_avg_probabilities_promotes
+        #todo this must be a dictionary. the same as a2b
+        return avg_prob_of_all_promote_queries
 
     def find_highest_prob_between_adverb_donot_adverb(self,dict_adverb_prob_a2b,key1, key2,overall_highest_accuracies_relations,direction_string):
         prob_key1=dict_adverb_prob_a2b[key1]
