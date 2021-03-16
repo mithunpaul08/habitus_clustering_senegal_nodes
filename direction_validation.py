@@ -24,7 +24,7 @@ vi ./log_directionality.log
 
 
 
-INPUT_TOKENS = ["income", "rice production stability"]
+INPUT_TOKENS = ["farmer being in coop", "income"]
 LIST_MODEL_NAME=["distilbert-base-uncased"]
 class DirectionValidation:
 
@@ -327,18 +327,19 @@ class DirectionValidation:
         index_of_other_part_token = len_input_tokens - 1 - index
         partner_token = input_tokens[index_of_other_part_token]
 
+        ######## all promotes relate verbs
         # for each sub token, find the probability of query token cumulatively.
         # e.g: find probability of income to fill 'rice improves [mask]'
         # then find probability of income to fill 'rice production improves [mask]'
-        # avg_prob_of_all_promote_queries=self.give_verb_types_return_multi_word_query_averages(split_multi_word_token, flag_multi_word_token_goes_first,
-        #                                                                                           partner_token, all_promote_verbs)
-        #
-        #
-        # self.logger.debug(
-        #     f"In the multiword query sentence {split_multi_word_token} the average "
-        #     f"probability of the word {partner_token} to occur at the end with all_promote_verbs is {avg_prob_of_all_promote_queries}")
+        avg_prob_of_all_promote_queries=self.give_verb_types_return_multi_word_query_averages(split_multi_word_token, flag_multi_word_token_goes_first,
+                                                                                                  partner_token, all_promote_verbs)
 
-        ########do the same but for inhibits verbs
+
+        self.logger.debug(
+            f"In the multiword query sentence {split_multi_word_token} the average "
+            f"probability of the word {partner_token} to occur at the end with all_promote_verbs is {avg_prob_of_all_promote_queries}")
+
+        ########all inhibits verbs
 
         all_avg_probabilities_inhibits= self.give_verb_types_return_multi_word_query_averages(split_multi_word_token,
                                                                                                     flag_multi_word_token_goes_first,
@@ -385,17 +386,20 @@ def run_for_all_models(model_name):
         #however, i dont want to go into weird recurdsion code. so to find which token comes first, i am using a bool flag
 
         flag_multi_word_token_goes_first=False
+        flag_found_multi_word_token=True
 
         for index,each_token in enumerate(input_tokens):
             split_multi_word_token=each_token.split(" ")
             if (len(split_multi_word_token) > 1):
-                list_all_avg_probabilities= obj_direction_validation.get_avg_of_multi_worded_queries(index, len_input_tokens, input_tokens, split_multi_word_token)
+                adverb_prob_a2b= obj_direction_validation.get_avg_of_multi_worded_queries(index, len_input_tokens, input_tokens, split_multi_word_token)
                 print("end of multi token expts")
-        import sys
-        sys.exit(1)
 
-        #adverb_prob_a2b stores the type of query as key and the average of all sub queries as its average e.g.;["DOES_NOT_NON_POLARIZED"] = avg.item()
-        adverb_prob_a2b = obj_direction_validation.all_single_worded_queries(INPUT_TOKENS)
+        if not (flag_found_multi_word_token):
+                #####for queries where both are singled worded tokens. eg: stability improves income
+                # adverb_prob_a2b stores the type of query as key and the average of all sub queries as its average e.g.;["DOES_NOT_NON_POLARIZED"] = avg.item()
+                adverb_prob_a2b = obj_direction_validation.all_single_worded_queries(INPUT_TOKENS)
+
+
 
         assert adverb_prob_a2b is not None
         overall_highest_accuracies_relations = {}

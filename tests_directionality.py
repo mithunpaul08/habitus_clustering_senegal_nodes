@@ -70,7 +70,7 @@ class tests_directionality(TestCase):
             prob= token_probs[mlm_second_query_token]
             assert prob == 0.0004211414197925478
 
-    def test_get_avg_of_multi_worded_queries(self):
+    def test_get_avg_of_multi_worded_queries_for_promotes(self):
 
         input_tokens=["rice production","income"]
         split_multi_word_token=["rice","production"]
@@ -106,6 +106,11 @@ class tests_directionality(TestCase):
         get_avg_of_multi_worded_queries_given_input_tokens(assert_value, split_multi_word_token, index,
                                                            self.obj_direction_validation, partner_token, input_tokens,
                                                            all_promote_verbs)
+
+
+    def test_get_avg_of_multi_worded_queries_for_inhibits(self):
+
+
         ###tests for inhibit related queries
         input_tokens = ["rice production", "income"]
         split_multi_word_token = ["rice", "production"]
@@ -148,4 +153,3 @@ class tests_directionality(TestCase):
         get_avg_of_multi_worded_queries_given_input_tokens(assert_value, split_multi_word_token, index,
                                                            self.obj_direction_validation, partner_token, input_tokens,
                                                            all_inhibits_verbs)
-
