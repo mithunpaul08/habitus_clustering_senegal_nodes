@@ -24,7 +24,7 @@ vi ./log_directionality.log
 
 
 
-INPUT_TOKENS = ["main crop", "income"]
+INPUT_TOKENS = ["primary crop", "income"]
 LIST_MODEL_NAME=["distilbert-base-uncased"]
 class DirectionValidation:
 
@@ -35,7 +35,7 @@ class DirectionValidation:
         FORMAT='%(message)s'
         logging.basicConfig(
             format=FORMAT,
-            level=logging.DEBUG,
+            level=logging.INFO,
             filename=log_file_name,
             filemode='w'
         )
@@ -333,24 +333,24 @@ class DirectionValidation:
         # for each sub token, find the probability of query token cumulatively.
         # e.g: find probability of income to fill 'rice improves [mask]'
         # then find probability of income to fill 'rice production improves [mask]'
-        # avg_prob_of_all_promote_queries=self.give_verb_types_return_multi_word_query_averages(split_multi_word_token, flag_multi_word_token_goes_first,
-        #                                                                                           partner_token, all_promote_verbs)
-        #
-        #
-        # self.logger.debug(
-        #     f"In the multiword query sentence {split_multi_word_token} the average "
-        #     f"probability of the word {partner_token} to occur at the end with all_promote_verbs is {avg_prob_of_all_promote_queries}")
-        #
-        #
-        #
-        # ########all inhibits verbs
-        # all_avg_probabilities_inhibits= self.give_verb_types_return_multi_word_query_averages(split_multi_word_token,
-        #                                                                                             flag_multi_word_token_goes_first,
-        #                                                                                             partner_token,
-        #                                                                                             all_inhibits_verbs)
-        # self.logger.debug(
-        #     f"In the multiword query sentence {split_multi_word_token} the average "
-        #     f"probability of the word {partner_token} to occur at the end with all_inhibits_verbs is {all_avg_probabilities_inhibits}")
+        avg_prob_of_all_promote_queries=self.give_verb_types_return_multi_word_query_averages(split_multi_word_token, flag_multi_word_token_goes_first,
+                                                                                                  partner_token, all_promote_verbs)
+
+
+        self.logger.debug(
+            f"In the multiword query sentence {split_multi_word_token} the average "
+            f"probability of the word {partner_token} to occur at the end with all_promote_verbs is {avg_prob_of_all_promote_queries}")
+
+
+
+        ########all inhibits verbs
+        all_avg_probabilities_inhibits= self.give_verb_types_return_multi_word_query_averages(split_multi_word_token,
+                                                                                                    flag_multi_word_token_goes_first,
+                                                                                                    partner_token,
+                                                                                                    all_inhibits_verbs)
+        self.logger.debug(
+            f"In the multiword query sentence {split_multi_word_token} the average "
+            f"probability of the word {partner_token} to occur at the end with all_inhibits_verbs is {all_avg_probabilities_inhibits}")
 
         ########all does not promote verbs
         all_avg_probabilities_dnpromotes = self.give_verb_types_return_multi_word_query_averages(split_multi_word_token,
@@ -359,7 +359,7 @@ class DirectionValidation:
                                                                                                  all_does_not_promote_verbs)
         self.logger.debug(
             f"In the multiword query sentence {split_multi_word_token} the average "
-            f"probability of the word {partner_token} to occur at the end with all_inhibits_verbs is {all_avg_probabilities_dnpromotes}")
+            f"probability of the word {partner_token} to occur at the end with all_does_not_promote_verbs is {all_avg_probabilities_dnpromotes}")
 
         ########all does not promote verbs
         all_avg_probabilities_dninhibits = self.give_verb_types_return_multi_word_query_averages(split_multi_word_token,
@@ -368,17 +368,24 @@ class DirectionValidation:
                                                                                                  all_does_not_inhibits_verbs)
         self.logger.debug(
             f"In the multiword query sentence {split_multi_word_token} the average "
-            f"probability of the word {partner_token} to occur at the end with all_inhibits_verbs is {all_avg_probabilities_dninhibits}")
+            f"probability of the word {partner_token} to occur at the end with all_does_not_inhibits_verbs is {all_avg_probabilities_dninhibits}")
 
-        #todo this must be a dictionary. the same as a2b
-        return all_avg_probabilities_dnpromotes
 
-    def find_highest_prob_between_adverb_donot_adverb(self,dict_adverb_prob_a2b,key1, key2,overall_highest_accuracies_relations,direction_string):
+        dict_all_avg_probs={
+            "PROMOTES":avg_prob_of_all_promote_queries,
+            "INHIBITS": all_avg_probabilities_inhibits,
+            "DOES_NOT_PROMOTE": all_avg_probabilities_dnpromotes,
+            "DOES_NOT_INHIBIT": all_avg_probabilities_dninhibits
+        }
+
+        return dict_all_avg_probs
+
+    def find_highest_prob_between_verb_donot_verb(self, dict_adverb_prob_a2b, key1, key2, overall_highest_accuracies_relations, direction_string):
         prob_key1=dict_adverb_prob_a2b[key1]
         prob_key2=dict_adverb_prob_a2b[key2]
         if (prob_key1 > prob_key2):
             who_is_bigger=f"{key1}>{key2}"
-            print(who_is_bigger)
+            self.logger.info(who_is_bigger)
             overall_highest_accuracies_relations[prob_key1]=(who_is_bigger,direction_string)
 
 def run_for_all_models(model_name):
@@ -399,58 +406,74 @@ def run_for_all_models(model_name):
               Ans:Correct. For the second word start with:  income promotes rice [MASK]"
               '''
         adverb_prob_a2b=None
+        adverb_prob_b2a = None
 
         len_input_tokens=len(input_tokens)
 
-        #which token goes first in the query. ideally the order of the tokens must be same as what user gave us.
-        #however, i dont want to go into weird recurdsion code. so to find which token comes first, i am using a bool flag
 
+        #There is an assumption here that one of the tokens is multiword and other wont be
         flag_found_multi_word_token=False
-
         for index,each_token in enumerate(input_tokens):
             split_multi_word_token=each_token.split(" ")
             if (len(split_multi_word_token) > 1):
                 adverb_prob_a2b= obj_direction_validation.get_avg_of_multi_worded_queries(index, len_input_tokens, input_tokens, split_multi_word_token)
-                print("end of multi token expts")
+                obj_direction_validation.logger.debug("end of multi token expts")
                 flag_found_multi_word_token=True
-
         if not (flag_found_multi_word_token):
                 #####for queries where both are singled worded tokens. eg: stability improves income
                 # adverb_prob_a2b stores the type of query as key and the average of all sub queries as its average e.g.;["DOES_NOT_NON_POLARIZED"] = avg.item()
                 adverb_prob_a2b = obj_direction_validation.all_single_worded_queries(INPUT_TOKENS)
 
+        ############## opposite direction
 
-
-        assert adverb_prob_a2b is not None
-        overall_highest_accuracies_relations = {}
-        print(f"Extended Summary:")
-        direction_string = f"From {input_tokens[0]} to {input_tokens[1]:}"
-        print(direction_string)
-        obj_direction_validation.find_highest_prob_between_adverb_donot_adverb(adverb_prob_a2b, "PROMOTES",
-                                                                               "DOES_NOT_PROMOTE",
-                                                                               overall_highest_accuracies_relations,
-                                                                               direction_string)
-        obj_direction_validation.find_highest_prob_between_adverb_donot_adverb(adverb_prob_a2b, "INHIBITS",
-                                                                               "DOES_NOT_INHIBIT",
-                                                                               overall_highest_accuracies_relations,
-                                                                               direction_string)
-
-        # opposite direction
         input_tokens = [INPUT_TOKENS[1], INPUT_TOKENS[0]]
-        adverb_prob_b2a = obj_direction_validation.all_single_worded_queries(input_tokens)
+        obj_direction_validation.logger.info(
+            f"######going to run in the opposite direction i.e {INPUT_TOKENS[1]} to {INPUT_TOKENS[0]}######")
+        flag_found_multi_word_token = False
+        for index, each_token in enumerate(input_tokens):
+            split_multi_word_token = each_token.split(" ")
+            if (len(split_multi_word_token) > 1):
+                adverb_prob_b2a = obj_direction_validation.get_avg_of_multi_worded_queries(index, len_input_tokens,
+                                                                                           input_tokens,
+                                                                                           split_multi_word_token)
+                obj_direction_validation.logger.debug("end of multi token expts")
+                flag_found_multi_word_token = True
+        if not (flag_found_multi_word_token):
+            #####for queries where both are singled worded tokens. eg: stability improves income
+            # adverb_prob_a2b stores the type of query as key and the average of all sub queries as its average e.g.;["DOES_NOT_NON_POLARIZED"] = avg.item()
+            adverb_prob_b2a = obj_direction_validation.all_single_worded_queries(INPUT_TOKENS)
+
+        ########find overall_highest_accuracies_relations
+        # i.e by now we would have got average probabilites of all verbs in both directions. now find which one is
+        # bigger. Example is PROMOTES>INHIBITS for the given set of tokens and verbs
+        assert adverb_prob_a2b is not None
+        assert adverb_prob_b2a is not None
         assert len(adverb_prob_a2b.keys()) == len(adverb_prob_b2a.keys())
 
-        direction_string_reverse = f"From {input_tokens[0]} to {input_tokens[1]:}"
-        print(direction_string_reverse)
-        obj_direction_validation.find_highest_prob_between_adverb_donot_adverb(adverb_prob_b2a, "PROMOTES",
+        overall_highest_accuracies_relations = {}
+        obj_direction_validation.logger.info(f"Extended Summary:")
+        direction_string = f"From {INPUT_TOKENS[0]} to {INPUT_TOKENS[1]:}"
+        obj_direction_validation.logger.info(direction_string)
+        obj_direction_validation.find_highest_prob_between_verb_donot_verb(adverb_prob_a2b, "PROMOTES",
                                                                                "DOES_NOT_PROMOTE",
-                                                                               overall_highest_accuracies_relations,
-                                                                               direction_string_reverse)
-        obj_direction_validation.find_highest_prob_between_adverb_donot_adverb(adverb_prob_b2a, "INHIBITS",
+                                                                           overall_highest_accuracies_relations,
+                                                                           direction_string)
+        obj_direction_validation.find_highest_prob_between_verb_donot_verb(adverb_prob_a2b, "INHIBITS",
                                                                                "DOES_NOT_INHIBIT",
-                                                                               overall_highest_accuracies_relations,
-                                                                               direction_string_reverse)
-        print(f"Brief Summary:\n Overall_best=")
+                                                                           overall_highest_accuracies_relations,
+                                                                           direction_string)
+
+        direction_string_reverse = f"From {INPUT_TOKENS[1]} to {INPUT_TOKENS[0]:}"
+        obj_direction_validation.logger.info(direction_string_reverse)
+        obj_direction_validation.find_highest_prob_between_verb_donot_verb(adverb_prob_b2a, "PROMOTES",
+                                                                               "DOES_NOT_PROMOTE",
+                                                                           overall_highest_accuracies_relations,
+                                                                           direction_string_reverse)
+        obj_direction_validation.find_highest_prob_between_verb_donot_verb(adverb_prob_b2a, "INHIBITS",
+                                                                               "DOES_NOT_INHIBIT",
+                                                                           overall_highest_accuracies_relations,
+                                                                           direction_string_reverse)
+        obj_direction_validation.logger.info(f"Brief Summary:\n Overall_best=")
 
         # find the higheest value and print it as the best overall
 
@@ -459,8 +482,8 @@ def run_for_all_models(model_name):
             all_probs.append(kv)
 
         if(len(all_probs)>0):
-            print(overall_highest_accuracies_relations[max(all_probs)][1])
-            print(overall_highest_accuracies_relations[max(all_probs)][0])
+            obj_direction_validation.logger.info(overall_highest_accuracies_relations[max(all_probs)][1])
+            obj_direction_validation.logger.info(overall_highest_accuracies_relations[max(all_probs)][0])
 
 def main():
     for each_model in LIST_MODEL_NAME:
