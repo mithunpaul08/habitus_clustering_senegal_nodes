@@ -10,7 +10,8 @@ from pprint import pprint
 from utils import read_file_python_way
 import torch
 from data.verbs import *
-
+import os
+from datetime import date
 import logging
 
 '''
@@ -24,19 +25,22 @@ vi ./log_directionality.log
 
 
 
-INPUT_TOKENS = ["primary crop", "income"]
+INPUT_TOKENS = ["number of years of farming", "income"]
 LIST_MODEL_NAME=["distilbert-base-uncased"]
 class DirectionValidation:
 
     def __init__(self,model_name):
 
         self.logger = logging.getLogger(__name__)
-        log_file_name = "log_"+model_name+".log"
+        today = date.today()
+        today_date=today.strftime("%b-%d-%Y")
+        log_file_name = "".join(INPUT_TOKENS[0].split())+"_"+"".join(INPUT_TOKENS[1].split())+"_"+model_name+today_date+".log"
+        full_path=os.path.join("./logs",log_file_name)
         FORMAT='%(message)s'
         logging.basicConfig(
             format=FORMAT,
             level=logging.INFO,
-            filename=log_file_name,
+            filename=full_path,
             filemode='w'
         )
         self.logger.info(f"modelname={model_name}")
@@ -269,7 +273,7 @@ class DirectionValidation:
         word_buildup = []
         prob_of_each_sub_token_to_appear_at_end = 0
         for index, each_subtoken_in_multi_word_token in enumerate(split_multi_word_token):
-            self.logger.info("*******")
+            self.logger.debug("*******")
             if index == 0:
                 if (flag_multi_word_token_goes_first) == True:
                     new_input_tokens = [each_subtoken_in_multi_word_token,
@@ -337,7 +341,7 @@ class DirectionValidation:
                                                                                                   partner_token, all_promote_verbs)
 
 
-        self.logger.debug(
+        self.logger.info(
             f"In the multiword query sentence {split_multi_word_token} the average "
             f"probability of the word {partner_token} to occur at the end with all_promote_verbs is {avg_prob_of_all_promote_queries}")
 
@@ -348,7 +352,7 @@ class DirectionValidation:
                                                                                                     flag_multi_word_token_goes_first,
                                                                                                     partner_token,
                                                                                                     all_inhibits_verbs)
-        self.logger.debug(
+        self.logger.info(
             f"In the multiword query sentence {split_multi_word_token} the average "
             f"probability of the word {partner_token} to occur at the end with all_inhibits_verbs is {all_avg_probabilities_inhibits}")
 
@@ -357,7 +361,7 @@ class DirectionValidation:
                                                                                                  flag_multi_word_token_goes_first,
                                                                                                  partner_token,
                                                                                                  all_does_not_promote_verbs)
-        self.logger.debug(
+        self.logger.info(
             f"In the multiword query sentence {split_multi_word_token} the average "
             f"probability of the word {partner_token} to occur at the end with all_does_not_promote_verbs is {all_avg_probabilities_dnpromotes}")
 
@@ -366,7 +370,7 @@ class DirectionValidation:
                                                                                                  flag_multi_word_token_goes_first,
                                                                                                  partner_token,
                                                                                                  all_does_not_inhibits_verbs)
-        self.logger.debug(
+        self.logger.info(
             f"In the multiword query sentence {split_multi_word_token} the average "
             f"probability of the word {partner_token} to occur at the end with all_does_not_inhibits_verbs is {all_avg_probabilities_dninhibits}")
 
@@ -409,7 +413,8 @@ def run_for_all_models(model_name):
         adverb_prob_b2a = None
 
         len_input_tokens=len(input_tokens)
-
+        obj_direction_validation.logger.info(
+            f"######going to run queries in the direction  {INPUT_TOKENS[0]} to {INPUT_TOKENS[1]}######")
 
         #There is an assumption here that one of the tokens is multiword and other wont be
         flag_found_multi_word_token=False
