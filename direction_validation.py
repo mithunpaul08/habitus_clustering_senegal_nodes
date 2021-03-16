@@ -24,7 +24,7 @@ vi ./log_directionality.log
 
 
 
-INPUT_TOKENS = ["farmer being in coop", "income"]
+INPUT_TOKENS = ["education", "stability"]
 LIST_MODEL_NAME=["distilbert-base-uncased"]
 class DirectionValidation:
 
@@ -142,7 +142,9 @@ class DirectionValidation:
 
 
             mlm_second_query_token = input_tokens[1]
-            sequence=str(mlm_first_query_token)+" does not "+str(mlm_causal_causal_adverb)+" "+self.tokenizer.mask_token
+            sequence=str(mlm_first_query_token)+" "+str(mlm_causal_causal_adverb)+" "+self.tokenizer.mask_token
+#            sequence=str(mlm_first_query_token)+" does not "+str(mlm_causal_causal_adverb)+" "+self.tokenizer.mask_token
+
             input = self.tokenizer.encode(sequence, return_tensors="pt")
             mask_token_index = torch.where(input == self.tokenizer.mask_token_id)[1]
             token_logits = self.model(input).logits
@@ -228,7 +230,7 @@ class DirectionValidation:
 
         prob_adverb_doesnot = {}
         all_averages = []
-        avg = self.find_average_causal_mlm_with_negation(all_promote_verbs_for_negation,
+        avg = self.find_average_causal_mlm_with_negation(all_does_not_promote_verbs,
                                                          input_tokens)
         self.logger.info(f"For {input_tokens[0]} to {input_tokens[1]}  avg probability  for all DOES NOT PROMOTE queries is {avg}")
         all_averages.append(avg.item())
@@ -236,14 +238,14 @@ class DirectionValidation:
         adverb_prob["DOES_NOT_PROMOTE"] = avg.item()
 
 
-        avg = self.find_average_causal_mlm_with_negation(all_inhibits_verbs_for_negation,
+        avg = self.find_average_causal_mlm_with_negation(all_does_not_inhibits_verbs,
                                                          input_tokens)
         self.logger.info(f"For {input_tokens[0]} to {input_tokens[1]}  avg probability  for all DOES NOT INHIBIT queries is {avg}")
         all_averages.append(avg.item())
         prob_adverb_doesnot[avg.item()] = "DOES NOT INHIBIT"
         adverb_prob["DOES_NOT_INHIBIT"] = avg.item()
 
-        avg = self.find_average_causal_mlm_with_negation(all_causal_verbs_for_negation,
+        avg = self.find_average_causal_mlm_with_negation(all_does_not_cauase_verbs,
                                                          input_tokens)
         self.logger.info(f"For {input_tokens[0]} to {input_tokens[1]}  avg probability  for all DOES NOT CAUSE queries is {avg}")
         all_averages.append(avg.item())
@@ -331,27 +333,36 @@ class DirectionValidation:
         # for each sub token, find the probability of query token cumulatively.
         # e.g: find probability of income to fill 'rice improves [mask]'
         # then find probability of income to fill 'rice production improves [mask]'
-        avg_prob_of_all_promote_queries=self.give_verb_types_return_multi_word_query_averages(split_multi_word_token, flag_multi_word_token_goes_first,
-                                                                                                  partner_token, all_promote_verbs)
+        # avg_prob_of_all_promote_queries=self.give_verb_types_return_multi_word_query_averages(split_multi_word_token, flag_multi_word_token_goes_first,
+        #                                                                                           partner_token, all_promote_verbs)
+        #
+        #
+        # self.logger.debug(
+        #     f"In the multiword query sentence {split_multi_word_token} the average "
+        #     f"probability of the word {partner_token} to occur at the end with all_promote_verbs is {avg_prob_of_all_promote_queries}")
+        #
+        #
+        #
+        # ########all inhibits verbs
+        # all_avg_probabilities_inhibits= self.give_verb_types_return_multi_word_query_averages(split_multi_word_token,
+        #                                                                                             flag_multi_word_token_goes_first,
+        #                                                                                             partner_token,
+        #                                                                                             all_inhibits_verbs)
+        # self.logger.debug(
+        #     f"In the multiword query sentence {split_multi_word_token} the average "
+        #     f"probability of the word {partner_token} to occur at the end with all_inhibits_verbs is {all_avg_probabilities_inhibits}")
 
-
-        self.logger.debug(
-            f"In the multiword query sentence {split_multi_word_token} the average "
-            f"probability of the word {partner_token} to occur at the end with all_promote_verbs is {avg_prob_of_all_promote_queries}")
-
-        ########all inhibits verbs
-
-        all_avg_probabilities_inhibits= self.give_verb_types_return_multi_word_query_averages(split_multi_word_token,
-                                                                                                    flag_multi_word_token_goes_first,
-                                                                                                    partner_token,
-                                                                                                    all_inhibits_verbs)
-
+        ########all does not promote verbs
+        all_avg_probabilities_dnpromotes = self.give_verb_types_return_multi_word_query_averages(split_multi_word_token,
+                                                                                                 flag_multi_word_token_goes_first,
+                                                                                                 partner_token,
+                                                                                                 all_does_not_promote_verbs)
         self.logger.debug(
             f"In the multiword query sentence {split_multi_word_token} the average "
             f"probability of the word {partner_token} to occur at the end with all_inhibits_verbs is {all_avg_probabilities_inhibits}")
 
         #todo this must be a dictionary. the same as a2b
-        return avg_prob_of_all_promote_queries
+        return all_avg_probabilities_dnpromotes
 
     def find_highest_prob_between_adverb_donot_adverb(self,dict_adverb_prob_a2b,key1, key2,overall_highest_accuracies_relations,direction_string):
         prob_key1=dict_adverb_prob_a2b[key1]
@@ -385,14 +396,14 @@ def run_for_all_models(model_name):
         #which token goes first in the query. ideally the order of the tokens must be same as what user gave us.
         #however, i dont want to go into weird recurdsion code. so to find which token comes first, i am using a bool flag
 
-        flag_multi_word_token_goes_first=False
-        flag_found_multi_word_token=True
+        flag_found_multi_word_token=False
 
         for index,each_token in enumerate(input_tokens):
             split_multi_word_token=each_token.split(" ")
             if (len(split_multi_word_token) > 1):
                 adverb_prob_a2b= obj_direction_validation.get_avg_of_multi_worded_queries(index, len_input_tokens, input_tokens, split_multi_word_token)
                 print("end of multi token expts")
+                flag_found_multi_word_token=True
 
         if not (flag_found_multi_word_token):
                 #####for queries where both are singled worded tokens. eg: stability improves income

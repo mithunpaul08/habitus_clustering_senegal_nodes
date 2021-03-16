@@ -55,10 +55,7 @@ class tests_directionality(TestCase):
             avg = self.obj_direction_validation.find_average_causal_mlm(all_causal_verbs, input_tokens)
             assert avg ==0.0003280365199316293
 
-    def test_find_average_causal_mlm_education_stability(self):
-            input_tokens = ["education", "stability"]
-            avg = self.obj_direction_validation.find_average_causal_mlm(all_promote_verbs, input_tokens)
-            assert avg == 0.00019201972463633865
+
 
     def test_find_per_adverb_prob_education_stability(self):
             mlm_first_query_token="education"
@@ -109,8 +106,6 @@ class tests_directionality(TestCase):
 
 
     def test_get_avg_of_multi_worded_queries_for_inhibits(self):
-
-
         ###tests for inhibit related queries
         input_tokens = ["rice production", "income"]
         split_multi_word_token = ["rice", "production"]
@@ -153,3 +148,41 @@ class tests_directionality(TestCase):
         get_avg_of_multi_worded_queries_given_input_tokens(assert_value, split_multi_word_token, index,
                                                            self.obj_direction_validation, partner_token, input_tokens,
                                                            all_inhibits_verbs)
+
+
+    def test_get_single_word_queries_for_does_not(self):
+        input_tokens = ["education", "stability"]
+        mlm_causal_causal_adverb = "does not improve"
+        sequence = str(input_tokens[0]) + " " + (
+            mlm_causal_causal_adverb) + " " + self.obj_direction_validation.tokenizer.mask_token
+        prob_dict, sequence = self.obj_direction_validation.create_prob_dict(sequence)
+        print(prob_dict['stability'])
+        assert prob_dict['stability'] == 2.5620288397476543e-06
+
+        input_tokens = ["education", "stability"]
+        mlm_causal_causal_adverb = "does not diminish"
+        sequence = str(input_tokens[0]) + " " + (
+            mlm_causal_causal_adverb) + " " + self.obj_direction_validation.tokenizer.mask_token
+        prob_dict, sequence = self.obj_direction_validation.create_prob_dict(sequence)
+        print(prob_dict['stability'])
+        assert prob_dict['stability'] == 4.7516396080027334e-06
+
+
+    #average of all verbs in a class. eg. average of education improves stability, education promotes stability etc
+    def test_find_average_prob_mlm_single_word_tokens(self):
+        input_tokens = ["education", "stability"]
+        avg = self.obj_direction_validation.find_average_causal_mlm(all_promote_verbs, input_tokens)
+        assert avg == 0.00019201972463633865
+
+        input_tokens = ["education", "stability"]
+        avg = self.obj_direction_validation.find_average_causal_mlm(all_inhibits_verbs, input_tokens)
+        assert avg == 0.00012041754234815016
+
+
+        input_tokens = ["education", "stability"]
+        avg = self.obj_direction_validation.find_average_causal_mlm(all_does_not_promote_verbs, input_tokens)
+        assert avg == 0.00014735285367351025
+
+        input_tokens = ["education", "stability"]
+        avg = self.obj_direction_validation.find_average_causal_mlm(all_does_not_inhibits_verbs, input_tokens)
+        assert avg == 8.410893497057259e-05
