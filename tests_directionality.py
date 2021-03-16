@@ -138,7 +138,6 @@ class tests_directionality(TestCase):
                                                            all_inhibits_verbs)
 
 
-        #pasting at 1113pm
         input_tokens = ["income", "rice production stability"]
         split_multi_word_token = ["rice", "production","stability"]
         # index must be 1 when the multiwordtoken comes second. e.g.;, income promotes rice production
@@ -148,6 +147,28 @@ class tests_directionality(TestCase):
         get_avg_of_multi_worded_queries_given_input_tokens(assert_value, split_multi_word_token, index,
                                                            self.obj_direction_validation, partner_token, input_tokens,
                                                            all_inhibits_verbs)
+
+
+        input_tokens = ["main crop", "income"]
+        split_multi_word_token = ["main", "crop"]
+        # index must be 1 when the multiwordtoken comes second( e.g.;, income promotes rice production) else zero
+        index = 0
+        assert_value = 0.0006208729610079899
+        partner_token = "income"
+        get_avg_of_multi_worded_queries_given_input_tokens(assert_value, split_multi_word_token, index,
+                                                           self.obj_direction_validation, partner_token, input_tokens,
+                                                           all_does_not_promote_verbs)
+
+
+        input_tokens = ["main crop", "income"]
+        split_multi_word_token = ["main", "crop"]
+        # index must be 1 when the multiwordtoken comes second( e.g.;, income promotes rice production) else zero
+        index = 0
+        assert_value = 0.00022078755137044936
+        partner_token = "income"
+        get_avg_of_multi_worded_queries_given_input_tokens(assert_value, split_multi_word_token, index,
+                                                           self.obj_direction_validation, partner_token, input_tokens,
+                                                           all_does_not_inhibits_verbs)
 
 
     def test_get_single_word_queries_for_does_not(self):

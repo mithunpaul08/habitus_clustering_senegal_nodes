@@ -24,7 +24,7 @@ vi ./log_directionality.log
 
 
 
-INPUT_TOKENS = ["education", "stability"]
+INPUT_TOKENS = ["main crop", "income"]
 LIST_MODEL_NAME=["distilbert-base-uncased"]
 class DirectionValidation:
 
@@ -359,7 +359,16 @@ class DirectionValidation:
                                                                                                  all_does_not_promote_verbs)
         self.logger.debug(
             f"In the multiword query sentence {split_multi_word_token} the average "
-            f"probability of the word {partner_token} to occur at the end with all_inhibits_verbs is {all_avg_probabilities_inhibits}")
+            f"probability of the word {partner_token} to occur at the end with all_inhibits_verbs is {all_avg_probabilities_dnpromotes}")
+
+        ########all does not promote verbs
+        all_avg_probabilities_dninhibits = self.give_verb_types_return_multi_word_query_averages(split_multi_word_token,
+                                                                                                 flag_multi_word_token_goes_first,
+                                                                                                 partner_token,
+                                                                                                 all_does_not_inhibits_verbs)
+        self.logger.debug(
+            f"In the multiword query sentence {split_multi_word_token} the average "
+            f"probability of the word {partner_token} to occur at the end with all_inhibits_verbs is {all_avg_probabilities_dninhibits}")
 
         #todo this must be a dictionary. the same as a2b
         return all_avg_probabilities_dnpromotes
