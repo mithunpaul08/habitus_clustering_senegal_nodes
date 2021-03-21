@@ -7,7 +7,7 @@ import torch.nn.functional as F
 from nltk.corpus import stopwords
 from transformers import pipeline
 from pprint import pprint
-from utils import read_file_python_way
+from utils import *
 import torch
 from data.verbs import *
 import os
@@ -23,9 +23,9 @@ python direction_validation.py
 vi ./log_directionality.log
 '''
 
+VARIABLES_FILE="data/query_directionality.csv"
 
-
-INPUT_TOKENS = ["number of years of farming", "income"]
+INPUT_TOKENS = ["coop", "income"]
 LIST_MODEL_NAME=["distilbert-base-uncased"]
 class DirectionValidation:
 
@@ -392,11 +392,23 @@ class DirectionValidation:
             self.logger.info(who_is_bigger)
             overall_highest_accuracies_relations[prob_key1]=(who_is_bigger,direction_string)
 
+def get_data(data_file_path):
+    lines=read_csv_python(data_file_path)
+    for each_row in lines:
+        each_row_split=each_row.split("\t")
+        list_all_causal_variables=each_row_split[0]
+        list_all_effect_variables = each_row_split[1]
+
+
 def run_for_all_models(model_name):
 
         obj_direction_validation = DirectionValidation(model_name)
 
         input_tokens = INPUT_TOKENS
+
+        input_tokens_all=get_data(VARIABLES_FILE)
+
+
 
         '''
               #if either of the tokens are multiworded tokens (e.g.; rice production) have to treat them separately.
@@ -427,7 +439,7 @@ def run_for_all_models(model_name):
         if not (flag_found_multi_word_token):
                 #####for queries where both are singled worded tokens. eg: stability improves income
                 # adverb_prob_a2b stores the type of query as key and the average of all sub queries as its average e.g.;["DOES_NOT_NON_POLARIZED"] = avg.item()
-                adverb_prob_a2b = obj_direction_validation.all_single_worded_queries(INPUT_TOKENS)
+                adverb_prob_a2b = obj_direction_validation.all_single_worded_queries(input_tokens)
 
         ############## opposite direction
 
@@ -446,7 +458,7 @@ def run_for_all_models(model_name):
         if not (flag_found_multi_word_token):
             #####for queries where both are singled worded tokens. eg: stability improves income
             # adverb_prob_a2b stores the type of query as key and the average of all sub queries as its average e.g.;["DOES_NOT_NON_POLARIZED"] = avg.item()
-            adverb_prob_b2a = obj_direction_validation.all_single_worded_queries(INPUT_TOKENS)
+            adverb_prob_b2a = obj_direction_validation.all_single_worded_queries(input_tokens)
 
         ########find overall_highest_accuracies_relations
         # i.e by now we would have got average probabilites of all verbs in both directions. now find which one is
