@@ -17,11 +17,12 @@ find probability of the token `income to occur at the end of :
 ```
 ## Inputs
 
-There are 3 types of inputs expected to this code. 
+There are the inputs expected to this code. 
 
 - causal variables
 - effect variables
 - verbs
+- masked language model
 
 
 Causal and effect variables, should be in the file 
@@ -41,6 +42,8 @@ Note: In this version (v1.0) even though we provide verbs which are not
 `promotes` or `inhibits` like, (e.g.,all_does_not_cauase_verbs) they are 
 not used in probability calculations.
 
+By default distilbert is used as the masked language model. You can change this by changing the value of LIST_MODEL_NAME in `./direction_validation.py`
+
 ## Outputs
 
 The outputs are the probabilities of each combination of the aforementioned
@@ -58,6 +61,6 @@ and the date of execution of this program.
 
 e.g.,`numberofyearsoffarming_income_distilbert-base-uncasedMar-15-2021.log`
 
-Logging levels can be changed using the variable LOGGING_LEVEL in `./direction_validation.py`
+Logging levels (e.g., DEBUG, INFO, WARNING, ERROR etc.) can be set using the variable LOGGING_LEVEL in `./direction_validation.py`
 
 

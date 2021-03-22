@@ -32,7 +32,7 @@ class DirectionValidation:
 
         logging.basicConfig(
             format=FORMAT,
-            level=LOGGING_LEVEL,
+            level=logging.INFO,
             filename=full_path,
             filemode='w'
         )
