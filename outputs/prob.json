@@ -1,0 +1,18 @@
+{
+    "education standard PROMOTES income": 0.0005121692374814302,
+    "education standard INHIBITS income": 0.00044834756408818066,
+    "education standard DOES_NOT_PROMOTE income": 0.002649172442033887,
+    "education standard DOES_NOT_INHIBIT income": 0.0015227344701997936,
+    "income PROMOTES education standard": 0.0008037051456994959,
+    "income INHIBITS education standard": 0.0005215316314206575,
+    "income DOES_NOT_PROMOTE education standard": 0.00029224887384771137,
+    "income DOES_NOT_INHIBIT education standard": 0.000546206308172259,
+    "education standard PROMOTES food": 1.0938484592770692e-05,
+    "education standard INHIBITS food": 2.516771201044321e-05,
+    "education standard DOES_NOT_PROMOTE food": 3.986488445661962e-05,
+    "education standard DOES_NOT_INHIBIT food": 5.282958227326162e-05,
+    "food PROMOTES education standard": 0.00033985829668381484,
+    "food INHIBITS education standard": 0.0001042286212395993,
+    "food DOES_NOT_PROMOTE education standard": 9.970313817575516e-05,
+    "food DOES_NOT_INHIBIT education standard": 0.00022226145392778562
+}
