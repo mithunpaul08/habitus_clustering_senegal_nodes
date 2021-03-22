@@ -395,10 +395,11 @@ def get_data(data_file_path):
 
 def get_input_tokens_find_probability(model_name):
     list_all_causal_variables, list_all_effect_variables = get_data(VARIABLES_FILE)
+    pretty_dict = {}
     for causal_variable in list_all_causal_variables:
         for effect_variable in list_all_effect_variables:
             input_tokens = [causal_variable, effect_variable]
-            find_causal_probability_for_tokens(model_name, input_tokens)
+            find_causal_probability_for_tokens(model_name, input_tokens, pretty_dict)
 
 def convert_probability_dict_to_pretty_print(data,input_tokens,pretty_dict):
     for k, v in data.items():
@@ -408,7 +409,7 @@ def convert_probability_dict_to_pretty_print(data,input_tokens,pretty_dict):
     return pretty_dict
 
 
-def find_causal_probability_for_tokens(model_name,input_tokens):
+def find_causal_probability_for_tokens(model_name,input_tokens,pretty_dict):
         '''Finds the probability of each effect token to appear at the end of causal token with verb.
         For example if input_tokens=[education, income], find probability of income to occur at the end of :
         education improves ______ etc.
@@ -462,7 +463,7 @@ def find_causal_probability_for_tokens(model_name,input_tokens):
         assert verb_prob_a2b is not None
         assert verb_prob_b2a is not None
         assert len(verb_prob_a2b.keys()) == len(verb_prob_b2a.keys())
-        pretty_dict={}
+
         convert_probability_dict_to_pretty_print(verb_prob_a2b,input_tokens,pretty_dict)
         convert_probability_dict_to_pretty_print(verb_prob_b2a, input_tokens_reverse, pretty_dict)
         write_dict_to_json(pretty_dict,OUTPUT_FILE)
