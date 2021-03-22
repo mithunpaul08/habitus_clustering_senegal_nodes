@@ -1,5 +1,6 @@
 import pandas as pd
 import csv
+import json
 
 
 def read_file(filename):
@@ -19,4 +20,10 @@ def read_csv_python(input_filepath):
         for row in reader:
             all_lines.append(" ".join(row))
     return all_lines
+
+
+def write_dict_to_json(data,filepath):
+    str_json = json.dumps(data, indent=4)
+    with open(filepath, "w") as f:
+        f.write(str_json)
 

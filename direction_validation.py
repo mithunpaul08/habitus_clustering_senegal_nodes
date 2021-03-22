@@ -14,17 +14,11 @@ import os
 from datetime import date
 import logging
 
-'''
-to run: 
--pip install -r requirements.txt
--pick name of the MLM model you want to use:MODEL_NAME e.g.,:[distilbert-base-uncased]
--add the  variables you want to check probability for data/query_directionality.csv
-python direction_validation.py
-vi ./log_directionality.log
-'''
-
-VARIABLES_FILE="data/query_directionality.csv"
+LOGGING_LEVEL="logging.INFO"
+VARIABLES_FILE="data/query_directionality_variables.csv"
 LIST_MODEL_NAME=["distilbert-base-uncased"]
+OUTPUT_FILE="outputs/prob.json"
+
 class DirectionValidation:
 
     def __init__(self,model_name, input_tokens):
@@ -35,9 +29,10 @@ class DirectionValidation:
         log_file_name = "".join(input_tokens[0].split())+"_"+"".join(input_tokens[1].split())+"_"+model_name+today_date+".log"
         full_path=os.path.join("./logs",log_file_name)
         FORMAT='%(message)s'
+
         logging.basicConfig(
             format=FORMAT,
-            level=logging.DEBUG,
+            level=LOGGING_LEVEL,
             filename=full_path,
             filemode='w'
         )
@@ -405,6 +400,12 @@ def get_input_tokens_find_probability(model_name):
             input_tokens = [causal_variable, effect_variable]
             find_causal_probability_for_tokens(model_name, input_tokens)
 
+def convert_probability_dict_to_pretty_print(data,input_tokens,pretty_dict):
+    for k, v in data.items():
+        if not "polarized" in k.lower(): #the dictionary at this point has two more extra lines for NON_POLARIZED verbs. e.g impacts. dont write it to disk. this is a future work.
+            pretty_key = f"{input_tokens[0]} {k} {input_tokens[1]}"
+            pretty_dict[pretty_key] = v
+    return pretty_dict
 
 
 def find_causal_probability_for_tokens(model_name,input_tokens):
@@ -438,22 +439,22 @@ def find_causal_probability_for_tokens(model_name,input_tokens):
 
         ############## opposite direction
 
-        input_tokens = [input_tokens[1], input_tokens[0]]
+        input_tokens_reverse = [input_tokens[1], input_tokens[0]]
         obj_direction_validation.logger.info(
-            f"######going to run in the opposite direction i.e {input_tokens[1]} to {input_tokens[0]}######")
+            f"######going to run in the opposite direction i.e {input_tokens_reverse[0]} to {input_tokens_reverse[1]}######")
         flag_found_multi_word_token = False
-        for index, each_token in enumerate(input_tokens):
+        for index, each_token in enumerate(input_tokens_reverse):
             split_multi_word_token = each_token.split(" ")
             if (len(split_multi_word_token) > 1):
                 verb_prob_b2a = obj_direction_validation.get_avg_of_multi_worded_queries(index, len_input_tokens,
-                                                                                           input_tokens,
+                                                                                         input_tokens_reverse,
                                                                                            split_multi_word_token)
                 obj_direction_validation.logger.debug("end of multi token expts")
                 flag_found_multi_word_token = True
         if not (flag_found_multi_word_token):
             #####for queries where both are singled worded tokens. eg: stability improves income
             # verb_prob_a2b stores the type of query as key and the average of all sub queries as its average e.g.;["DOES_NOT_NON_POLARIZED"] = avg.item()
-            verb_prob_b2a = obj_direction_validation.all_single_worded_queries(input_tokens)
+            verb_prob_b2a = obj_direction_validation.all_single_worded_queries(input_tokens_reverse)
 
         ########find overall_highest_accuracies_relations
         # i.e by now we would have got average probabilites of all verbs in both directions. now find which one is
@@ -461,6 +462,10 @@ def find_causal_probability_for_tokens(model_name,input_tokens):
         assert verb_prob_a2b is not None
         assert verb_prob_b2a is not None
         assert len(verb_prob_a2b.keys()) == len(verb_prob_b2a.keys())
+        pretty_dict={}
+        convert_probability_dict_to_pretty_print(verb_prob_a2b,input_tokens,pretty_dict)
+        convert_probability_dict_to_pretty_print(verb_prob_b2a, input_tokens_reverse, pretty_dict)
+        write_dict_to_json(pretty_dict,OUTPUT_FILE)
 
         overall_highest_accuracies_relations = {}
         obj_direction_validation.logger.info(f"Extended Summary:")
