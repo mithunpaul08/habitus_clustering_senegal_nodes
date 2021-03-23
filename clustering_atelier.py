@@ -11,7 +11,7 @@ from glove_read_get_embed import get_embedding_given_token
 X=random.rand(999,2)
 
 #X=np.asarray(X).reshape(1,-1)
-#the engine part which does clustering and plotting. will need cosine similarities of each concept as input
+#the engine part which does habitus and plotting. will need cosine similarities of each concept as input
 model=AgglomerativeClustering(n_clusters=None, distance_threshold=0.3, linkage='average',compute_full_tree=True)
 model.fit(X)
 labels=model.labels_

@@ -1,6 +1,6 @@
 '''
 This code was written for hoang to do somee cosine similarity test
- this is just a subseet of all functions i have. Dont usee it for clustering.
+ this is just a subseet of all functions i have. Dont usee it for habitus.
 '''
 
 import numpy as np
