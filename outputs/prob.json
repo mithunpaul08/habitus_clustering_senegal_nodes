@@ -6,5 +6,13 @@
     "income PROMOTES education": 0.0015862255822867155,
     "income INHIBITS education": 0.0010163591941818595,
     "income DOES_NOT_PROMOTE education": 0.0005807646666653454,
-    "income DOES_NOT_INHIBIT education": 0.0010872345883399248
+    "income DOES_NOT_INHIBIT education": 0.0010872345883399248,
+    "education level PROMOTES income": 0.0007131092716008425,
+    "education level INHIBITS income": 0.0006853941740700975,
+    "education level DOES_NOT_PROMOTE income": 0.0032016204204410315,
+    "education level DOES_NOT_INHIBIT income": 0.002117234340403229,
+    "income PROMOTES education level": 0.0008391574083361775,
+    "income INHIBITS education level": 0.0005299141721479828,
+    "income DOES_NOT_PROMOTE education level": 0.0003407805343158543,
+    "income DOES_NOT_INHIBIT education level": 0.0005830123664054554
 }
