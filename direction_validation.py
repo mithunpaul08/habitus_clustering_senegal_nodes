@@ -32,7 +32,7 @@ class DirectionValidation:
 
         logging.basicConfig(
             format=FORMAT,
-            level=logging.INFO,
+            level=logging.DEBUG,
             filename=full_path,
             filemode='w'
         )
@@ -385,21 +385,19 @@ class DirectionValidation:
             self.logger.info(who_is_bigger)
             overall_highest_accuracies_relations[prob_key1]=(who_is_bigger,direction_string)
 
-def get_data(data_file_path):
-    lines=read_file(data_file_path)
-    for each_row in lines:
-        each_row_split=each_row.rstrip().split("|")
-        list_all_causal_variables=each_row_split[0]
-        list_all_effect_variables = each_row_split[1]
-        return list_all_causal_variables.split(","),list_all_effect_variables.split(",")
 
 def get_input_tokens_find_probability(model_name):
-    list_all_causal_variables, list_all_effect_variables = get_data(VARIABLES_FILE)
-    pretty_dict = {}
-    for causal_variable in list_all_causal_variables:
-        for effect_variable in list_all_effect_variables:
-            input_tokens = [causal_variable, effect_variable]
-            find_causal_probability_for_tokens(model_name, input_tokens, pretty_dict)
+    lines = read_file(VARIABLES_FILE)
+    initalize_json_file(OUTPUT_FILE)
+    for each_row in lines:
+        each_row_split = each_row.rstrip().split("\t")
+        list_all_causal_variables = each_row_split[0]
+        list_all_effect_variables = each_row_split[1]
+        for causal_variable in list_all_causal_variables.split("|"):
+            for effect_variable in list_all_effect_variables.split("|"):
+                pretty_dict = {}
+                input_tokens = [causal_variable, effect_variable]
+                find_causal_probability_for_tokens(model_name, input_tokens, pretty_dict)
 
 def convert_probability_dict_to_pretty_print(data,input_tokens,pretty_dict):
     for k, v in data.items():
@@ -466,7 +464,7 @@ def find_causal_probability_for_tokens(model_name,input_tokens,pretty_dict):
 
         convert_probability_dict_to_pretty_print(verb_prob_a2b,input_tokens,pretty_dict)
         convert_probability_dict_to_pretty_print(verb_prob_b2a, input_tokens_reverse, pretty_dict)
-        write_dict_to_json(pretty_dict,OUTPUT_FILE)
+        append_dict_to_json(pretty_dict,OUTPUT_FILE)
 
         overall_highest_accuracies_relations = {}
         obj_direction_validation.logger.info(f"Extended Summary:")

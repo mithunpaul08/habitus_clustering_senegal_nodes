@@ -7,7 +7,7 @@ tokenizer = AutoTokenizer.from_pretrained(MLM_MODEL)
 model = AutoModelForMaskedLM.from_pretrained(MLM_MODEL)
 
 # prob(effect | cause)
-def create_prob_dict(self,sequence):
+def create_prob_dict(sequence):
         input = self.tokenizer.encode(sequence, return_tensors="pt")
         mask_token_index = torch.where(input == self.tokenizer.mask_token_id)[1]
         token_logits = self.model(input).logits
@@ -34,10 +34,11 @@ def calc_rel_prob(cause, effect, triggers):
     for trigger in triggers:
         for i in range(len(effect_tokens)):
             effect_chunk = ' '.join(effect_tokens[:i])
-            text = f'{cause} {trigger} {effect_chunk} [MASK]'
-            probabilities.append(prob(text, effect_tokens[i]))
-    avg_prob = sum(probabilities) / len(probabilities)
-    return avg_prob
+            text = f'{cause} {trigger} {effect_chunk}[MASK]'
+            print(text)
+            #probabilities.append(prob(text, effect_tokens[i]))
+    #avg_prob = sum(probabilities) / len(probabilities)
+    return 0
 def read_data(filename):
     with open(filename) as f:
         for line in f:
@@ -45,11 +46,8 @@ def read_data(filename):
             cause_synonyms = lhs.split('|')
             effect_synonyms = rhs.split('|')
             yield cause_synonyms, effect_synonyms
-promotes_triggers = [
-    'promotes', 'causes',
-]
-
-filename="data/v2_query_directionality_variables.csv"
+promotes_triggers = ['promotes']
+filename="data/query_directionality_variables.csv"
 
 def calc_average_probabilities():
     # for each line in tsv file
