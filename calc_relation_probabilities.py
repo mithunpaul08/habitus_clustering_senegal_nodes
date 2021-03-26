@@ -4,6 +4,7 @@ import torch.nn.functional as F
 from data.verbs import *
 from utils import *
 import argparse
+
 MLM_MODEL="distilbert-base-uncased"
 tokenizer = AutoTokenizer.from_pretrained(MLM_MODEL)
 model = AutoModelForMaskedLM.from_pretrained(MLM_MODEL)
@@ -65,13 +66,15 @@ names_triggers={
     "DOES_NOT_INHIBT":all_does_not_inhibits_verbs
 }
 
-
-#filename="data/query_directionality_variables.csv"
-
 def calc_average_probabilities(input_file_name):
-    # for each line in tsv file
     data=read_data(input_file_name)
+
+    #empty out the output file if it exists from previous runs
+    initalize_file(OUTPUT_FILE)
+
+    # for each type of trigger verb
     for name,triggers in names_triggers.items():
+        # for each line in tsv file
         for id_cause, cause_synonyms in data.items():
             for id_effect, effect_synonyms in data.items():
                 if not (id_cause == id_effect):
@@ -86,10 +89,7 @@ def calc_average_probabilities(input_file_name):
                     output=f"{id_cause}\t{id_effect}\t{name}\t{avg_prob}\n"
                     append_to_file(output,OUTPUT_FILE)
 
-
-
 if __name__ == "__main__":
     input_file_name=parse_arguments()
-    initalize_file(OUTPUT_FILE)
     calc_average_probabilities(input_file_name)
 
