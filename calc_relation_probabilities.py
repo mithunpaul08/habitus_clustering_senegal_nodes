@@ -36,32 +36,37 @@ def calc_rel_prob(cause, effect, triggers):
             text = f'{cause} {trigger} {effect_chunk} [MASK]'
             prob_effect=prob(text, effect_tokens[i])
             probabilities.append(prob_effect)
-            print(f"{text}:{prob_effect}")
+            #print(f"{text}:{prob_effect}")
     avg_prob = float(sum(probabilities)) / float(len(probabilities))
     return avg_prob
 
 def read_data(filename):
+    id_variables={}
     with open(filename) as f:
         for line in f:
-            [lhs, rhs] = line.strip().split('\t')
-            cause_synonyms = lhs.split('|')
-            effect_synonyms = rhs.split('|')
-            yield cause_synonyms, effect_synonyms
+            line_split = line.strip().split('\t')
+            id=line_split[0]
+            cause_effect_synonyms=line_split[1:]
+            id_variables[id]=cause_effect_synonyms
+    return id_variables
 promotes_triggers = all_promote_verbs
 filename="data/query_directionality_variables.csv"
 
 def calc_average_probabilities():
     # for each line in tsv file
-    for cause_synonyms, effect_synonyms in read_data(filename):
-        # probabilities for each element in cartesian product
-        probabilities = []
-        for cause in cause_synonyms:
-            for effect in effect_synonyms:
-                p = calc_rel_prob(cause, effect, promotes_triggers)
-                probabilities.append(p)
-        # calculate probability average
-        avg_prob = float(sum(probabilities)) / float(len(probabilities))
-        print(avg_prob)
+    data=read_data(filename)
+    for id_cause, cause_synonyms in data.items():
+        for id_effect, effect_synonyms in data.items():
+            if not (id_cause == id_effect):
+                # probabilities for each element in cartesian product
+                probabilities = []
+                for cause in cause_synonyms:
+                    for effect in effect_synonyms:
+                        p = calc_rel_prob(cause, effect, promotes_triggers)
+                        probabilities.append(p)
+                # calculate probability average
+                avg_prob = float(sum(probabilities)) / float(len(probabilities))
+                print(f"{id_cause}\t{id_effect}\tPROMOTES\t{avg_prob}")
         # TODO save to file
 
 
