@@ -3,11 +3,17 @@ from transformers import AutoModelForMaskedLM, AutoTokenizer
 import torch.nn.functional as F
 from data.verbs import *
 from utils import *
-
+import argparse
 MLM_MODEL="distilbert-base-uncased"
 tokenizer = AutoTokenizer.from_pretrained(MLM_MODEL)
 model = AutoModelForMaskedLM.from_pretrained(MLM_MODEL)
 OUTPUT_FILE="outputs/probabilities.tsv"
+
+def parse_arguments():
+    argparser = argparse.ArgumentParser("to parse causal documents")
+    argparser.add_argument("input_file_name", help="name of the input file where causal and effect variables are kept")
+    args = argparser.parse_args()
+    return args.input_file_name
 
 # prob(effect | cause)
 def create_prob_dict(sequence):
@@ -38,7 +44,7 @@ def calc_rel_prob(cause, effect, triggers):
             text = f'{cause} {trigger} {effect_chunk} [MASK]'
             prob_effect=prob(text, effect_tokens[i])
             probabilities.append(prob_effect)
-            #print(f"{text}:{prob_effect}")
+            print(f"{text}:{prob_effect}")
     avg_prob = float(sum(probabilities)) / float(len(probabilities))
     return avg_prob
 
@@ -60,11 +66,11 @@ names_triggers={
 }
 
 
-filename="data/query_directionality_variables.csv"
+#filename="data/query_directionality_variables.csv"
 
-def calc_average_probabilities():
+def calc_average_probabilities(input_file_name):
     # for each line in tsv file
-    data=read_data(filename)
+    data=read_data(input_file_name)
     for name,triggers in names_triggers.items():
         for id_cause, cause_synonyms in data.items():
             for id_effect, effect_synonyms in data.items():
@@ -83,6 +89,7 @@ def calc_average_probabilities():
 
 
 if __name__ == "__main__":
+    input_file_name=parse_arguments()
     initalize_file(OUTPUT_FILE)
-    calc_average_probabilities()
+    calc_average_probabilities(input_file_name)
 

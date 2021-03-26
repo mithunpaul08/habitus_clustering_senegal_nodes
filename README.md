@@ -8,14 +8,22 @@ find probability of the token `income to occur at the end of :
         averaged. For example, for input tokens=["income", "rice production"] overall probability of rice production to
         occur at the end of income based sentences are:average(prob(income promotes rice [MASK]), prob(income promotes [MASK])
 
-## To execute this application
+## Pre requisites
  ```
     conda create -n directionality python=3
     conda activate directionality
     pip install -r requiements.txt    
-    python direction_validation.py    
+    python  python calc_relation_probabilities.py "data/inputs.tsv"    
 ```
+
+## To execute this application
+
+`python  python calc_relation_probabilities.py [input_file]`
+
+For example:
+ `python  python calc_relation_probabilities.py "data/inputs.tsv"    `
 ## Inputs
+######todo: update based on final data format you decide on
 
 There are the inputs expected to this code. 
 
@@ -26,7 +34,8 @@ There are the inputs expected to this code.
 
 
 Causal and effect variables, should be in the file 
-`data/query_directionality_variables.csv`
+`data/inputs.tsv`
+
 
 Causal variables should be separated by comma, which inturn should be separated from effect variables using a pipe `|`
 
@@ -45,6 +54,7 @@ not used in probability calculations.
 By default distilbert is used as the masked language model. You can change this by changing the value of LIST_MODEL_NAME in `./direction_validation.py`
 
 ## Outputs
+######todo: update based on final data format you decide on
 
 The outputs are the probabilities of each combination of the aforementioned
 variables to occur with the list of provided verbs
