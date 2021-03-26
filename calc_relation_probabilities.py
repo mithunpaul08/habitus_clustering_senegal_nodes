@@ -51,25 +51,34 @@ def read_data(filename):
             cause_effect_synonyms=line_split[1:]
             id_variables[id]=cause_effect_synonyms
     return id_variables
-promotes_triggers = all_promote_verbs
+
+names_triggers={
+    "PROMOTES":all_promote_verbs,
+    "INHIBITS":all_inhibits_verbs,
+    "DOES_NOT_PROMOTE":all_does_not_promote_verbs,
+    "DOES_NOT_INHIBT":all_does_not_inhibits_verbs
+}
+
+
 filename="data/query_directionality_variables.csv"
 
 def calc_average_probabilities():
     # for each line in tsv file
     data=read_data(filename)
-    for id_cause, cause_synonyms in data.items():
-        for id_effect, effect_synonyms in data.items():
-            if not (id_cause == id_effect):
-                # probabilities for each element in cartesian product
-                probabilities = []
-                for cause in cause_synonyms:
-                    for effect in effect_synonyms:
-                        p = calc_rel_prob(cause, effect, promotes_triggers)
-                        probabilities.append(p)
-                # calculate probability average
-                avg_prob = float(sum(probabilities)) / float(len(probabilities))
-                output=f"{id_cause}\t{id_effect}\tPROMOTES\t{avg_prob}\n"
-                append_to_file(output,OUTPUT_FILE)
+    for name,triggers in names_triggers.items():
+        for id_cause, cause_synonyms in data.items():
+            for id_effect, effect_synonyms in data.items():
+                if not (id_cause == id_effect):
+                    # probabilities for each element in cartesian product
+                    probabilities = []
+                    for cause in cause_synonyms:
+                        for effect in effect_synonyms:
+                            p = calc_rel_prob(cause, effect, triggers)
+                            probabilities.append(p)
+                    # calculate probability average
+                    avg_prob = float(sum(probabilities)) / float(len(probabilities))
+                    output=f"{id_cause}\t{id_effect}\t{name}\t{avg_prob}\n"
+                    append_to_file(output,OUTPUT_FILE)
 
 
 
