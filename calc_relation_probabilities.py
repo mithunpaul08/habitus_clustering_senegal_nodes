@@ -5,10 +5,7 @@ from data.verbs import *
 from utils import *
 import argparse
 
-MLM_MODEL="distilbert-base-uncased"
-tokenizer = AutoTokenizer.from_pretrained(MLM_MODEL)
-model = AutoModelForMaskedLM.from_pretrained(MLM_MODEL)
-OUTPUT_FILE="outputs/probabilities.tsv"
+MLM_MODELS=["bert-base-uncased","distilbert-base-uncased"]
 
 def parse_arguments():
     argparser = argparse.ArgumentParser("to parse causal documents")
@@ -45,7 +42,7 @@ def calc_rel_prob(cause, effect, triggers):
             text = f'{cause} {trigger} {effect_chunk} [MASK]'
             prob_effect=prob(text, effect_tokens[i])
             probabilities.append(prob_effect)
-            print(f"{text}:{prob_effect}")
+            #print(f"{text}:{prob_effect}")
     avg_prob = float(sum(probabilities)) / float(len(probabilities))
     return avg_prob
 
@@ -66,11 +63,11 @@ names_triggers={
     "DOES_NOT_INHIBT":all_does_not_inhibits_verbs
 }
 
-def calc_average_probabilities(input_file_name):
+def calc_average_probabilities(input_file_name,output_file):
     data=read_data(input_file_name)
 
     #empty out the output file if it exists from previous runs
-    initalize_file(OUTPUT_FILE)
+    initalize_file(output_file)
 
     # for each type of trigger verb
     for name,triggers in names_triggers.items():
@@ -87,9 +84,15 @@ def calc_average_probabilities(input_file_name):
                     # calculate probability average
                     avg_prob = float(sum(probabilities)) / float(len(probabilities))
                     output=f"{id_cause}\t{id_effect}\t{name}\t{avg_prob}\n"
-                    append_to_file(output,OUTPUT_FILE)
+                    append_to_file(output,output_file)
 
 if __name__ == "__main__":
-    input_file_name=parse_arguments()
-    calc_average_probabilities(input_file_name)
+
+    for each_model in MLM_MODELS:
+        tokenizer = AutoTokenizer.from_pretrained(each_model)
+        model = AutoModelForMaskedLM.from_pretrained(each_model)
+
+        output_file=f"outputs/{each_model}_probabilities.tsv"
+        input_file=parse_arguments()
+        calc_average_probabilities(input_file,output_file)
 
