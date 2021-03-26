@@ -33,7 +33,7 @@ def calc_rel_prob(cause, effect, triggers):
     for trigger in triggers:
         for i in range(len(effect_tokens)):
             effect_chunk = ' '.join(effect_tokens[:i])
-            text = f'{cause} {trigger} {effect_chunk}[MASK]'
+            text = f'{cause} {trigger} {effect_chunk} [MASK]'
             prob_effect=prob(text, effect_tokens[i])
             probabilities.append(prob_effect)
             print(f"{text}:{prob_effect}")
