@@ -2,10 +2,12 @@ import torch
 from transformers import AutoModelForMaskedLM, AutoTokenizer
 import torch.nn.functional as F
 from data.verbs import *
+from utils import *
 
 MLM_MODEL="distilbert-base-uncased"
 tokenizer = AutoTokenizer.from_pretrained(MLM_MODEL)
 model = AutoModelForMaskedLM.from_pretrained(MLM_MODEL)
+OUTPUT_FILE="outputs/probabilities.tsv"
 
 # prob(effect | cause)
 def create_prob_dict(sequence):
@@ -66,10 +68,12 @@ def calc_average_probabilities():
                         probabilities.append(p)
                 # calculate probability average
                 avg_prob = float(sum(probabilities)) / float(len(probabilities))
-                print(f"{id_cause}\t{id_effect}\tPROMOTES\t{avg_prob}")
-        # TODO save to file
+                output=f"{id_cause}\t{id_effect}\tPROMOTES\t{avg_prob}\n"
+                append_to_file(output,OUTPUT_FILE)
 
 
 
 if __name__ == "__main__":
+    initalize_file(OUTPUT_FILE)
     calc_average_probabilities()
+

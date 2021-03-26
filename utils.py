@@ -21,9 +21,10 @@ def read_csv_python(input_filepath):
             all_lines.append(" ".join(row))
     return all_lines
 
-
-def initalize_json_file(filepath):
-    open(filepath, "w").close()
+def initalize_file(filepath):
+    with open(filepath, "w") as f:
+        f.write("")
+    f.close()
 
 def write_dict_to_json(data,filepath):
     str_json = json.dumps(data, indent=4)
@@ -34,3 +35,9 @@ def append_dict_to_json(data,filepath):
     str_json = json.dumps(data, indent=4)
     with open(filepath, "a") as f:
         f.write(str_json)
+
+def append_to_file(row,filepath):
+    with open(filepath,'a') as f:
+        f.write(row)
+
+

@@ -388,7 +388,7 @@ class DirectionValidation:
 
 def get_input_tokens_find_probability(model_name):
     lines = read_file(VARIABLES_FILE)
-    initalize_json_file(OUTPUT_FILE)
+    initalize_file(OUTPUT_FILE)
     for each_row in lines:
         each_row_split = each_row.rstrip().split("\t")
         list_all_causal_variables = each_row_split[0]
