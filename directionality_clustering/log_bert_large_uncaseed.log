@@ -1,0 +1,25 @@
+INFO:__main__:modelname=bert-large-uncased
+INFO:filelock:Lock 140571706544960 acquired on /Users/mordor/.cache/huggingface/transformers/1cf090f220f9674b67b3434decfe4d40a6532d7849653eac435ff94d31a4904c.d4d29047141693194a1c377423a9a58b3ffdd39ed177b3a9b2ac9bce9e6638d9.lock
+INFO:filelock:Lock 140571706544960 released on /Users/mordor/.cache/huggingface/transformers/1cf090f220f9674b67b3434decfe4d40a6532d7849653eac435ff94d31a4904c.d4d29047141693194a1c377423a9a58b3ffdd39ed177b3a9b2ac9bce9e6638d9.lock
+INFO:filelock:Lock 140571706612896 acquired on /Users/mordor/.cache/huggingface/transformers/e12f02d630da91a0982ce6db1ad595231d155a2b725ab106971898276d842ecc.d789d64ebfe299b0e416afc4a169632f903f693095b4629a7ea271d5a0cf2c99.lock
+INFO:filelock:Lock 140571706612896 released on /Users/mordor/.cache/huggingface/transformers/e12f02d630da91a0982ce6db1ad595231d155a2b725ab106971898276d842ecc.d789d64ebfe299b0e416afc4a169632f903f693095b4629a7ea271d5a0cf2c99.lock
+INFO:filelock:Lock 140571706546304 acquired on /Users/mordor/.cache/huggingface/transformers/475d46024228961ca8770cead39e1079f135fd2441d14cf216727ffac8d41d78.7f2721073f19841be16f41b0a70b600ca6b880c8f3df6f3535cbc704371bdfa4.lock
+INFO:filelock:Lock 140571706546304 released on /Users/mordor/.cache/huggingface/transformers/475d46024228961ca8770cead39e1079f135fd2441d14cf216727ffac8d41d78.7f2721073f19841be16f41b0a70b600ca6b880c8f3df6f3535cbc704371bdfa4.lock
+INFO:filelock:Lock 140571706612032 acquired on /Users/mordor/.cache/huggingface/transformers/1d959166dd7e047e57ea1b2d9b7b9669938a7e90c5e37a03961ad9f15eaea17f.fea64cd906e3766b04c92397f9ad3ff45271749cbe49829a079dd84e34c1697d.lock
+INFO:filelock:Lock 140571706612032 released on /Users/mordor/.cache/huggingface/transformers/1d959166dd7e047e57ea1b2d9b7b9669938a7e90c5e37a03961ad9f15eaea17f.fea64cd906e3766b04c92397f9ad3ff45271749cbe49829a079dd84e34c1697d.lock
+INFO:__main__:For education to stability  avg probability  for all PROMOTES queries is 4.775135534651909e-15
+INFO:__main__:For education to stability  avg probability  for all INHIBITS queries is 2.828208045362046e-13
+INFO:__main__:For education to stability  avg probability  for all CAUSAL queries is 6.1049867418339065e-12
+INFO:__main__:NON_POLARIZED > INHIBITS > PROMOTES > 
+INFO:__main__:For education to stability  avg probability  for all DOES NOT PROMOTE queries is 4.1151842133588246e-13
+INFO:__main__:For education to stability  avg probability  for all DOES NOT INHIBIT queries is 6.227982105727614e-12
+INFO:__main__:For education to stability  avg probability  for all DOES NOT CAUSE queries is 8.232647341621657e-10
+INFO:__main__:NON_POLARIZED > DOES NOT INHIBIT > DOES NOT PROMOTE > 
+INFO:__main__:For stability to education  avg probability  for all PROMOTES queries is 3.453935705152733e-12
+INFO:__main__:For stability to education  avg probability  for all INHIBITS queries is 9.529279275388713e-12
+INFO:__main__:For stability to education  avg probability  for all CAUSAL queries is 2.4695595568502426e-10
+INFO:__main__:NON_POLARIZED > INHIBITS > PROMOTES > 
+INFO:__main__:For stability to education  avg probability  for all DOES NOT PROMOTE queries is 1.1120480231108232e-10
+INFO:__main__:For stability to education  avg probability  for all DOES NOT INHIBIT queries is 1.7106522864906992e-09
+INFO:__main__:For stability to education  avg probability  for all DOES NOT CAUSE queries is 5.993109652990825e-08
+INFO:__main__:NON_POLARIZED > DOES NOT INHIBIT > DOES NOT PROMOTE > 

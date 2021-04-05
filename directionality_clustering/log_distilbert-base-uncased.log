@@ -1,0 +1,27 @@
+modelname=distilbert-base-uncased
+*******
+*******
+*******
+*******
+*******
+*******
+*******
+*******
+######going to run in the opposite direction i.e income to primary crop######
+*******
+*******
+*******
+*******
+*******
+*******
+*******
+*******
+Extended Summary:
+From primary crop to income
+From income to primary crop
+PROMOTES>DOES_NOT_PROMOTE
+INHIBITS>DOES_NOT_INHIBIT
+Brief Summary:
+ Overall_best=
+From income to primary crop
+INHIBITS>DOES_NOT_INHIBIT

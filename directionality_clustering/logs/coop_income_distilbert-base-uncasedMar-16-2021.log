@@ -1,0 +1,28 @@
+modelname=distilbert-base-uncased
+######going to run queries in the direction  coop to income######
+For coop to income  avg probability  for all PROMOTES queries is 0.0003765282453969121
+For coop to income  avg probability  for all INHIBITS queries is 6.525673961732537e-05
+For coop to income  avg probability  for all CAUSAL queries is 6.998778553679585e-05
+PROMOTES > NON_POLARIZED > INHIBITS > 
+For coop to income  avg probability  for all DOES NOT PROMOTE queries is 0.0014133064541965723
+For coop to income  avg probability  for all DOES NOT INHIBIT queries is 0.0005338378832675517
+For coop to income  avg probability  for all DOES NOT CAUSE queries is 0.0022252050694078207
+NON_POLARIZED > DOES NOT PROMOTE > DOES NOT INHIBIT > 
+######going to run in the opposite direction i.e income to coop######
+For income to coop  avg probability  for all PROMOTES queries is 2.9936188639112515e-06
+For income to coop  avg probability  for all INHIBITS queries is 1.4164383173920214e-05
+For income to coop  avg probability  for all CAUSAL queries is 9.186205147670989e-07
+INHIBITS > PROMOTES > NON_POLARIZED > 
+For income to coop  avg probability  for all DOES NOT PROMOTE queries is 7.501621439587325e-07
+For income to coop  avg probability  for all DOES NOT INHIBIT queries is 1.4880073422318674e-06
+For income to coop  avg probability  for all DOES NOT CAUSE queries is 1.0151109108846867e-06
+DOES NOT INHIBIT > NON_POLARIZED > DOES NOT PROMOTE > 
+Extended Summary:
+From coop to income
+From income to coop
+PROMOTES>DOES_NOT_PROMOTE
+INHIBITS>DOES_NOT_INHIBIT
+Brief Summary:
+ Overall_best=
+From income to coop
+INHIBITS>DOES_NOT_INHIBIT

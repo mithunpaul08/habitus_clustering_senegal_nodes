@@ -1,0 +1,16 @@
+modelname=distilbert-base-uncased
+######going to run queries in the direction  farmer being in coop to income######
+In the multiword query sentence ['farmer', 'being', 'in', 'coop'] the average probability of the word income to occur at the end with all_promote_verbs is 0.0009617750092729693
+In the multiword query sentence ['farmer', 'being', 'in', 'coop'] the average probability of the word income to occur at the end with all_inhibits_verbs is 0.0002073447139991913
+In the multiword query sentence ['farmer', 'being', 'in', 'coop'] the average probability of the word income to occur at the end with all_does_not_promote_verbs is 0.0031951796263456345
+In the multiword query sentence ['farmer', 'being', 'in', 'coop'] the average probability of the word income to occur at the end with all_does_not_inhibits_verbs is 0.0013524956884793937
+######going to run in the opposite direction i.e income to farmer being in coop######
+In the multiword query sentence ['farmer', 'being', 'in', 'coop'] the average probability of the word income to occur at the end with all_promote_verbs is 4.8034895371529274e-05
+In the multiword query sentence ['farmer', 'being', 'in', 'coop'] the average probability of the word income to occur at the end with all_inhibits_verbs is 5.286499595058558e-05
+In the multiword query sentence ['farmer', 'being', 'in', 'coop'] the average probability of the word income to occur at the end with all_does_not_promote_verbs is 6.745799198881741e-05
+In the multiword query sentence ['farmer', 'being', 'in', 'coop'] the average probability of the word income to occur at the end with all_does_not_inhibits_verbs is 6.631887464436659e-05
+Extended Summary:
+From farmer being in coop to income
+From income to farmer being in coop
+Brief Summary:
+ Overall_best=

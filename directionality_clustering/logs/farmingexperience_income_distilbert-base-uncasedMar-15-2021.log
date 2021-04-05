@@ -1,0 +1,20 @@
+modelname=distilbert-base-uncased
+######going to run queries in the direction  farming experience to income######
+In the multiword query sentence ['farming', 'experience'] the average probability of the word income to occur at the end with all_promote_verbs is 0.00031572324223816395
+In the multiword query sentence ['farming', 'experience'] the average probability of the word income to occur at the end with all_inhibits_verbs is 0.0002823946488206275
+In the multiword query sentence ['farming', 'experience'] the average probability of the word income to occur at the end with all_does_not_promote_verbs is 0.0013637831434607506
+In the multiword query sentence ['farming', 'experience'] the average probability of the word income to occur at the end with all_does_not_inhibits_verbs is 0.0008776401227805763
+######going to run in the opposite direction i.e income to farming experience######
+In the multiword query sentence ['farming', 'experience'] the average probability of the word income to occur at the end with all_promote_verbs is 0.00016660236360621639
+In the multiword query sentence ['farming', 'experience'] the average probability of the word income to occur at the end with all_inhibits_verbs is 0.0001763493819453288
+In the multiword query sentence ['farming', 'experience'] the average probability of the word income to occur at the end with all_does_not_promote_verbs is 6.797302557970397e-05
+In the multiword query sentence ['farming', 'experience'] the average probability of the word income to occur at the end with all_does_not_inhibits_verbs is 9.06051400306751e-05
+Extended Summary:
+From farming experience to income
+From income to farming experience
+PROMOTES>DOES_NOT_PROMOTE
+INHIBITS>DOES_NOT_INHIBIT
+Brief Summary:
+ Overall_best=
+From income to farming experience
+INHIBITS>DOES_NOT_INHIBIT

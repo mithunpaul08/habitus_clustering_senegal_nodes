@@ -12,7 +12,8 @@ find probability of the token `income to occur at the end of :
  ```
     conda create -n directionality python=3
     conda activate directionality
-    pip install -r requiements.txt    
+    pip install -r requirements.txt   
+    mkdir outputs 
     python  python calc_relation_probabilities.py "data/inputs.tsv"    
 ```
 

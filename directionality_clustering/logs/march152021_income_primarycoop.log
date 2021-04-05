@@ -1,0 +1,246 @@
+modelname=distilbert-base-uncased
+Starting new HTTPS connection (1): huggingface.co:443
+https://huggingface.co:443 "HEAD /distilbert-base-uncased/resolve/main/config.json HTTP/1.1" 200 0
+Starting new HTTPS connection (1): huggingface.co:443
+https://huggingface.co:443 "HEAD /bert-base-uncased/resolve/main/vocab.txt HTTP/1.1" 200 0
+Starting new HTTPS connection (1): huggingface.co:443
+https://huggingface.co:443 "HEAD /bert-base-uncased/resolve/main/tokenizer.json HTTP/1.1" 200 0
+Starting new HTTPS connection (1): huggingface.co:443
+https://huggingface.co:443 "HEAD /distilbert-base-uncased/resolve/main/config.json HTTP/1.1" 200 0
+Starting new HTTPS connection (1): huggingface.co:443
+https://huggingface.co:443 "HEAD /distilbert-base-uncased/resolve/main/pytorch_model.bin HTTP/1.1" 302 0
+*******
+For the sentence primary improves [MASK] probability of the word income to occur at the end is 0.00042335616308264434
+For the sentence primary accelerates [MASK] probability of the word income to occur at the end is 4.467130111152073e-06
+For the sentence primary boosts [MASK] probability of the word income to occur at the end is 2.677891097846441e-05
+For the sentence primary improves [MASK] probability of the word income to occur at the end is 0.00042335616308264434
+For the sentence primary compounds [MASK] probability of the word income to occur at the end is 1.0871349331864621e-06
+For the sentence primary enhances [MASK] probability of the word income to occur at the end is 3.4672539186431095e-05
+For the sentence primary escalates [MASK] probability of the word income to occur at the end is 3.921873670265086e-08
+For the sentence primary increases [MASK] probability of the word income to occur at the end is 0.0010705012828111649
+For the sentence primary facilitates [MASK] probability of the word income to occur at the end is 0.0003194156161043793
+For the sentence primary spikes [MASK] probability of the word income to occur at the end is 1.315844292548718e-05
+--
+In the multiword query sub sentence: primary :the average probability of the word income to occur at the end with all the given verb type is 0.00023168328334577382
+--
+*******
+For the sentence primary crop improves [MASK] probability of the word income to occur at the end is 0.00016892312851268798
+For the sentence primary crop accelerates [MASK] probability of the word income to occur at the end is 4.67011341243051e-05
+For the sentence primary crop boosts [MASK] probability of the word income to occur at the end is 0.00015433055523317307
+For the sentence primary crop improves [MASK] probability of the word income to occur at the end is 0.00016892312851268798
+For the sentence primary crop compounds [MASK] probability of the word income to occur at the end is 4.916243597108405e-06
+For the sentence primary crop enhances [MASK] probability of the word income to occur at the end is 0.0001741051528370008
+For the sentence primary crop escalates [MASK] probability of the word income to occur at the end is 3.1600310990143043e-07
+For the sentence primary crop increases [MASK] probability of the word income to occur at the end is 0.00011674207053147256
+For the sentence primary crop facilitates [MASK] probability of the word income to occur at the end is 0.00012481764133553952
+For the sentence primary crop spikes [MASK] probability of the word income to occur at the end is 7.808805094100535e-05
+--
+In the multiword query sub sentence: primary crop:the average probability of the word income to occur at the end with all the given verb type  is 0.00010378631122875959
+--
+In the multiword query sentence ['primary', 'crop'] the average probability of the word income to occur at the end with all_promote_verbs is 0.0001677347972872667
+*******
+For the sentence primary diminishes [MASK] probability of the word income to occur at the end is 1.0548416867095511e-05
+For the sentence primary drops [MASK] probability of the word income to occur at the end is 5.1647639338625595e-06
+For the sentence primary drains [MASK] probability of the word income to occur at the end is 7.77043226207752e-07
+For the sentence primary exhausts [MASK] probability of the word income to occur at the end is 9.562431841914076e-07
+For the sentence primary impairs [MASK] probability of the word income to occur at the end is 4.8867437726585194e-05
+For the sentence primary inhibits [MASK] probability of the word income to occur at the end is 3.701094556163298e-06
+For the sentence primary hampers [MASK] probability of the word income to occur at the end is 4.51159939984791e-06
+For the sentence primary hinders [MASK] probability of the word income to occur at the end is 1.8169168470194563e-05
+For the sentence primary eliminates [MASK] probability of the word income to occur at the end is 6.258019129745662e-05
+For the sentence primary disrupts [MASK] probability of the word income to occur at the end is 1.6311892977682874e-05
+--
+In the multiword query sub sentence: primary :the average probability of the word income to occur at the end with all the given verb type is 1.7158785340143368e-05
+--
+*******
+For the sentence primary crop diminishes [MASK] probability of the word income to occur at the end is 4.303276364225894e-05
+For the sentence primary crop drops [MASK] probability of the word income to occur at the end is 1.9001550754182972e-05
+For the sentence primary crop drains [MASK] probability of the word income to occur at the end is 9.300717465521302e-06
+For the sentence primary crop exhausts [MASK] probability of the word income to occur at the end is 9.250491530110594e-06
+For the sentence primary crop impairs [MASK] probability of the word income to occur at the end is 0.00026128257741220295
+For the sentence primary crop inhibits [MASK] probability of the word income to occur at the end is 5.3160452807787806e-05
+For the sentence primary crop hampers [MASK] probability of the word income to occur at the end is 1.1660602467600256e-05
+For the sentence primary crop hinders [MASK] probability of the word income to occur at the end is 6.781412957934663e-05
+For the sentence primary crop eliminates [MASK] probability of the word income to occur at the end is 4.625490328180604e-05
+For the sentence primary crop disrupts [MASK] probability of the word income to occur at the end is 3.638667112682015e-05
+--
+In the multiword query sub sentence: primary crop:the average probability of the word income to occur at the end with all the given verb type  is 5.5714481277391315e-05
+--
+In the multiword query sentence ['primary', 'crop'] the average probability of the word income to occur at the end with all_inhibits_verbs is 3.643663330876734e-05
+*******
+For the sentence primary does not improve [MASK] probability of the word income to occur at the end is 0.000411956018069759
+For the sentence primary does not accelerate [MASK] probability of the word income to occur at the end is 5.127653821546119e-06
+For the sentence primary does not boost [MASK] probability of the word income to occur at the end is 0.004346884787082672
+For the sentence primary does not improve [MASK] probability of the word income to occur at the end is 0.000411956018069759
+For the sentence primary does not compound [MASK] probability of the word income to occur at the end is 6.4679102251830045e-06
+For the sentence primary does not enhance [MASK] probability of the word income to occur at the end is 0.0007764914189465344
+For the sentence primary does not escalate [MASK] probability of the word income to occur at the end is 3.2635880415909924e-06
+For the sentence primary does not increase [MASK] probability of the word income to occur at the end is 0.004053561948239803
+For the sentence primary does not facilitate [MASK] probability of the word income to occur at the end is 0.00018904233002103865
+For the sentence primary does not spike [MASK] probability of the word income to occur at the end is 8.203157631214708e-05
+--
+In the multiword query sub sentence: primary :the average probability of the word income to occur at the end with all the given verb type is 0.0010286783799529076
+--
+*******
+For the sentence primary crop does not improve [MASK] probability of the word income to occur at the end is 0.00019597099162638187
+For the sentence primary crop does not accelerate [MASK] probability of the word income to occur at the end is 9.259290527552366e-05
+For the sentence primary crop does not boost [MASK] probability of the word income to occur at the end is 0.0025464941281825304
+For the sentence primary crop does not improve [MASK] probability of the word income to occur at the end is 0.00019597099162638187
+For the sentence primary crop does not compound [MASK] probability of the word income to occur at the end is 3.2943393307505175e-05
+For the sentence primary crop does not enhance [MASK] probability of the word income to occur at the end is 0.001661265385337174
+For the sentence primary crop does not escalate [MASK] probability of the word income to occur at the end is 2.868676165235229e-05
+For the sentence primary crop does not increase [MASK] probability of the word income to occur at the end is 0.0007782589527778327
+For the sentence primary crop does not facilitate [MASK] probability of the word income to occur at the end is 0.00025765059399418533
+For the sentence primary crop does not spike [MASK] probability of the word income to occur at the end is 8.201633318094537e-05
+--
+In the multiword query sub sentence: primary crop:the average probability of the word income to occur at the end with all the given verb type  is 0.0005871850298717618
+--
+In the multiword query sentence ['primary', 'crop'] the average probability of the word income to occur at the end with all_inhibits_verbs is 0.0008079317049123347
+*******
+For the sentence primary does not diminish [MASK] probability of the word income to occur at the end is 0.0002305344387423247
+For the sentence primary does not drop [MASK] probability of the word income to occur at the end is 0.00014427876158151776
+For the sentence primary does not drain [MASK] probability of the word income to occur at the end is 0.00028626597486436367
+For the sentence primary does not exhaust [MASK] probability of the word income to occur at the end is 0.0006404320592992008
+For the sentence primary does not impair [MASK] probability of the word income to occur at the end is 0.0003480534360278398
+For the sentence primary does not inhibit [MASK] probability of the word income to occur at the end is 1.3054138435109053e-05
+For the sentence primary does not hamper [MASK] probability of the word income to occur at the end is 0.00026094098575413227
+For the sentence primary does not hinder [MASK] probability of the word income to occur at the end is 0.00019463052740320563
+For the sentence primary does not eliminate [MASK] probability of the word income to occur at the end is 0.0008789263083599508
+For the sentence primary does not disrupt [MASK] probability of the word income to occur at the end is 9.550122922519222e-05
+--
+In the multiword query sub sentence: primary :the average probability of the word income to occur at the end with all the given verb type is 0.00030926178442314267
+--
+*******
+For the sentence primary crop does not diminish [MASK] probability of the word income to occur at the end is 0.0004384802596177906
+For the sentence primary crop does not drop [MASK] probability of the word income to occur at the end is 4.4304251787252724e-05
+For the sentence primary crop does not drain [MASK] probability of the word income to occur at the end is 0.00036349514266476035
+For the sentence primary crop does not exhaust [MASK] probability of the word income to occur at the end is 0.0008829626603983343
+For the sentence primary crop does not impair [MASK] probability of the word income to occur at the end is 0.00092555012088269
+For the sentence primary crop does not inhibit [MASK] probability of the word income to occur at the end is 0.00016829972446430475
+For the sentence primary crop does not hamper [MASK] probability of the word income to occur at the end is 0.00011894518684130162
+For the sentence primary crop does not hinder [MASK] probability of the word income to occur at the end is 0.00025820801965892315
+For the sentence primary crop does not eliminate [MASK] probability of the word income to occur at the end is 0.0001728700299281627
+For the sentence primary crop does not disrupt [MASK] probability of the word income to occur at the end is 0.00012953820987604558
+--
+In the multiword query sub sentence: primary crop:the average probability of the word income to occur at the end with all the given verb type  is 0.000350265356246382
+--
+In the multiword query sentence ['primary', 'crop'] the average probability of the word income to occur at the end with all_inhibits_verbs is 0.00032976357033476233
+end of multi token expts
+######going to run in the opposite direction i.e income to primary crop######
+*******
+For the sentence income improves [MASK] probability of the word primary to occur at the end is 8.904874448489863e-06
+For the sentence income accelerates [MASK] probability of the word primary to occur at the end is 3.0323938062792877e-06
+For the sentence income boosts [MASK] probability of the word primary to occur at the end is 2.1381704300438287e-06
+For the sentence income improves [MASK] probability of the word primary to occur at the end is 8.904874448489863e-06
+For the sentence income compounds [MASK] probability of the word primary to occur at the end is 5.982622951705707e-06
+For the sentence income enhances [MASK] probability of the word primary to occur at the end is 1.5096259630809072e-05
+For the sentence income escalates [MASK] probability of the word primary to occur at the end is 1.479044726693246e-07
+For the sentence income increases [MASK] probability of the word primary to occur at the end is 7.698718036408536e-07
+For the sentence income facilitates [MASK] probability of the word primary to occur at the end is 1.822312879085075e-05
+For the sentence income spikes [MASK] probability of the word primary to occur at the end is 1.7826030216383515e-06
+--
+In the multiword query sub sentence: primary :the average probability of the word income to occur at the end with all the given verb type is 6.4982705225702375e-06
+--
+*******
+For the sentence income improves primary [MASK] probability of the word crop to occur at the end is 4.60994488094002e-06
+For the sentence income accelerates primary [MASK] probability of the word crop to occur at the end is 6.491732347058132e-05
+For the sentence income boosts primary [MASK] probability of the word crop to occur at the end is 0.00010883688082685694
+For the sentence income improves primary [MASK] probability of the word crop to occur at the end is 4.60994488094002e-06
+For the sentence income compounds primary [MASK] probability of the word crop to occur at the end is 0.0001405907387379557
+For the sentence income enhances primary [MASK] probability of the word crop to occur at the end is 1.6522151781828143e-05
+For the sentence income escalates primary [MASK] probability of the word crop to occur at the end is 1.854588117566891e-05
+For the sentence income increases primary [MASK] probability of the word crop to occur at the end is 2.5358040147693828e-06
+For the sentence income facilitates primary [MASK] probability of the word crop to occur at the end is 4.166856797382934e-06
+For the sentence income spikes primary [MASK] probability of the word crop to occur at the end is 2.163373756047804e-05
+--
+In the multiword query sub sentence: primary crop:the average probability of the word income to occur at the end with all the given verb type  is 3.869692955049686e-05
+--
+In the multiword query sentence ['primary', 'crop'] the average probability of the word income to occur at the end with all_promote_verbs is 2.259760003653355e-05
+*******
+For the sentence income diminishes [MASK] probability of the word primary to occur at the end is 3.244792878831504e-06
+For the sentence income drops [MASK] probability of the word primary to occur at the end is 9.286711247113999e-06
+For the sentence income drains [MASK] probability of the word primary to occur at the end is 1.6887735910131596e-05
+For the sentence income exhausts [MASK] probability of the word primary to occur at the end is 7.201546850410523e-06
+For the sentence income impairs [MASK] probability of the word primary to occur at the end is 3.8953061448410153e-05
+For the sentence income inhibits [MASK] probability of the word primary to occur at the end is 1.899661037896294e-05
+For the sentence income hampers [MASK] probability of the word primary to occur at the end is 8.203166544262785e-06
+For the sentence income hinders [MASK] probability of the word primary to occur at the end is 5.262621198198758e-05
+For the sentence income eliminates [MASK] probability of the word primary to occur at the end is 2.266680712637026e-05
+For the sentence income disrupts [MASK] probability of the word primary to occur at the end is 2.4886250685085543e-05
+--
+In the multiword query sub sentence: primary :the average probability of the word income to occur at the end with all the given verb type is 2.0295288777560927e-05
+--
+*******
+For the sentence income diminishes primary [MASK] probability of the word crop to occur at the end is 7.247747998917475e-05
+For the sentence income drops primary [MASK] probability of the word crop to occur at the end is 6.791049236198887e-05
+For the sentence income drains primary [MASK] probability of the word crop to occur at the end is 9.60792021942325e-05
+For the sentence income exhausts primary [MASK] probability of the word crop to occur at the end is 7.989440928213298e-05
+For the sentence income impairs primary [MASK] probability of the word crop to occur at the end is 5.9782258176710457e-05
+For the sentence income inhibits primary [MASK] probability of the word crop to occur at the end is 1.959416658792179e-05
+For the sentence income hampers primary [MASK] probability of the word crop to occur at the end is 3.4202982988063013e-06
+For the sentence income hinders primary [MASK] probability of the word crop to occur at the end is 8.005598647287115e-05
+For the sentence income eliminates primary [MASK] probability of the word crop to occur at the end is 3.5407254472374916e-05
+For the sentence income disrupts primary [MASK] probability of the word crop to occur at the end is 0.00011226788046769798
+--
+In the multiword query sub sentence: primary crop:the average probability of the word income to occur at the end with all the given verb type  is 6.268893775995821e-05
+--
+In the multiword query sentence ['primary', 'crop'] the average probability of the word income to occur at the end with all_inhibits_verbs is 4.149211326875957e-05
+*******
+For the sentence income does not improve [MASK] probability of the word primary to occur at the end is 3.3094033824454527e-06
+For the sentence income does not accelerate [MASK] probability of the word primary to occur at the end is 2.380268597335089e-06
+For the sentence income does not boost [MASK] probability of the word primary to occur at the end is 7.807985639374238e-06
+For the sentence income does not improve [MASK] probability of the word primary to occur at the end is 3.3094033824454527e-06
+For the sentence income does not compound [MASK] probability of the word primary to occur at the end is 2.8299425594013883e-06
+For the sentence income does not enhance [MASK] probability of the word primary to occur at the end is 2.1540401576203294e-05
+For the sentence income does not escalate [MASK] probability of the word primary to occur at the end is 3.160410244618106e-07
+For the sentence income does not increase [MASK] probability of the word primary to occur at the end is 3.4650270208658185e-06
+For the sentence income does not facilitate [MASK] probability of the word primary to occur at the end is 5.283015707391314e-05
+For the sentence income does not spike [MASK] probability of the word primary to occur at the end is 8.000442903721705e-06
+--
+In the multiword query sub sentence: primary :the average probability of the word income to occur at the end with all the given verb type is 1.0578907676972449e-05
+--
+*******
+For the sentence income does not improve primary [MASK] probability of the word crop to occur at the end is 6.848842531326227e-06
+For the sentence income does not accelerate primary [MASK] probability of the word crop to occur at the end is 9.354239409731235e-06
+For the sentence income does not boost primary [MASK] probability of the word crop to occur at the end is 1.0285983989888337e-05
+For the sentence income does not improve primary [MASK] probability of the word crop to occur at the end is 6.848842531326227e-06
+For the sentence income does not compound primary [MASK] probability of the word crop to occur at the end is 8.044504284043796e-06
+For the sentence income does not enhance primary [MASK] probability of the word crop to occur at the end is 4.5099386625224724e-06
+For the sentence income does not escalate primary [MASK] probability of the word crop to occur at the end is 2.475167775628506e-06
+For the sentence income does not increase primary [MASK] probability of the word crop to occur at the end is 2.746685595411691e-06
+For the sentence income does not facilitate primary [MASK] probability of the word crop to occur at the end is 4.949588856106857e-06
+For the sentence income does not spike primary [MASK] probability of the word crop to occur at the end is 7.359416485996917e-06
+--
+In the multiword query sub sentence: primary crop:the average probability of the word income to occur at the end with all the given verb type  is 6.342320375551935e-06
+--
+In the multiword query sentence ['primary', 'crop'] the average probability of the word income to occur at the end with all_inhibits_verbs is 8.460614026262192e-06
+*******
+For the sentence income does not diminish [MASK] probability of the word primary to occur at the end is 3.0862033781886566e-06
+For the sentence income does not drop [MASK] probability of the word primary to occur at the end is 1.1645801350823604e-05
+For the sentence income does not drain [MASK] probability of the word primary to occur at the end is 2.8811571155529236e-06
+For the sentence income does not exhaust [MASK] probability of the word primary to occur at the end is 3.137058229185641e-05
+For the sentence income does not impair [MASK] probability of the word primary to occur at the end is 4.658634134102613e-05
+For the sentence income does not inhibit [MASK] probability of the word primary to occur at the end is 2.494866930646822e-05
+For the sentence income does not hamper [MASK] probability of the word primary to occur at the end is 2.7697044060914777e-05
+For the sentence income does not hinder [MASK] probability of the word primary to occur at the end is 4.211807390674949e-05
+For the sentence income does not eliminate [MASK] probability of the word primary to occur at the end is 2.8018646844429895e-05
+For the sentence income does not disrupt [MASK] probability of the word primary to occur at the end is 3.093285340582952e-05
+--
+In the multiword query sub sentence: primary :the average probability of the word income to occur at the end with all the given verb type is 2.4928536731749773e-05
+--
+*******
+For the sentence income does not diminish primary [MASK] probability of the word crop to occur at the end is 2.475976089044707e-06
+For the sentence income does not drop primary [MASK] probability of the word crop to occur at the end is 8.387829439016059e-06
+For the sentence income does not drain primary [MASK] probability of the word crop to occur at the end is 1.282040830119513e-05
+For the sentence income does not exhaust primary [MASK] probability of the word crop to occur at the end is 3.5048888094024733e-06
+For the sentence income does not impair primary [MASK] probability of the word crop to occur at the end is 1.1202228051843122e-05
+For the sentence income does not inhibit primary [MASK] probability of the word crop to occur at the end is 6.499361461465014e-06
+For the sentence income does not hamper primary [MASK] probability of the word crop to occur at the end is 5.315924227033975e-06
+For the sentence income does not hinder primary [MASK] probability of the word crop to occur at the end is 8.452937436231878e-06
+For the sentence income does not eliminate primary [MASK] probability of the word crop to occur at the end is 3.860542619804619e-06
+For the sentence income does not disrupt primary [MASK] probability of the word crop to occur at the end is 1.887350663309917e-05
+--
+In the multiword query sub sentence: primary crop:the average probability of the word income to occur at the end with all the given verb type  is 8.139360033965204e-06
+--
+In the multiword query sentence ['primary', 'crop'] the average probability of the word income to occur at the end with all_inhibits_verbs is 1.653394838285749e-05
+end of multi token expts

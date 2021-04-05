@@ -1,0 +1,17 @@
+modelname=distilbert-base-uncased
+For education to stability  avg probability  for all PROMOTES queries is 0.00019201972463633865
+For education to stability  avg probability  for all INHIBITS queries is 0.00012041754234815016
+For education to stability  avg probability  for all CAUSAL queries is 4.574364356813021e-05
+PROMOTES > INHIBITS > NON_POLARIZED > 
+For education to stability  avg probability  for all DOES NOT PROMOTE queries is 0.00014735285367351025
+For education to stability  avg probability  for all DOES NOT INHIBIT queries is 8.410893497057259e-05
+For education to stability  avg probability  for all DOES NOT CAUSE queries is 9.43966006161645e-05
+DOES NOT PROMOTE > NON_POLARIZED > DOES NOT INHIBIT > 
+For stability to education  avg probability  for all PROMOTES queries is 2.6248697395203635e-05
+For stability to education  avg probability  for all INHIBITS queries is 3.274993650848046e-05
+For stability to education  avg probability  for all CAUSAL queries is 6.91452223691158e-05
+NON_POLARIZED > INHIBITS > PROMOTES > 
+For stability to education  avg probability  for all DOES NOT PROMOTE queries is 1.5888757843640633e-05
+For stability to education  avg probability  for all DOES NOT INHIBIT queries is 4.018855906906538e-05
+For stability to education  avg probability  for all DOES NOT CAUSE queries is 6.513246626127511e-05
+NON_POLARIZED > DOES NOT INHIBIT > DOES NOT PROMOTE > 

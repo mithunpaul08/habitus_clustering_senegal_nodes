@@ -1,0 +1,27 @@
+modelname=distilbert-base-uncased
+######going to run queries in the direction  education to income######
+For education to income  avg probability  for all PROMOTES queries is 0.0005161457811482251
+For education to income  avg probability  for all INHIBITS queries is 0.0004498149792198092
+For education to income  avg probability  for all CAUSAL queries is 0.0004000126791652292
+PROMOTES > INHIBITS > NON_POLARIZED > 
+For education to income  avg probability  for all DOES NOT PROMOTE queries is 0.0036508317571133375
+For education to income  avg probability  for all DOES NOT INHIBIT queries is 0.0018296359339728951
+For education to income  avg probability  for all DOES NOT CAUSE queries is 0.009002916514873505
+NON_POLARIZED > DOES NOT PROMOTE > DOES NOT INHIBIT > 
+######going to run in the opposite direction i.e income to education######
+For income to education  avg probability  for all PROMOTES queries is 0.0015862255822867155
+For income to education  avg probability  for all INHIBITS queries is 0.0010163591941818595
+For income to education  avg probability  for all CAUSAL queries is 0.0009917531860992312
+PROMOTES > INHIBITS > NON_POLARIZED > 
+For income to education  avg probability  for all DOES NOT PROMOTE queries is 0.0005807646666653454
+For income to education  avg probability  for all DOES NOT INHIBIT queries is 0.0010872345883399248
+For income to education  avg probability  for all DOES NOT CAUSE queries is 0.002961812075227499
+NON_POLARIZED > DOES NOT INHIBIT > DOES NOT PROMOTE > 
+Extended Summary:
+From education to income
+From income to education
+PROMOTES>DOES_NOT_PROMOTE
+Brief Summary:
+ Overall_best=
+From income to education
+PROMOTES>DOES_NOT_PROMOTE

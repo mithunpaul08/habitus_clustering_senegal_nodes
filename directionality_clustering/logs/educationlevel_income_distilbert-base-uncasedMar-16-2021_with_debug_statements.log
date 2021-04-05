@@ -1,0 +1,255 @@
+modelname=distilbert-base-uncased
+Starting new HTTPS connection (1): huggingface.co:443
+https://huggingface.co:443 "HEAD /distilbert-base-uncased/resolve/main/config.json HTTP/1.1" 200 0
+Starting new HTTPS connection (1): huggingface.co:443
+https://huggingface.co:443 "HEAD /bert-base-uncased/resolve/main/vocab.txt HTTP/1.1" 200 0
+Starting new HTTPS connection (1): huggingface.co:443
+https://huggingface.co:443 "HEAD /bert-base-uncased/resolve/main/tokenizer.json HTTP/1.1" 200 0
+Starting new HTTPS connection (1): huggingface.co:443
+https://huggingface.co:443 "HEAD /distilbert-base-uncased/resolve/main/config.json HTTP/1.1" 200 0
+Starting new HTTPS connection (1): huggingface.co:443
+https://huggingface.co:443 "HEAD /distilbert-base-uncased/resolve/main/pytorch_model.bin HTTP/1.1" 302 0
+######going to run queries in the direction  education level to income######
+*******
+For the sentence education improves [MASK] probability of the word income to occur at the end is 0.0005225149798206985
+For the sentence education accelerates [MASK] probability of the word income to occur at the end is 8.44146270537749e-05
+For the sentence education boosts [MASK] probability of the word income to occur at the end is 0.0031801864970475435
+For the sentence education improves [MASK] probability of the word income to occur at the end is 0.0005225149798206985
+For the sentence education compounds [MASK] probability of the word income to occur at the end is 1.8582120901555754e-05
+For the sentence education enhances [MASK] probability of the word income to occur at the end is 0.000446169899078086
+For the sentence education escalates [MASK] probability of the word income to occur at the end is 3.532506127612578e-07
+For the sentence education increases [MASK] probability of the word income to occur at the end is 0.00022285489831119776
+For the sentence education facilitates [MASK] probability of the word income to occur at the end is 0.0001328528014710173
+For the sentence education spikes [MASK] probability of the word income to occur at the end is 3.101334368693642e-05
+--
+In the multiword query sub sentence: education :the average probability of the word income to occur at the end with all the given verb type is 0.0005161457811482251
+--
+*******
+For the sentence education level improves [MASK] probability of the word income to occur at the end is 0.0010182036785408854
+For the sentence education level accelerates [MASK] probability of the word income to occur at the end is 0.00020345002121757716
+For the sentence education level boosts [MASK] probability of the word income to occur at the end is 0.0054680537432432175
+For the sentence education level improves [MASK] probability of the word income to occur at the end is 0.0010182036785408854
+For the sentence education level compounds [MASK] probability of the word income to occur at the end is 2.147559280274436e-05
+For the sentence education level enhances [MASK] probability of the word income to occur at the end is 0.0009344397694803774
+For the sentence education level escalates [MASK] probability of the word income to occur at the end is 5.069142616775935e-07
+For the sentence education level increases [MASK] probability of the word income to occur at the end is 3.629705679486506e-05
+For the sentence education level facilitates [MASK] probability of the word income to occur at the end is 0.00025167499552480876
+For the sentence education level spikes [MASK] probability of the word income to occur at the end is 0.00014842198288533837
+--
+In the multiword query sub sentence: education level:the average probability of the word income to occur at the end with all the given verb type  is 0.0009100727620534599
+--
+In the multiword query sentence ['education', 'level'] the average probability of the word income to occur at the end with all_promote_verbs is 0.0007131092716008425
+*******
+For the sentence education diminishes [MASK] probability of the word income to occur at the end is 0.00042706853128038347
+For the sentence education drops [MASK] probability of the word income to occur at the end is 3.399100387468934e-05
+For the sentence education drains [MASK] probability of the word income to occur at the end is 0.0001260608696611598
+For the sentence education exhausts [MASK] probability of the word income to occur at the end is 0.00027572590624913573
+For the sentence education impairs [MASK] probability of the word income to occur at the end is 0.0023694594856351614
+For the sentence education inhibits [MASK] probability of the word income to occur at the end is 0.0003842126752715558
+For the sentence education hampers [MASK] probability of the word income to occur at the end is 8.342760338564403e-06
+For the sentence education hinders [MASK] probability of the word income to occur at the end is 0.00022861217439640313
+For the sentence education eliminates [MASK] probability of the word income to occur at the end is 0.000619965314399451
+For the sentence education disrupts [MASK] probability of the word income to occur at the end is 2.4710649086046033e-05
+--
+In the multiword query sub sentence: education :the average probability of the word income to occur at the end with all the given verb type is 0.0004498149792198092
+--
+*******
+For the sentence education level diminishes [MASK] probability of the word income to occur at the end is 0.00042699225014075637
+For the sentence education level drops [MASK] probability of the word income to occur at the end is 8.554239684599452e-06
+For the sentence education level drains [MASK] probability of the word income to occur at the end is 7.938936323625967e-05
+For the sentence education level exhausts [MASK] probability of the word income to occur at the end is 8.721696940483525e-05
+For the sentence education level impairs [MASK] probability of the word income to occur at the end is 0.00627090921625495
+For the sentence education level inhibits [MASK] probability of the word income to occur at the end is 0.0009409135091118515
+For the sentence education level hampers [MASK] probability of the word income to occur at the end is 8.215472917072475e-06
+For the sentence education level hinders [MASK] probability of the word income to occur at the end is 0.0006649619899690151
+For the sentence education level eliminates [MASK] probability of the word income to occur at the end is 0.0005530136986635625
+For the sentence education level disrupts [MASK] probability of the word income to occur at the end is 0.00016956731269601732
+--
+In the multiword query sub sentence: education level:the average probability of the word income to occur at the end with all the given verb type  is 0.0009209733689203858
+--
+In the multiword query sentence ['education', 'level'] the average probability of the word income to occur at the end with all_inhibits_verbs is 0.0006853941740700975
+*******
+For the sentence education does not improve [MASK] probability of the word income to occur at the end is 8.258708840003237e-05
+For the sentence education does not accelerate [MASK] probability of the word income to occur at the end is 0.00020310714899096638
+For the sentence education does not boost [MASK] probability of the word income to occur at the end is 0.02567092888057232
+For the sentence education does not improve [MASK] probability of the word income to occur at the end is 8.258708840003237e-05
+For the sentence education does not compound [MASK] probability of the word income to occur at the end is 3.84278864657972e-05
+For the sentence education does not enhance [MASK] probability of the word income to occur at the end is 0.0063291918486356735
+For the sentence education does not escalate [MASK] probability of the word income to occur at the end is 2.3046807200444164e-06
+For the sentence education does not increase [MASK] probability of the word income to occur at the end is 0.0013689581537619233
+For the sentence education does not facilitate [MASK] probability of the word income to occur at the end is 0.000999306794255972
+For the sentence education does not spike [MASK] probability of the word income to occur at the end is 0.001730918767862022
+--
+In the multiword query sub sentence: education :the average probability of the word income to occur at the end with all the given verb type is 0.0036508317571133375
+--
+*******
+For the sentence education level does not improve [MASK] probability of the word income to occur at the end is 0.00019349325157236308
+For the sentence education level does not accelerate [MASK] probability of the word income to occur at the end is 0.0003650165454018861
+For the sentence education level does not boost [MASK] probability of the word income to occur at the end is 0.01725468598306179
+For the sentence education level does not improve [MASK] probability of the word income to occur at the end is 0.00019349325157236308
+For the sentence education level does not compound [MASK] probability of the word income to occur at the end is 0.00012998573947697878
+For the sentence education level does not enhance [MASK] probability of the word income to occur at the end is 0.007443045265972614
+For the sentence education level does not escalate [MASK] probability of the word income to occur at the end is 1.0608948286972009e-05
+For the sentence education level does not increase [MASK] probability of the word income to occur at the end is 0.00022021857148502022
+For the sentence education level does not facilitate [MASK] probability of the word income to occur at the end is 0.0008929013856686652
+For the sentence education level does not spike [MASK] probability of the word income to occur at the end is 0.0008206407073885202
+--
+In the multiword query sub sentence: education level:the average probability of the word income to occur at the end with all the given verb type  is 0.0027524090837687254
+--
+In the multiword query sentence ['education', 'level'] the average probability of the word income to occur at the end with all_does_not_promote_verbs is 0.0032016204204410315
+*******
+For the sentence education does not diminish [MASK] probability of the word income to occur at the end is 0.0003061996540054679
+For the sentence education does not drop [MASK] probability of the word income to occur at the end is 9.580516052665189e-05
+For the sentence education does not drain [MASK] probability of the word income to occur at the end is 0.0075653004460036755
+For the sentence education does not exhaust [MASK] probability of the word income to occur at the end is 0.0013273661024868488
+For the sentence education does not impair [MASK] probability of the word income to occur at the end is 0.004672518000006676
+For the sentence education does not inhibit [MASK] probability of the word income to occur at the end is 0.0006671547307632864
+For the sentence education does not hamper [MASK] probability of the word income to occur at the end is 0.001247784006409347
+For the sentence education does not hinder [MASK] probability of the word income to occur at the end is 0.0012583398493006825
+For the sentence education does not eliminate [MASK] probability of the word income to occur at the end is 0.0009026674088090658
+For the sentence education does not disrupt [MASK] probability of the word income to occur at the end is 0.0002532230573706329
+--
+In the multiword query sub sentence: education :the average probability of the word income to occur at the end with all the given verb type is 0.0018296359339728951
+--
+*******
+For the sentence education level does not diminish [MASK] probability of the word income to occur at the end is 0.0012726059649139643
+For the sentence education level does not drop [MASK] probability of the word income to occur at the end is 1.2726330169243738e-05
+For the sentence education level does not drain [MASK] probability of the word income to occur at the end is 0.004956851713359356
+For the sentence education level does not exhaust [MASK] probability of the word income to occur at the end is 0.0006970472168177366
+For the sentence education level does not impair [MASK] probability of the word income to occur at the end is 0.00853155180811882
+For the sentence education level does not inhibit [MASK] probability of the word income to occur at the end is 0.00200046319514513
+For the sentence education level does not hamper [MASK] probability of the word income to occur at the end is 0.0016377685824409127
+For the sentence education level does not hinder [MASK] probability of the word income to occur at the end is 0.0027978848665952682
+For the sentence education level does not eliminate [MASK] probability of the word income to occur at the end is 0.0015794596401974559
+For the sentence education level does not disrupt [MASK] probability of the word income to occur at the end is 0.0005619677249342203
+--
+In the multiword query sub sentence: education level:the average probability of the word income to occur at the end with all the given verb type  is 0.002404832746833563
+--
+In the multiword query sentence ['education', 'level'] the average probability of the word income to occur at the end with all_does_not_inhibits_verbs is 0.002117234340403229
+end of multi token expts
+######going to run in the opposite direction i.e income to education level######
+*******
+For the sentence income improves [MASK] probability of the word education to occur at the end is 0.002105106133967638
+For the sentence income accelerates [MASK] probability of the word education to occur at the end is 7.79532128944993e-05
+For the sentence income boosts [MASK] probability of the word education to occur at the end is 7.31736290617846e-05
+For the sentence income improves [MASK] probability of the word education to occur at the end is 0.002105106133967638
+For the sentence income compounds [MASK] probability of the word education to occur at the end is 0.0001458308397559449
+For the sentence income enhances [MASK] probability of the word education to occur at the end is 0.006925375200808048
+For the sentence income escalates [MASK] probability of the word education to occur at the end is 5.818494059894874e-07
+For the sentence income increases [MASK] probability of the word education to occur at the end is 4.146887476963457e-06
+For the sentence income facilitates [MASK] probability of the word education to occur at the end is 0.004417494870722294
+For the sentence income spikes [MASK] probability of the word education to occur at the end is 7.487431048502913e-06
+--
+In the multiword query sub sentence: education :the average probability of the word income to occur at the end with all the given verb type is 0.0015862255822867155
+--
+*******
+For the sentence income improves education [MASK] probability of the word level to occur at the end is 0.00012089458323316649
+For the sentence income accelerates education [MASK] probability of the word level to occur at the end is 7.006991654634476e-05
+For the sentence income boosts education [MASK] probability of the word level to occur at the end is 0.0002350320282857865
+For the sentence income improves education [MASK] probability of the word level to occur at the end is 0.00012089458323316649
+For the sentence income compounds education [MASK] probability of the word level to occur at the end is 5.3794134146301076e-05
+For the sentence income enhances education [MASK] probability of the word level to occur at the end is 6.767347076674923e-05
+For the sentence income escalates education [MASK] probability of the word level to occur at the end is 8.392948802793398e-05
+For the sentence income increases education [MASK] probability of the word level to occur at the end is 0.00012675626203417778
+For the sentence income facilitates education [MASK] probability of the word level to occur at the end is 2.0994179067201912e-05
+For the sentence income spikes education [MASK] probability of the word level to occur at the end is 2.0853693058597855e-05
+--
+In the multiword query sub sentence: education level:the average probability of the word income to occur at the end with all the given verb type  is 9.208923438563943e-05
+--
+In the multiword query sentence ['education', 'level'] the average probability of the word income to occur at the end with all_promote_verbs is 0.0008391574083361775
+*******
+For the sentence income diminishes [MASK] probability of the word education to occur at the end is 1.0699675840442069e-05
+For the sentence income drops [MASK] probability of the word education to occur at the end is 1.2241080185049213e-06
+For the sentence income drains [MASK] probability of the word education to occur at the end is 6.394737283699214e-05
+For the sentence income exhausts [MASK] probability of the word education to occur at the end is 9.707070421427488e-05
+For the sentence income impairs [MASK] probability of the word education to occur at the end is 0.0015807505697011948
+For the sentence income inhibits [MASK] probability of the word education to occur at the end is 0.0015551280230283737
+For the sentence income hampers [MASK] probability of the word education to occur at the end is 0.00014431943418458104
+For the sentence income hinders [MASK] probability of the word education to occur at the end is 0.0039019836112856865
+For the sentence income eliminates [MASK] probability of the word education to occur at the end is 0.0005775049212388694
+For the sentence income disrupts [MASK] probability of the word education to occur at the end is 0.0022309639025479555
+--
+In the multiword query sub sentence: education :the average probability of the word income to occur at the end with all the given verb type is 0.0010163591941818595
+--
+*******
+For the sentence income diminishes education [MASK] probability of the word level to occur at the end is 6.75698829581961e-05
+For the sentence income drops education [MASK] probability of the word level to occur at the end is 0.00011494537466205657
+For the sentence income drains education [MASK] probability of the word level to occur at the end is 9.412413055542856e-05
+For the sentence income exhausts education [MASK] probability of the word level to occur at the end is 8.8308377598878e-05
+For the sentence income impairs education [MASK] probability of the word level to occur at the end is 2.2372978492057882e-05
+For the sentence income inhibits education [MASK] probability of the word level to occur at the end is 7.518095117120538e-06
+For the sentence income hampers education [MASK] probability of the word level to occur at the end is 5.438083917397307e-06
+For the sentence income hinders education [MASK] probability of the word level to occur at the end is 1.1806650036305655e-05
+For the sentence income eliminates education [MASK] probability of the word level to occur at the end is 1.1510089279909153e-05
+For the sentence income disrupts education [MASK] probability of the word level to occur at the end is 1.109780259866966e-05
+--
+In the multiword query sub sentence: education level:the average probability of the word income to occur at the end with all the given verb type  is 4.3469150114106014e-05
+--
+In the multiword query sentence ['education', 'level'] the average probability of the word income to occur at the end with all_inhibits_verbs is 0.0005299141721479828
+*******
+For the sentence income does not improve [MASK] probability of the word education to occur at the end is 0.00010974519682349637
+For the sentence income does not accelerate [MASK] probability of the word education to occur at the end is 9.485759801464155e-05
+For the sentence income does not boost [MASK] probability of the word education to occur at the end is 0.0007540567312389612
+For the sentence income does not improve [MASK] probability of the word education to occur at the end is 0.00010974519682349637
+For the sentence income does not compound [MASK] probability of the word education to occur at the end is 4.088679816049989e-06
+For the sentence income does not enhance [MASK] probability of the word education to occur at the end is 0.001620759256184101
+For the sentence income does not escalate [MASK] probability of the word education to occur at the end is 3.816043772530975e-06
+For the sentence income does not increase [MASK] probability of the word education to occur at the end is 1.0757923519122414e-05
+For the sentence income does not facilitate [MASK] probability of the word education to occur at the end is 0.003063733922317624
+For the sentence income does not spike [MASK] probability of the word education to occur at the end is 3.60859849024564e-05
+--
+In the multiword query sub sentence: education :the average probability of the word income to occur at the end with all the given verb type is 0.0005807646666653454
+--
+*******
+For the sentence income does not improve education [MASK] probability of the word level to occur at the end is 5.240310565568507e-05
+For the sentence income does not accelerate education [MASK] probability of the word level to occur at the end is 1.2978180166101083e-05
+For the sentence income does not boost education [MASK] probability of the word level to occur at the end is 5.115424210089259e-05
+For the sentence income does not improve education [MASK] probability of the word level to occur at the end is 5.240310565568507e-05
+For the sentence income does not compound education [MASK] probability of the word level to occur at the end is 0.0001981100213015452
+For the sentence income does not enhance education [MASK] probability of the word level to occur at the end is 1.6811751265777275e-05
+For the sentence income does not escalate education [MASK] probability of the word level to occur at the end is 0.00013195637438911945
+For the sentence income does not increase education [MASK] probability of the word level to occur at the end is 0.00011846551933558658
+For the sentence income does not facilitate education [MASK] probability of the word level to occur at the end is 1.2785141052518156e-06
+For the sentence income does not spike education [MASK] probability of the word level to occur at the end is 0.00037240321398712695
+--
+In the multiword query sub sentence: education level:the average probability of the word income to occur at the end with all the given verb type  is 0.00010079640196636319
+--
+In the multiword query sentence ['education', 'level'] the average probability of the word income to occur at the end with all_does_not_promote_verbs is 0.0003407805343158543
+*******
+For the sentence income does not diminish [MASK] probability of the word education to occur at the end is 2.4624456273159012e-05
+For the sentence income does not drop [MASK] probability of the word education to occur at the end is 6.175460384838516e-06
+For the sentence income does not drain [MASK] probability of the word education to occur at the end is 1.5160502698563505e-05
+For the sentence income does not exhaust [MASK] probability of the word education to occur at the end is 0.0009810017654672265
+For the sentence income does not impair [MASK] probability of the word education to occur at the end is 0.0006281882524490356
+For the sentence income does not inhibit [MASK] probability of the word education to occur at the end is 0.0017738384194672108
+For the sentence income does not hamper [MASK] probability of the word education to occur at the end is 0.0014828970888629556
+For the sentence income does not hinder [MASK] probability of the word education to occur at the end is 0.0026813745498657227
+For the sentence income does not eliminate [MASK] probability of the word education to occur at the end is 0.00018075005209539086
+For the sentence income does not disrupt [MASK] probability of the word education to occur at the end is 0.0030983358155936003
+--
+In the multiword query sub sentence: education :the average probability of the word income to occur at the end with all the given verb type is 0.0010872345883399248
+--
+*******
+For the sentence income does not diminish education [MASK] probability of the word level to occur at the end is 2.9808592444169335e-05
+For the sentence income does not drop education [MASK] probability of the word level to occur at the end is 0.0005802691448479891
+For the sentence income does not drain education [MASK] probability of the word level to occur at the end is 7.970031583681703e-05
+For the sentence income does not exhaust education [MASK] probability of the word level to occur at the end is 5.8817564422497526e-05
+For the sentence income does not impair education [MASK] probability of the word level to occur at the end is 1.256440100405598e-05
+For the sentence income does not inhibit education [MASK] probability of the word level to occur at the end is 1.9267604329797905e-06
+For the sentence income does not hamper education [MASK] probability of the word level to occur at the end is 4.7770290620974265e-06
+For the sentence income does not hinder education [MASK] probability of the word level to occur at the end is 7.1915033004188444e-06
+For the sentence income does not eliminate education [MASK] probability of the word level to occur at the end is 1.05005492514465e-05
+For the sentence income does not disrupt education [MASK] probability of the word level to occur at the end is 2.3455854716303293e-06
+--
+In the multiword query sub sentence: education level:the average probability of the word income to occur at the end with all the given verb type  is 7.879014447098598e-05
+--
+In the multiword query sentence ['education', 'level'] the average probability of the word income to occur at the end with all_does_not_inhibits_verbs is 0.0005830123664054554
+end of multi token expts
+Extended Summary:
+From education level to income
+From income to education level
+PROMOTES>DOES_NOT_PROMOTE
+Brief Summary:
+ Overall_best=
+From income to education level
+PROMOTES>DOES_NOT_PROMOTE

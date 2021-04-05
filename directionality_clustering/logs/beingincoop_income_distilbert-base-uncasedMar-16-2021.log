@@ -1,0 +1,16 @@
+modelname=distilbert-base-uncased
+######going to run queries in the direction  being in coop to income######
+In the multiword query sentence ['being', 'in', 'coop'] the average probability of the word income to occur at the end with all_promote_verbs is 2.481333755592156e-05
+In the multiword query sentence ['being', 'in', 'coop'] the average probability of the word income to occur at the end with all_inhibits_verbs is 1.438007006981934e-05
+In the multiword query sentence ['being', 'in', 'coop'] the average probability of the word income to occur at the end with all_does_not_promote_verbs is 0.0003805564629146829
+In the multiword query sentence ['being', 'in', 'coop'] the average probability of the word income to occur at the end with all_does_not_inhibits_verbs is 0.0002197674912167713
+######going to run in the opposite direction i.e income to being in coop######
+In the multiword query sentence ['being', 'in', 'coop'] the average probability of the word income to occur at the end with all_promote_verbs is 3.042745508234172e-05
+In the multiword query sentence ['being', 'in', 'coop'] the average probability of the word income to occur at the end with all_inhibits_verbs is 3.397744004966322e-05
+In the multiword query sentence ['being', 'in', 'coop'] the average probability of the word income to occur at the end with all_does_not_promote_verbs is 4.397940741303804e-05
+In the multiword query sentence ['being', 'in', 'coop'] the average probability of the word income to occur at the end with all_does_not_inhibits_verbs is 4.1896002888582494e-05
+Extended Summary:
+From being in coop to income
+From income to being in coop
+Brief Summary:
+ Overall_best=

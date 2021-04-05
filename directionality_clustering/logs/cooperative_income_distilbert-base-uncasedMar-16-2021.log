@@ -1,0 +1,145 @@
+modelname=distilbert-base-uncased
+Starting new HTTPS connection (1): huggingface.co:443
+https://huggingface.co:443 "HEAD /distilbert-base-uncased/resolve/main/config.json HTTP/1.1" 200 0
+Starting new HTTPS connection (1): huggingface.co:443
+https://huggingface.co:443 "HEAD /bert-base-uncased/resolve/main/vocab.txt HTTP/1.1" 200 0
+Starting new HTTPS connection (1): huggingface.co:443
+https://huggingface.co:443 "HEAD /bert-base-uncased/resolve/main/tokenizer.json HTTP/1.1" 200 0
+Starting new HTTPS connection (1): huggingface.co:443
+https://huggingface.co:443 "HEAD /distilbert-base-uncased/resolve/main/config.json HTTP/1.1" 200 0
+Starting new HTTPS connection (1): huggingface.co:443
+https://huggingface.co:443 "HEAD /distilbert-base-uncased/resolve/main/pytorch_model.bin HTTP/1.1" 302 0
+######going to run queries in the direction  cooperative to income######
+For the sentence cooperative improves [MASK] probability of the word income to occur at the end is 0.0003424217866268009
+For the sentence cooperative accelerates [MASK] probability of the word income to occur at the end is 5.963273724773899e-05
+For the sentence cooperative boosts [MASK] probability of the word income to occur at the end is 0.000584011257160455
+For the sentence cooperative improves [MASK] probability of the word income to occur at the end is 0.0003424217866268009
+For the sentence cooperative compounds [MASK] probability of the word income to occur at the end is 1.907669229694875e-06
+For the sentence cooperative enhances [MASK] probability of the word income to occur at the end is 0.00018077692948281765
+For the sentence cooperative escalates [MASK] probability of the word income to occur at the end is 1.3111243788443971e-06
+For the sentence cooperative increases [MASK] probability of the word income to occur at the end is 0.0017894151387736201
+For the sentence cooperative facilitates [MASK] probability of the word income to occur at the end is 5.7317683967994526e-05
+For the sentence cooperative spikes [MASK] probability of the word income to occur at the end is 8.017366781132296e-06
+For cooperative to income  avg probability  for all PROMOTES queries is 0.0003367233439348638
+For the sentence cooperative diminishes [MASK] probability of the word income to occur at the end is 0.00035740004386752844
+For the sentence cooperative drops [MASK] probability of the word income to occur at the end is 5.05400976180681e-06
+For the sentence cooperative drains [MASK] probability of the word income to occur at the end is 7.200229106274492e-07
+For the sentence cooperative exhausts [MASK] probability of the word income to occur at the end is 3.189262315572705e-06
+For the sentence cooperative impairs [MASK] probability of the word income to occur at the end is 0.0004055985773447901
+For the sentence cooperative inhibits [MASK] probability of the word income to occur at the end is 1.406477349519264e-05
+For the sentence cooperative hampers [MASK] probability of the word income to occur at the end is 7.118189273569442e-07
+For the sentence cooperative hinders [MASK] probability of the word income to occur at the end is 2.102527469105553e-05
+For the sentence cooperative eliminates [MASK] probability of the word income to occur at the end is 0.00032079662196338177
+For the sentence cooperative disrupts [MASK] probability of the word income to occur at the end is 2.041094921878539e-05
+For cooperative to income  avg probability  for all INHIBITS queries is 0.00011489713506307453
+For the sentence cooperative influences [MASK] probability of the word income to occur at the end is 4.723221991298487e-06
+For the sentence cooperative affects [MASK] probability of the word income to occur at the end is 0.00018262486264575273
+For the sentence cooperative alters [MASK] probability of the word income to occur at the end is 2.9129419999662787e-05
+For the sentence cooperative modifies [MASK] probability of the word income to occur at the end is 9.087770013138652e-05
+For the sentence cooperative impacts [MASK] probability of the word income to occur at the end is 7.03030400472926e-06
+For the sentence cooperative changes [MASK] probability of the word income to occur at the end is 1.0427918823552318e-05
+For the sentence cooperative displaces [MASK] probability of the word income to occur at the end is 8.297370186483022e-06
+For cooperative to income  avg probability  for all CAUSAL queries is 4.758725481224246e-05
+PROMOTES > INHIBITS > NON_POLARIZED > 
+For the sentence cooperative does not improve [MASK] probability of the word income to occur at the end is 0.0009527293732389808
+For the sentence cooperative does not accelerate [MASK] probability of the word income to occur at the end is 4.299984357203357e-05
+For the sentence cooperative does not boost [MASK] probability of the word income to occur at the end is 0.006893767975270748
+For the sentence cooperative does not improve [MASK] probability of the word income to occur at the end is 0.0009527293732389808
+For the sentence cooperative does not compound [MASK] probability of the word income to occur at the end is 4.925708344671875e-05
+For the sentence cooperative does not enhance [MASK] probability of the word income to occur at the end is 0.0017286100191995502
+For the sentence cooperative does not escalate [MASK] probability of the word income to occur at the end is 2.804775067488663e-05
+For the sentence cooperative does not increase [MASK] probability of the word income to occur at the end is 0.007435759529471397
+For the sentence cooperative does not facilitate [MASK] probability of the word income to occur at the end is 0.00021566840587183833
+For the sentence cooperative does not spike [MASK] probability of the word income to occur at the end is 0.00016562457312829792
+For cooperative to income  avg probability  for all DOES NOT PROMOTE queries is 0.00184651929885149
+For the sentence cooperative does not diminish [MASK] probability of the word income to occur at the end is 0.0016918175388127565
+For the sentence cooperative does not drop [MASK] probability of the word income to occur at the end is 0.00038180669071152806
+For the sentence cooperative does not drain [MASK] probability of the word income to occur at the end is 0.00715056573972106
+For the sentence cooperative does not exhaust [MASK] probability of the word income to occur at the end is 0.0009025512845255435
+For the sentence cooperative does not impair [MASK] probability of the word income to occur at the end is 0.0011912320042029023
+For the sentence cooperative does not inhibit [MASK] probability of the word income to occur at the end is 3.102010305156e-05
+For the sentence cooperative does not hamper [MASK] probability of the word income to occur at the end is 0.0005192783428356051
+For the sentence cooperative does not hinder [MASK] probability of the word income to occur at the end is 0.0001955428597284481
+For the sentence cooperative does not eliminate [MASK] probability of the word income to occur at the end is 0.0008091257186606526
+For the sentence cooperative does not disrupt [MASK] probability of the word income to occur at the end is 7.012861169641837e-05
+For cooperative to income  avg probability  for all DOES NOT INHIBIT queries is 0.0012943069450557232
+For the sentence cooperative does not influence [MASK] probability of the word income to occur at the end is 0.0020263635087758303
+For the sentence cooperative does not affect [MASK] probability of the word income to occur at the end is 0.005374076310545206
+For the sentence cooperative does not alter [MASK] probability of the word income to occur at the end is 0.000772094470448792
+For the sentence cooperative does not modify [MASK] probability of the word income to occur at the end is 0.00044738358701579273
+For the sentence cooperative does not impact [MASK] probability of the word income to occur at the end is 0.007699378300458193
+For the sentence cooperative does not change [MASK] probability of the word income to occur at the end is 0.00019437077571637928
+For the sentence cooperative does not displace [MASK] probability of the word income to occur at the end is 0.0002769813872873783
+For cooperative to income  avg probability  for all DOES NOT CAUSE queries is 0.0023986638989299536
+NON_POLARIZED > DOES NOT PROMOTE > DOES NOT INHIBIT > 
+######going to run in the opposite direction i.e income to cooperative######
+For the sentence income improves [MASK] probability of the word cooperative to occur at the end is 2.076534883599379e-06
+For the sentence income accelerates [MASK] probability of the word cooperative to occur at the end is 1.511366320983143e-07
+For the sentence income boosts [MASK] probability of the word cooperative to occur at the end is 6.531687404276454e-07
+For the sentence income improves [MASK] probability of the word cooperative to occur at the end is 2.076534883599379e-06
+For the sentence income compounds [MASK] probability of the word cooperative to occur at the end is 1.0433740499138366e-05
+For the sentence income enhances [MASK] probability of the word cooperative to occur at the end is 1.0233341527055018e-05
+For the sentence income escalates [MASK] probability of the word cooperative to occur at the end is 4.287425525717481e-09
+For the sentence income increases [MASK] probability of the word cooperative to occur at the end is 3.359515687861858e-07
+For the sentence income facilitates [MASK] probability of the word cooperative to occur at the end is 1.4753979485249147e-05
+For the sentence income spikes [MASK] probability of the word cooperative to occur at the end is 2.404813983503118e-07
+For income to cooperative  avg probability  for all PROMOTES queries is 4.095915755897295e-06
+For the sentence income diminishes [MASK] probability of the word cooperative to occur at the end is 9.754558050190099e-08
+For the sentence income drops [MASK] probability of the word cooperative to occur at the end is 5.7113126672447834e-08
+For the sentence income drains [MASK] probability of the word cooperative to occur at the end is 5.348562990548089e-05
+For the sentence income exhausts [MASK] probability of the word cooperative to occur at the end is 4.3996340082230745e-07
+For the sentence income impairs [MASK] probability of the word cooperative to occur at the end is 3.738500709005166e-06
+For the sentence income inhibits [MASK] probability of the word cooperative to occur at the end is 1.0678401849872898e-05
+For the sentence income hampers [MASK] probability of the word cooperative to occur at the end is 0.000206816999707371
+For the sentence income hinders [MASK] probability of the word cooperative to occur at the end is 2.2469141185865737e-05
+For the sentence income eliminates [MASK] probability of the word cooperative to occur at the end is 1.0587979204501607e-06
+For the sentence income disrupts [MASK] probability of the word cooperative to occur at the end is 4.567420546663925e-06
+For income to cooperative  avg probability  for all INHIBITS queries is 3.034095061593689e-05
+For the sentence income influences [MASK] probability of the word cooperative to occur at the end is 2.6612821102389717e-07
+For the sentence income affects [MASK] probability of the word cooperative to occur at the end is 2.6045272534247488e-06
+For the sentence income alters [MASK] probability of the word cooperative to occur at the end is 1.692233695393952e-07
+For the sentence income modifies [MASK] probability of the word cooperative to occur at the end is 5.583270379361238e-08
+For the sentence income impacts [MASK] probability of the word cooperative to occur at the end is 1.2317141226958483e-06
+For the sentence income changes [MASK] probability of the word cooperative to occur at the end is 7.130531542998142e-08
+For the sentence income displaces [MASK] probability of the word cooperative to occur at the end is 1.3736594155489001e-06
+For income to cooperative  avg probability  for all CAUSAL queries is 8.246271931966476e-07
+INHIBITS > PROMOTES > NON_POLARIZED > 
+For the sentence income does not improve [MASK] probability of the word cooperative to occur at the end is 1.0596555455322232e-07
+For the sentence income does not accelerate [MASK] probability of the word cooperative to occur at the end is 4.165999101246598e-08
+For the sentence income does not boost [MASK] probability of the word cooperative to occur at the end is 3.896586804330582e-07
+For the sentence income does not improve [MASK] probability of the word cooperative to occur at the end is 1.0596555455322232e-07
+For the sentence income does not compound [MASK] probability of the word cooperative to occur at the end is 2.6470573288861488e-08
+For the sentence income does not enhance [MASK] probability of the word cooperative to occur at the end is 2.1913181171839824e-06
+For the sentence income does not escalate [MASK] probability of the word cooperative to occur at the end is 1.233019109037059e-08
+For the sentence income does not increase [MASK] probability of the word cooperative to occur at the end is 5.291844829002912e-08
+For the sentence income does not facilitate [MASK] probability of the word cooperative to occur at the end is 4.688931949203834e-05
+For the sentence income does not spike [MASK] probability of the word cooperative to occur at the end is 1.0037856412736801e-07
+For income to cooperative  avg probability  for all DOES NOT PROMOTE queries is 4.991598871129099e-06
+For the sentence income does not diminish [MASK] probability of the word cooperative to occur at the end is 2.1701627161974102e-08
+For the sentence income does not drop [MASK] probability of the word cooperative to occur at the end is 1.3207392512981642e-08
+For the sentence income does not drain [MASK] probability of the word cooperative to occur at the end is 1.3115241870309546e-07
+For the sentence income does not exhaust [MASK] probability of the word cooperative to occur at the end is 2.3606881427440385e-07
+For the sentence income does not impair [MASK] probability of the word cooperative to occur at the end is 3.3000073926814366e-06
+For the sentence income does not inhibit [MASK] probability of the word cooperative to occur at the end is 7.827943591109943e-06
+For the sentence income does not hamper [MASK] probability of the word cooperative to occur at the end is 1.6102607105494826e-06
+For the sentence income does not hinder [MASK] probability of the word cooperative to occur at the end is 1.6124171452247538e-05
+For the sentence income does not eliminate [MASK] probability of the word cooperative to occur at the end is 7.617637720613857e-07
+For the sentence income does not disrupt [MASK] probability of the word cooperative to occur at the end is 3.088163794018328e-06
+For income to cooperative  avg probability  for all DOES NOT INHIBIT queries is 3.3114440611825557e-06
+For the sentence income does not influence [MASK] probability of the word cooperative to occur at the end is 4.346650712250266e-06
+For the sentence income does not affect [MASK] probability of the word cooperative to occur at the end is 6.850833415228408e-06
+For the sentence income does not alter [MASK] probability of the word cooperative to occur at the end is 5.192824232835846e-07
+For the sentence income does not modify [MASK] probability of the word cooperative to occur at the end is 2.2198025817488087e-07
+For the sentence income does not impact [MASK] probability of the word cooperative to occur at the end is 1.470126107960823e-06
+For the sentence income does not change [MASK] probability of the word cooperative to occur at the end is 2.8641251148542324e-08
+For the sentence income does not displace [MASK] probability of the word cooperative to occur at the end is 7.7466768289014e-07
+For income to cooperative  avg probability  for all DOES NOT CAUSE queries is 2.0303116343711736e-06
+DOES NOT PROMOTE > DOES NOT INHIBIT > NON_POLARIZED > 
+Extended Summary:
+From cooperative to income
+From income to cooperative
+INHIBITS>DOES_NOT_INHIBIT
+Brief Summary:
+ Overall_best=
+From income to cooperative
+INHIBITS>DOES_NOT_INHIBIT

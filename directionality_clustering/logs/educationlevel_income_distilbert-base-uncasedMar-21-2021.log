@@ -1,0 +1,3 @@
+modelname=distilbert-base-uncased
+######going to run queries in the direction  education level to income######
+In the multiword query sentence ['education', 'level'] the average probability of the word income to occur at the end with all_promote_verbs is 0.0007131092716008425

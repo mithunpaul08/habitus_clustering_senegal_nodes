@@ -1,0 +1,45 @@
+modelname=distilbert-base-uncased
+######going to run queries in the direction  education standard to income######
+In the multiword query sentence ['education', 'standard'] the average probability of the word income to occur at the end with all_promote_verbs is 0.0005121692374814302
+In the multiword query sentence ['education', 'standard'] the average probability of the word income to occur at the end with all_inhibits_verbs is 0.00044834756408818066
+In the multiword query sentence ['education', 'standard'] the average probability of the word income to occur at the end with all_does_not_promote_verbs is 0.002649172442033887
+In the multiword query sentence ['education', 'standard'] the average probability of the word income to occur at the end with all_does_not_inhibits_verbs is 0.0015227344701997936
+######going to run in the opposite direction i.e income to education standard######
+In the multiword query sentence ['education', 'standard'] the average probability of the word income to occur at the end with all_promote_verbs is 0.0008037051456994959
+In the multiword query sentence ['education', 'standard'] the average probability of the word income to occur at the end with all_inhibits_verbs is 0.0005215316314206575
+In the multiword query sentence ['education', 'standard'] the average probability of the word income to occur at the end with all_does_not_promote_verbs is 0.00029224887384771137
+In the multiword query sentence ['education', 'standard'] the average probability of the word income to occur at the end with all_does_not_inhibits_verbs is 0.000546206308172259
+Extended Summary:
+From education standard to income
+From income to education standard
+PROMOTES>DOES_NOT_PROMOTE
+Brief Summary:
+ Overall_best=
+From income to education standard
+PROMOTES>DOES_NOT_PROMOTE
+modelname=distilbert-base-uncased
+######going to run queries in the direction  education standard to food######
+In the multiword query sentence ['education', 'standard'] the average probability of the word food to occur at the end with all_promote_verbs is 1.0938484592770692e-05
+In the multiword query sentence ['education', 'standard'] the average probability of the word food to occur at the end with all_inhibits_verbs is 2.516771201044321e-05
+In the multiword query sentence ['education', 'standard'] the average probability of the word food to occur at the end with all_does_not_promote_verbs is 3.986488445661962e-05
+In the multiword query sentence ['education', 'standard'] the average probability of the word food to occur at the end with all_does_not_inhibits_verbs is 5.282958227326162e-05
+######going to run in the opposite direction i.e food to education standard######
+In the multiword query sentence ['education', 'standard'] the average probability of the word food to occur at the end with all_promote_verbs is 0.00033985829668381484
+In the multiword query sentence ['education', 'standard'] the average probability of the word food to occur at the end with all_inhibits_verbs is 0.0001042286212395993
+In the multiword query sentence ['education', 'standard'] the average probability of the word food to occur at the end with all_does_not_promote_verbs is 9.970313817575516e-05
+In the multiword query sentence ['education', 'standard'] the average probability of the word food to occur at the end with all_does_not_inhibits_verbs is 0.00022226145392778562
+Extended Summary:
+From education standard to food
+From food to education standard
+PROMOTES>DOES_NOT_PROMOTE
+Brief Summary:
+ Overall_best=
+From food to education standard
+PROMOTES>DOES_NOT_PROMOTE
+modelname=distilbert-base-uncased
+######going to run queries in the direction   income level to income######
+In the multiword query sentence ['', 'income', 'level'] the average probability of the word income to occur at the end with all_promote_verbs is 0.0033053222335486985
+In the multiword query sentence ['', 'income', 'level'] the average probability of the word income to occur at the end with all_inhibits_verbs is 0.006812973148650296
+In the multiword query sentence ['', 'income', 'level'] the average probability of the word income to occur at the end with all_does_not_promote_verbs is 0.008018390944926068
+In the multiword query sentence ['', 'income', 'level'] the average probability of the word income to occur at the end with all_does_not_inhibits_verbs is 0.028204532437181722
+######going to run in the opposite direction i.e income to  income level######

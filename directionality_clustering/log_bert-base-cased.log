@@ -1,0 +1,54 @@
+modelname=bert-base-cased
+Starting new HTTPS connection (1): huggingface.co:443
+https://huggingface.co:443 "HEAD /bert-base-cased/resolve/main/config.json HTTP/1.1" 200 0
+Starting new HTTPS connection (1): huggingface.co:443
+https://huggingface.co:443 "HEAD /bert-base-cased/resolve/main/vocab.txt HTTP/1.1" 200 0
+Starting new HTTPS connection (1): huggingface.co:443
+https://huggingface.co:443 "HEAD /bert-base-cased/resolve/main/tokenizer.json HTTP/1.1" 200 0
+Starting new HTTPS connection (1): huggingface.co:443
+https://huggingface.co:443 "HEAD /bert-base-cased/resolve/main/config.json HTTP/1.1" 200 0
+Starting new HTTPS connection (1): huggingface.co:443
+https://huggingface.co:443 "HEAD /bert-base-cased/resolve/main/pytorch_model.bin HTTP/1.1" 302 0
+For the sentence income improves [MASK] probability of the word rice to occur at the end is 3.7858967516513076e-07
+For the sentence income accelerates [MASK] probability of the word rice to occur at the end is 3.922874114437036e-08
+For the sentence income boosts [MASK] probability of the word rice to occur at the end is 2.733525832354644e-07
+For the sentence income improves [MASK] probability of the word rice to occur at the end is 3.7858967516513076e-07
+For the sentence income compounds [MASK] probability of the word rice to occur at the end is 9.236225650965935e-08
+For the sentence income enhances [MASK] probability of the word rice to occur at the end is 1.5420013141920208e-06
+For the sentence income escalates [MASK] probability of the word rice to occur at the end is 3.13401997686924e-08
+For the sentence income increases [MASK] probability of the word rice to occur at the end is 7.364744192273065e-08
+For the sentence income facilitates [MASK] probability of the word rice to occur at the end is 4.122984478271974e-07
+For the sentence income spikes [MASK] probability of the word rice to occur at the end is 1.7457457701652856e-08
+For income to rice  avg probability  for all PROMOTES queries is 3.238868089283642e-07
+For the sentence income diminishes [MASK] probability of the word rice to occur at the end is 2.7660709278620743e-08
+For the sentence income drops [MASK] probability of the word rice to occur at the end is 6.326389012656364e-08
+For the sentence income drains [MASK] probability of the word rice to occur at the end is 1.5490299043463551e-09
+For the sentence income exhausts [MASK] probability of the word rice to occur at the end is 3.073752452564804e-07
+For the sentence income impairs [MASK] probability of the word rice to occur at the end is 3.862683399802336e-07
+For the sentence income inhibits [MASK] probability of the word rice to occur at the end is 6.470237963185355e-07
+For the sentence income hampers [MASK] probability of the word rice to occur at the end is 4.73489052410514e-08
+For the sentence income hinders [MASK] probability of the word rice to occur at the end is 2.177528273250573e-07
+For the sentence income eliminates [MASK] probability of the word rice to occur at the end is 1.5779534123794292e-06
+For the sentence income disrupts [MASK] probability of the word rice to occur at the end is 7.769063472551352e-07
+For income to rice  avg probability  for all INHIBITS queries is 4.053102600209968e-07
+For the sentence income influences [MASK] probability of the word rice to occur at the end is 1.479254052583201e-07
+For the sentence income affects [MASK] probability of the word rice to occur at the end is 7.141026799217798e-06
+For the sentence income alters [MASK] probability of the word rice to occur at the end is 2.0679414092228399e-07
+For the sentence income modifies [MASK] probability of the word rice to occur at the end is 3.653893827504362e-06
+For the sentence income impacts [MASK] probability of the word rice to occur at the end is 1.8377825483639754e-08
+For the sentence income changes [MASK] probability of the word rice to occur at the end is 5.424566129619279e-09
+For the sentence income displaces [MASK] probability of the word rice to occur at the end is 1.1651067097773193e-06
+For income to rice  avg probability  for all CAUSAL queries is 1.7626498447498307e-06
+NON_POLARIZED > INHIBITS > PROMOTES > 
+For the sentence income does not improve [MASK] probability of the word rice to occur at the end is 9.92989601655836e-09
+For the sentence income does not accelerate [MASK] probability of the word rice to occur at the end is 1.2231359924896879e-08
+For the sentence income does not boost [MASK] probability of the word rice to occur at the end is 4.310222578851608e-08
+For the sentence income does not improve [MASK] probability of the word rice to occur at the end is 9.92989601655836e-09
+For the sentence income does not compound [MASK] probability of the word rice to occur at the end is 1.1058507887184987e-08
+For the sentence income does not enhance [MASK] probability of the word rice to occur at the end is 1.4744797738330817e-07
+For the sentence income does not escalate [MASK] probability of the word rice to occur at the end is 2.7109123834634374e-09
+For the sentence income does not increase [MASK] probability of the word rice to occur at the end is 5.3686225243154695e-08
+For the sentence income does not facilitate [MASK] probability of the word rice to occur at the end is 1.7502385389889241e-06
+For the sentence income does not spike [MASK] probability of the word rice to occur at the end is 3.915590962577653e-09
+For income to rice  avg probability  for all DOES NOT PROMOTE queries is 2.0442512038698624e-07
+For the sentence income does not diminish [MASK] probability of the word rice to occur at the end is 6.160132404176011e-09

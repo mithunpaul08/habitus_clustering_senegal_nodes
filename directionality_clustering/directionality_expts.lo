@@ -1,0 +1,39 @@
+For the sentence rice improves [MASK] probability of the word income to occur at the end is 8.142540900735185e-05
+For the sentence production improves [MASK] probability of the word income to occur at the end is 9.584808867657557e-05
+For rice production to income  avg probability  for all PROMOTES queries is 0.0
+For the sentence rice diminishes [MASK] probability of the word income to occur at the end is 0.00018608038953971118
+For the sentence production diminishes [MASK] probability of the word income to occur at the end is 8.117423567455262e-05
+For rice production to income  avg probability  for all INHIBITS queries is 0.0
+For the sentence rice influences [MASK] probability of the word income to occur at the end is 1.8758413489194936e-06
+For the sentence production influences [MASK] probability of the word income to occur at the end is 1.2077558508849506e-08
+For rice production to income  avg probability  for all CAUSAL queries is 0.0
+For the sentence rice production does not improve [MASK] probability of the word income to occur at the end is 9.538680023979396e-05
+For the sentence rice production does not accelerate [MASK] probability of the word income to occur at the end is 0.00010328286589356139
+For the sentence rice production does not boost [MASK] probability of the word income to occur at the end is 0.00380417937412858
+For the sentence rice production does not improve [MASK] probability of the word income to occur at the end is 9.538680023979396e-05
+For the sentence rice production does not compound [MASK] probability of the word income to occur at the end is 8.960202649177518e-06
+For the sentence rice production does not enhance [MASK] probability of the word income to occur at the end is 0.0024532584939152002
+For the sentence rice production does not escalate [MASK] probability of the word income to occur at the end is 2.1783152988064103e-06
+For the sentence rice production does not increase [MASK] probability of the word income to occur at the end is 0.00017140532145276666
+For the sentence rice production does not facilitate [MASK] probability of the word income to occur at the end is 0.000228400545893237
+For the sentence rice production does not spike [MASK] probability of the word income to occur at the end is 0.0001592815387994051
+For rice production to income  avg probability  for all DOES NOT PROMOTE queries is 0.0007121720118448138
+For the sentence rice production does not diminish [MASK] probability of the word income to occur at the end is 0.00017834882601164281
+For the sentence rice production does not drop [MASK] probability of the word income to occur at the end is 1.3171282262192108e-05
+For the sentence rice production does not drain [MASK] probability of the word income to occur at the end is 0.0007484560483135283
+For the sentence rice production does not exhaust [MASK] probability of the word income to occur at the end is 0.0009902032325044274
+For the sentence rice production does not impair [MASK] probability of the word income to occur at the end is 0.0011615412076935172
+For the sentence rice production does not inhibit [MASK] probability of the word income to occur at the end is 0.00017068245506379753
+For the sentence rice production does not hamper [MASK] probability of the word income to occur at the end is 0.00036598785663954914
+For the sentence rice production does not hinder [MASK] probability of the word income to occur at the end is 0.0003422577283345163
+For the sentence rice production does not eliminate [MASK] probability of the word income to occur at the end is 0.00025362896849401295
+For the sentence rice production does not disrupt [MASK] probability of the word income to occur at the end is 0.00014515657676383853
+For rice production to income  avg probability  for all DOES NOT INHIBIT queries is 0.0004369434027466923
+For the sentence rice production does not influence [MASK] probability of the word income to occur at the end is 0.004344630520790815
+For the sentence rice production does not affect [MASK] probability of the word income to occur at the end is 0.007027806248515844
+For the sentence rice production does not alter [MASK] probability of the word income to occur at the end is 0.0013961654622107744
+For the sentence rice production does not modify [MASK] probability of the word income to occur at the end is 0.001802136655896902
+For the sentence rice production does not impact [MASK] probability of the word income to occur at the end is 0.005407816264778376
+For the sentence rice production does not change [MASK] probability of the word income to occur at the end is 7.080795057845535e-06
+For the sentence rice production does not displace [MASK] probability of the word income to occur at the end is 0.00037707824958488345
+For rice production to income  avg probability  for all DOES NOT CAUSE queries is 0.0029089588206261396

@@ -1,0 +1,17 @@
+modelname=bert-base-uncased
+For weather to yield  avg probability  for all PROMOTES queries is 4.332059155842671e-09
+For weather to yield  avg probability  for all INHIBITS queries is 6.848804190440205e-09
+For weather to yield  avg probability  for all CAUSAL queries is 3.10716830043134e-09
+INHIBITS > PROMOTES > NON_POLARIZED > 
+For weather to yield  avg probability  for all DOES NOT PROMOTE queries is 1.0554428442333119e-08
+For weather to yield  avg probability  for all DOES NOT INHIBIT queries is 2.057968728763626e-08
+For weather to yield  avg probability  for all DOES NOT CAUSE queries is 5.079982301481323e-08
+NON_POLARIZED > DOES NOT INHIBIT > DOES NOT PROMOTE > 
+For yield to weather  avg probability  for all PROMOTES queries is 1.2103079649605775e-09
+For yield to weather  avg probability  for all INHIBITS queries is 1.116252157373765e-08
+For yield to weather  avg probability  for all CAUSAL queries is 7.954398029141885e-09
+INHIBITS > NON_POLARIZED > PROMOTES > 
+For yield to weather  avg probability  for all DOES NOT PROMOTE queries is 8.32475866019422e-09
+For yield to weather  avg probability  for all DOES NOT INHIBIT queries is 2.385716868502641e-08
+For yield to weather  avg probability  for all DOES NOT CAUSE queries is 1.1077209194354509e-07
+NON_POLARIZED > DOES NOT INHIBIT > DOES NOT PROMOTE > 
