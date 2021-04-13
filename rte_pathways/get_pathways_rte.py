@@ -83,5 +83,5 @@ if __name__ == "__main__":
 
     for premise in data_human_desc:
         for hyp in tqdm(data_pdfs_sents,total=len(data_pdfs_sents)):
-            get_entailment(premise, hyp, tokenizer, model)
+            get_entailment(premise.lower(), hyp.lower(), tokenizer, model)
 
