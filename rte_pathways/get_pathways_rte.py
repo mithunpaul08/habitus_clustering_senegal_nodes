@@ -19,6 +19,13 @@ logging.basicConfig(
 )
 
 
+hg_model_hub_name = "ynie/roberta-large-snli_mnli_fever_anli_R1_R2_R3-nli"
+# hg_model_hub_name = "ynie/albert-xxlarge-v2-snli_mnli_fever_anli_R1_R2_R3-nli"
+# hg_model_hub_name = "ynie/bart-large-snli_mnli_fever_anli_R1_R2_R3-nli"
+# hg_model_hub_name = "ynie/electra-large-discriminator-snli_mnli_fever_anli_R1_R2_R3-nli"
+# hg_model_hub_name ="typeform/distilbert-base-uncased-mnli"
+# hg_model_hub_name ='joeddav/xlm-roberta-large-xnli'
+
 def get_entailment(premise, hypothesis,tokenizer,model):
     max_length = 256
 
@@ -60,26 +67,14 @@ if __name__ == "__main__":
     #data_pdfs = get_data_pdf_files("data/temp/")
     data_pdfs = get_data_pdf_files("data/habitus_rice_growing_senegal/")
     data_pdfs_sents=get_sents(data_pdfs)
-
     data_human_desc = get_data("data/human_description.txt")
-
-
-
-
-
-    #list of possible mnli trained models can be found at:https://huggingface.co/models?filter=dataset:multi_nli
-    hg_model_hub_name = "ynie/roberta-large-snli_mnli_fever_anli_R1_R2_R3-nli"
-    # hg_model_hub_name = "ynie/albert-xxlarge-v2-snli_mnli_fever_anli_R1_R2_R3-nli"
-    # hg_model_hub_name = "ynie/bart-large-snli_mnli_fever_anli_R1_R2_R3-nli"
-    # hg_model_hub_name = "ynie/electra-large-discriminator-snli_mnli_fever_anli_R1_R2_R3-nli"
-    #hg_model_hub_name ="typeform/distilbert-base-uncased-mnli"
-    # hg_model_hub_name ='joeddav/xlm-roberta-large-xnli'
-
-
+    data_human_desc_sent=[]
+    for l in data_human_desc:
+        data_human_desc_sent.append(l)
     tokenizer = AutoTokenizer.from_pretrained(hg_model_hub_name)
     model = AutoModelForSequenceClassification.from_pretrained(hg_model_hub_name)
 
-    for premise in tqdm(data_human_desc,total=len(data_human_desc),desc="premises:"):
+    for premise in tqdm(data_human_desc_sent,total=len(data_human_desc_sent),desc="premises:"):
         for hyp in tqdm(data_pdfs_sents,total=len(data_pdfs_sents),desc="hypothesis:"):
             get_entailment(premise.lower(), hyp.lower(), tokenizer, model)
 
