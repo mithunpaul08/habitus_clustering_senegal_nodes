@@ -1,19 +1,12 @@
-# Calculating Directionality of Variables using Masked Language Models
-This application finds the probability of each effect token to appear at the end of a sentence which has a causal token with verb.
-
-For example if **input_tokens=[education, income]**, this application will
-find probability of the token `income to occur at the end of :
-        education improves ______ etc.
-        Note that if either of the tokens are multiworded tokens (e.g.; rice production) probabilities are recursively
-        averaged. For example, for input tokens=["income", "rice production"] overall probability of rice production to
-        occur at the end of income based sentences are:average(prob(income promotes rice [MASK]), prob(income promotes [MASK])
+# Grounding descriptions of graphs using trained RTE models
 
 ## Pre requisites
  ```
-    conda create -n directionality python=3
-    conda activate directionality
+    conda create -n habitus python=3
+    conda activate habitus
     pip install -r requirements.txt   
     mkdir outputs 
+    mkdir logs
     python  python calc_relation_probabilities.py "data/inputs.tsv"    
 ```
 
