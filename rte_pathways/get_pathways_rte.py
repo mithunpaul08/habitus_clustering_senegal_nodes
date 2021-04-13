@@ -57,8 +57,8 @@ def get_sents(data_pdfs):
 
 if __name__ == "__main__":
     # small number of files for testing
-    #data_pdfs = get_data_pdf_files("data/temp/")
-    data_pdfs = get_data_pdf_files("data/habitus_rice_growing_senegal/")
+    data_pdfs = get_data_pdf_files("data/temp/")
+    #data_pdfs = get_data_pdf_files("data/habitus_rice_growing_senegal/")
 
     data_pdfs_sents=get_sents(data_pdfs)
 
@@ -74,9 +74,9 @@ if __name__ == "__main__":
     # hg_model_hub_name = "ynie/albert-xxlarge-v2-snli_mnli_fever_anli_R1_R2_R3-nli"
     # hg_model_hub_name = "ynie/bart-large-snli_mnli_fever_anli_R1_R2_R3-nli"
     # hg_model_hub_name = "ynie/electra-large-discriminator-snli_mnli_fever_anli_R1_R2_R3-nli"
-    # hg_model_hub_name = "sentence-transformers/bert-base-nli-cls-token"
-    #hg_model_hub_name ="sentence-transformers/bert-base-nli-max-tokens"
     #hg_model_hub_name ="typeform/distilbert-base-uncased-mnli"
+    # hg_model_hub_name ='joeddav/xlm-roberta-large-xnli'
+
 
     tokenizer = AutoTokenizer.from_pretrained(hg_model_hub_name)
     model = AutoModelForSequenceClassification.from_pretrained(hg_model_hub_name)
