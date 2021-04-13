@@ -2,6 +2,7 @@ from utils import *
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import torch, logging, os
 from datetime import date
+import nltk
 
 logger = logging.getLogger(__name__)
 today = date.today()
@@ -45,16 +46,27 @@ def get_entailment(premise, hypothesis,tokenizer,model):
         logger.info(f"Premise:{premise}")
         logger.info(f"Hypothesis:{hypothesis}")
 
-
-
+def get_sents(data_pdfs):
+    sent_tokenizer = nltk.tokenize.PunktSentenceTokenizer()
+    all_data=[]
+    for x in data_pdfs:
+        result = (sent_tokenizer.tokenize(x))
+        for y in result:
+            all_data.append(y)
+    return all_data
 
 if __name__ == "__main__":
     # small number of files for testing
     #data_pdfs = get_data_pdf_files("data/temp/")
+    data_pdfs = get_data_pdf_files("data/habitus_rice_growing_senegal/")
+
+    data_pdfs_sents=get_sents(data_pdfs)
 
 
     data_human_desc = get_data("data/human_description.txt")
-    data_pdfs=get_data_pdf_files("data/habitus_rice_growing_senegal/")
+
+
+
 
 
     #list of possible mnli trained models can be found at:https://huggingface.co/models?filter=dataset:multi_nli
@@ -70,6 +82,6 @@ if __name__ == "__main__":
     model = AutoModelForSequenceClassification.from_pretrained(hg_model_hub_name)
 
     for premise in data_human_desc:
-        for hyp in data_pdfs:
+        for hyp in tqdm(data_pdfs_sents,total=len(data_pdfs_sents)):
             get_entailment(premise, hyp, tokenizer, model)
 

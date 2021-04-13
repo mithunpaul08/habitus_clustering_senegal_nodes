@@ -24,7 +24,7 @@ def get_data_pdf_files(folder_path):
                         for line in page_data_split:
                             if len(line)>1:
                                 all_text_per_page.append(line.strip().lower())
-                        all_text_per_page_str=". ".join(all_text_per_page)
+                        all_text_per_page_str=" ".join(all_text_per_page)
                         all_text.append(all_text_per_page_str)
             except Exception:
                 print(Exception)
