@@ -49,9 +49,13 @@ def get_entailment(premise, hypothesis,tokenizer,model):
 
 
 if __name__ == "__main__":
-    # data=get_data("data/habitus_rice_growing_senegal/")
+    # small number of files for testing
+    #data_pdfs = get_data_pdf_files("data/temp/")
+
+
     data_human_desc = get_data("data/human_description.txt")
-    data_pdfs = get_data_pdf_files("data/temp/")
+    data_pdfs=get_data_pdf_files("data/habitus_rice_growing_senegal/")
+
 
     #list of possible mnli trained models can be found at:https://huggingface.co/models?filter=dataset:multi_nli
     hg_model_hub_name = "ynie/roberta-large-snli_mnli_fever_anli_R1_R2_R3-nli"
