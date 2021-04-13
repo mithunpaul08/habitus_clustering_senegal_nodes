@@ -9,7 +9,7 @@ def get_data_pdf_files(folder_path):
         all_text = []
         file_count=len(listdir(folder_path))
         assert file_count>0
-        for file in tqdm(listdir(folder_path),total=file_count):
+        for file in tqdm(listdir(folder_path),total=file_count,desc="reading google crawled files:"):
             try:
                 file_path=join(folder_path,file)
                 if isfile(file_path):

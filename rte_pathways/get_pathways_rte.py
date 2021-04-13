@@ -59,9 +59,7 @@ if __name__ == "__main__":
     # small number of files for testing
     #data_pdfs = get_data_pdf_files("data/temp/")
     data_pdfs = get_data_pdf_files("data/habitus_rice_growing_senegal/")
-
     data_pdfs_sents=get_sents(data_pdfs)
-
 
     data_human_desc = get_data("data/human_description.txt")
 
@@ -81,7 +79,7 @@ if __name__ == "__main__":
     tokenizer = AutoTokenizer.from_pretrained(hg_model_hub_name)
     model = AutoModelForSequenceClassification.from_pretrained(hg_model_hub_name)
 
-    for premise in data_human_desc:
-        for hyp in tqdm(data_pdfs_sents,total=len(data_pdfs_sents)):
+    for premise in tqdm(data_human_desc,total=len(data_human_desc),desc="premises:"):
+        for hyp in tqdm(data_pdfs_sents,total=len(data_pdfs_sents),desc="hypothesis:"):
             get_entailment(premise.lower(), hyp.lower(), tokenizer, model)
 
