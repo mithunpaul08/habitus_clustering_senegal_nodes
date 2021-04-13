@@ -57,8 +57,8 @@ def get_sents(data_pdfs):
 
 if __name__ == "__main__":
     # small number of files for testing
-    data_pdfs = get_data_pdf_files("data/temp/")
-    #data_pdfs = get_data_pdf_files("data/habitus_rice_growing_senegal/")
+    #data_pdfs = get_data_pdf_files("data/temp/")
+    data_pdfs = get_data_pdf_files("data/habitus_rice_growing_senegal/")
 
     data_pdfs_sents=get_sents(data_pdfs)
 
