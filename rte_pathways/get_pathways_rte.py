@@ -49,7 +49,7 @@ def get_entailment(premise, hypothesis,tokenizer,model):
 def get_sents(data_pdfs):
     sent_tokenizer = nltk.tokenize.PunktSentenceTokenizer()
     all_data=[]
-    for x in data_pdfs:
+    for x in tqdm(data_pdfs, total=len(data_pdfs),desc="converting to sentences"):
         result = (sent_tokenizer.tokenize(x))
         for y in result:
             all_data.append(y)
