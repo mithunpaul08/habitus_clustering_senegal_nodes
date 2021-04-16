@@ -94,10 +94,10 @@ def find_sentence_boundaries(data_pdfs):
 if __name__ == "__main__":
     # small number of files for testing
     google_crawled_data = get_data_google_crawled_files("data/temp/")
-    #data_pdfs = get_data_pdf_files("data/habitus_rice_growing_senegal/")
+    #google_crawled_data = get_data_google_crawled_files("data/habitus_rice_growing_senegal/")
     google_crawled_data=split_into_para(google_crawled_data)
     google_crawled_data = cleanup(google_crawled_data)
-    google_crawled_data=find_sentence_boundaries(google_crawled_data)
+    #google_crawled_data=find_sentence_boundaries(google_crawled_data)
 
     data_human_desc = get_data("data/human_description.txt")
     data_human_desc_sent=[]
