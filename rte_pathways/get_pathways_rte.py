@@ -60,10 +60,16 @@ def get_entailment(premise, hypothesis,tokenizer,model):
             logger.info(f"Hypothesis:{hypothesis}")
             logger.info(f"predicted_probability:{predicted_probability}")
 
+def split_into_para(data_pdfs):
+    data_pdfs=" ".join(data_pdfs)
+    data_pdfs = data_pdfs.split("\n\n")
+    return data_pdfs
+
 
 def cleanup(data_pdfs):
     all_data=[]
     for x in tqdm(data_pdfs, total=len(data_pdfs),desc="cleanup"):
+        x=x.strip()
         x=x.replace("\n","")
         x = x.replace("-", "")
         x = x.replace("˜", "")
@@ -76,7 +82,7 @@ def cleanup(data_pdfs):
         all_data.append(x)
     return all_data
 
-def get_sents(data_pdfs):
+def find_sentence_boundaries(data_pdfs):
     sent_tokenizer = nltk.tokenize.PunktSentenceTokenizer()
     all_data=[]
     for x in tqdm(data_pdfs, total=len(data_pdfs),desc="converting to sentences"):
@@ -87,10 +93,12 @@ def get_sents(data_pdfs):
 
 if __name__ == "__main__":
     # small number of files for testing
-    data_pdfs = get_data_pdf_files("data/temp/")
+    google_crawled_data = get_data_google_crawled_files("data/temp/")
     #data_pdfs = get_data_pdf_files("data/habitus_rice_growing_senegal/")
-    data_pdfs_sents=get_sents(data_pdfs)
-    data_pdfs_sents=cleanup(data_pdfs_sents)
+    google_crawled_data=split_into_para(google_crawled_data)
+    google_crawled_data = cleanup(google_crawled_data)
+    #google_crawled_data=find_sentence_boundaries(google_crawled_data)
+
     data_human_desc = get_data("data/human_description.txt")
     data_human_desc_sent=[]
     for l in data_human_desc:
@@ -106,6 +114,6 @@ if __name__ == "__main__":
     # sys.exit()
 
     for premise in tqdm(data_human_desc_sent,total=len(data_human_desc_sent),desc="premises:"):
-        for hyp in tqdm(data_pdfs_sents,total=len(data_pdfs_sents),desc="hypothesis:"):
+        for hyp in tqdm(google_crawled_data, total=len(google_crawled_data), desc="hypothesis:"):
             get_entailment(premise.lower(), hyp.lower(), tokenizer, model)
 

@@ -5,7 +5,7 @@ from tqdm import tqdm
 import itertools
 
 
-def get_data_pdf_files(folder_path):
+def get_data_google_crawled_files(folder_path):
         all_text = []
         file_count=len(listdir(folder_path))
         assert file_count>0
