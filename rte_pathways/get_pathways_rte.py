@@ -97,13 +97,13 @@ if __name__ == "__main__":
         data_human_desc_sent.append(l)
     tokenizer = AutoTokenizer.from_pretrained(hg_model_hub_name)
     model = AutoModelForSequenceClassification.from_pretrained(hg_model_hub_name)
-
-    premise="A soccer game with multiple males playing."
-    hyp="	Some men are playing a sport."
-    get_entailment(premise.lower(), hyp.lower(), tokenizer, model)
-
-    import sys
-    sys.exit()
+    #
+    # premise="A soccer game with multiple males playing."
+    # hyp="	Some men are playing a sport."
+    # get_entailment(premise.lower(), hyp.lower(), tokenizer, model)
+    #
+    # import sys
+    # sys.exit()
 
     for premise in tqdm(data_human_desc_sent,total=len(data_human_desc_sent),desc="premises:"):
         for hyp in tqdm(data_pdfs_sents,total=len(data_pdfs_sents),desc="hypothesis:"):
