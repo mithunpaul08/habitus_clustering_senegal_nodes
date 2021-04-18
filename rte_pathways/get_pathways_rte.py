@@ -2,7 +2,7 @@ from utils import *
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import torch, logging, os
 from datetime import date
-import nltk
+from nltk import sent_tokenize
 
 logger = logging.getLogger(__name__)
 today = date.today()
@@ -70,6 +70,7 @@ def cleanup(data_pdfs):
     all_data=[]
     for x in tqdm(data_pdfs, total=len(data_pdfs),desc="cleanup"):
         x=x.strip()
+
         x=x.replace("\n","")
         x = x.replace("-", "")
         x = x.replace("˜", "")
@@ -81,25 +82,36 @@ def cleanup(data_pdfs):
         x=x.lower()
         all_data.append(x)
     return all_data
-
-def find_sentence_boundaries(data_pdfs):
-    sent_tokenizer = nltk.tokenize.PunktSentenceTokenizer()
-    all_data=[]
-    for x in tqdm(data_pdfs, total=len(data_pdfs),desc="converting to sentences"):
-        result = (sent_tokenizer.tokenize(x))
-        for y in result:
-            all_data.append(y)
-    return all_data
+#
+# def find_sentence_boundaries(data_pdfs):
+#     sent_tokenizer = nltk.tokenize.PunktSentenceTokenizer()
+#     all_data=[]
+#     for x in tqdm(data_pdfs, total=len(data_pdfs),desc="converting to sentences"):
+#         result = (sent_tokenizer.tokenize(x))
+#         for y in result:
+#             all_data.append(y)
+#     return all_data
 
 if __name__ == "__main__":
-    # small number of files for testing
-    #google_crawled_data = get_data_google_crawled_files("data/temp/")
-    google_crawled_data = get_data_google_crawled_files("data/habitus_rice_growing_senegal/")
-    google_crawled_data=split_into_para(google_crawled_data)
-    google_crawled_data = cleanup(google_crawled_data)
-    #google_crawled_data=find_sentence_boundaries(google_crawled_data)
 
-    data_human_desc = get_data("data/human_description.txt")
+    # file = open("data/temp/output.txt")
+    # google_crawled_data=file.read()
+    google_crawled_data=read_txt_data("data/pdffiles/")
+
+
+    #google_crawled_data = get_data_google_crawled_files("data/temp")
+    #google_crawled_data = google_crawled_data[0].split("\n\n")
+    #google_crawled_data = get_data_google_crawled_files("data/habitus_rice_growing_senegal/")
+
+    #google_crawled_data=split_into_para(google_crawled_data)
+    #google_crawled_data = cleanup(google_crawled_data)
+    #google_crawled_data=find_sentence_boundaries(google_crawled_data)
+    google_crawled_data_sentences=[]
+    for x in google_crawled_data:
+        output=sent_tokenize(x.replace("\n"," ").lower())
+        google_crawled_data_sentences.extend(output)
+
+    data_human_desc = get_data("data/full_human_description.txt")
     data_human_desc_sent=[]
     for l in data_human_desc:
         data_human_desc_sent.append(l)
@@ -114,6 +126,6 @@ if __name__ == "__main__":
     # sys.exit()
 
     for premise in tqdm(data_human_desc_sent,total=len(data_human_desc_sent),desc="premises:"):
-        for hyp in tqdm(google_crawled_data, total=len(google_crawled_data), desc="hypothesis:"):
+        for hyp in tqdm(google_crawled_data_sentences, total=len(google_crawled_data_sentences), desc="hypothesis:"):
             get_entailment(premise.lower(), hyp.lower(), tokenizer, model)
 

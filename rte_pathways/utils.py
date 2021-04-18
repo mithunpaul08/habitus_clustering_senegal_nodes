@@ -2,39 +2,54 @@ import PyPDF2
 from os import listdir
 from os.path import isfile, join
 from tqdm import tqdm
-import itertools
+import pdftotext
 
+
+def read_txt_data(folder_path):
+    all_text = []
+    file_count = len(listdir(folder_path))
+    assert file_count > 0
+    for file in tqdm(listdir(folder_path), total=file_count, desc="reading google crawled files:"):
+        try:
+            if ".txt" in file:
+                file_path = join(folder_path, file)
+                if isfile(file_path) :
+                        try:
+                            file = open(file_path)
+                            google_crawled_data=file.read()
+                            all_text.append(google_crawled_data)
+                        except Exception:
+                            print(Exception)
+                            continue
+        except Exception:
+            print(Exception)
+            continue
+    assert len(all_text) > 0
+    return all_text
 
 def get_data_google_crawled_files(folder_path):
-        all_text = []
-        file_count=len(listdir(folder_path))
-        assert file_count>0
-        for file in tqdm(listdir(folder_path),total=file_count,desc="reading google crawled files:"):
-            try:
-                file_path=join(folder_path,file)
-                if isfile(file_path):
-                    file_obj = open(file_path, 'rb')
-                    pdf_reader = PyPDF2.PdfFileReader(file_obj)
-                    page_count = pdf_reader.numPages
-                    for x in range(page_count):
-                            try:
-                                pageObj = pdf_reader.getPage(x)
-                                page_data=pageObj.extractText()
-                                # page_data_split=page_data.split("\n\n")
-                                # all_text_per_page = []
-                                # for line in page_data_split:
-                                #     if len(line)>1:
-                                #         all_text_per_page.append(line.strip().lower())
-                                # all_text_per_page_str=" ".join(all_text_per_page)
-                                all_text.append(page_data)
-                            except Exception:
-                                print(Exception)
-                                continue
-            except Exception:
-                print(Exception)
-                continue
-        assert len(all_text) > 0
-        return all_text
+    all_text = []
+    file_count = len(listdir(folder_path))
+    assert file_count > 0
+    for file in tqdm(listdir(folder_path), total=file_count, desc="reading google crawled files:"):
+        try:
+            if "pdf" in file:
+                file_path = join(folder_path, file)
+                if isfile(file_path) :
+
+                    with open(file_path, "rb") as f:
+                        try:
+                            pdf = pdftotext.PDF(f,"r")
+                            page_data=("\n\n".join(pdf))
+                            all_text.append(page_data)
+                        except Exception:
+                            print(Exception)
+                            continue
+        except Exception:
+            print(Exception)
+            continue
+    assert len(all_text) > 0
+    return all_text
 
 def get_data(filename):
     return open(filename,"r",newline='\n')
