@@ -47,10 +47,7 @@ def get_entailment(premise, hypothesis,tokenizer,model):
 
     predicted_probability = torch.softmax(outputs[0], dim=1)[0].tolist()  # batch_size only one
 
-    #     logger.info("***********")
-    # logger.info(f"Premise:{premise}")
-    # logger.info(f"Hypothesis:{hypothesis}")
-    # logger.info(f"predicted_probability:{predicted_probability}")
+
 
     if(predicted_probability.index(max(predicted_probability)))==0:
         if predicted_probability[0]>0.9:
@@ -82,30 +79,11 @@ def cleanup(data_pdfs):
         x=x.lower()
         all_data.append(x)
     return all_data
-#
-# def find_sentence_boundaries(data_pdfs):
-#     sent_tokenizer = nltk.tokenize.PunktSentenceTokenizer()
-#     all_data=[]
-#     for x in tqdm(data_pdfs, total=len(data_pdfs),desc="converting to sentences"):
-#         result = (sent_tokenizer.tokenize(x))
-#         for y in result:
-#             all_data.append(y)
-#     return all_data
+
 
 if __name__ == "__main__":
 
-    # file = open("data/temp/output.txt")
-    # google_crawled_data=file.read()
     google_crawled_data=read_txt_data("data/pdffiles/")
-
-
-    #google_crawled_data = get_data_google_crawled_files("data/temp")
-    #google_crawled_data = google_crawled_data[0].split("\n\n")
-    #google_crawled_data = get_data_google_crawled_files("data/habitus_rice_growing_senegal/")
-
-    #google_crawled_data=split_into_para(google_crawled_data)
-    #google_crawled_data = cleanup(google_crawled_data)
-    #google_crawled_data=find_sentence_boundaries(google_crawled_data)
     google_crawled_data_sentences=[]
     for x in google_crawled_data:
         output=sent_tokenize(x.replace("\n"," ").lower())
@@ -117,7 +95,8 @@ if __name__ == "__main__":
         data_human_desc_sent.append(l)
     tokenizer = AutoTokenizer.from_pretrained(hg_model_hub_name)
     model = AutoModelForSequenceClassification.from_pretrained(hg_model_hub_name)
-    #
+
+    #to check if the model works
     # premise="A soccer game with multiple males playing."
     # hyp="	Some men are playing a sport."
     # get_entailment(premise.lower(), hyp.lower(), tokenizer, model)
