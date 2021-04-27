@@ -32,8 +32,39 @@ def read_txt_data(folder_path):
 def get_data(filename):
     return open(filename,"r",newline='\n')
 
+def get_no_of_pages_in_a_pdf_file(file_path):
+    if isfile(file_path):
+        file_obj = open(file_path, 'rb')
+        pdf_reader = PyPDF2.PdfFileReader(file_obj)
+        return pdf_reader.numPages
 
 
+def get_data_pdf_files(folder_path):
+        all_text = []
+        file_count=len(listdir(folder_path))
+        assert file_count>0
+        for file in tqdm(listdir(folder_path),total=file_count):
+            try:
+                file_path=join(folder_path,file)
+                if isfile(file_path):
+                    file_obj = open(file_path, 'rb')
+                    pdf_reader = PyPDF2.PdfFileReader(file_obj)
+                    page_count = pdf_reader.numPages
+                    for x in range(page_count):
+                        pageObj = pdf_reader.getPage(x)
+                        page_data=pageObj.extractText()
+                        page_data_split=page_data.split("\n")
+                        all_text_per_page = []
+                        for line in page_data_split:
+                            if len(line)>1:
+                                all_text_per_page.append(line.strip().lower())
+                        all_text_per_page_str=" ".join(all_text_per_page)
+                        all_text.append(all_text_per_page_str)
+            except Exception:
+                print(Exception)
+                continue
+        assert len(all_text) > 0
+        return all_text
 
 # sample text for human description, pruned versions of which are found in data/human_description.txt
 # The main qualitative difference between the clusters is that cluster A has one peak, cluster C has two peaks and cluster C has no peaks. This interpretation requires no knowledge, just the ability to see patterns in wiggly lines.  Going further:

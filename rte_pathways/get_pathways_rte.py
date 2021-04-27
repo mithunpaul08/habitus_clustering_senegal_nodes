@@ -83,16 +83,18 @@ def cleanup(data_pdfs):
 
 if __name__ == "__main__":
 
-    google_crawled_data=read_txt_data("data/pdffiles/")
+    google_crawled_data=read_txt_data("data/txtfiles/")
     google_crawled_data_sentences=[]
     for x in google_crawled_data:
         output=sent_tokenize(x.replace("\n"," ").lower())
         google_crawled_data_sentences.extend(output)
 
-    data_human_desc = get_data("data/full_human_description.txt")
+    google_crawled_data = split_into_para(google_crawled_data)
+
+    data_human_desc = get_data("data/human_description.txt")
     data_human_desc_sent=[]
     for l in data_human_desc:
-        data_human_desc_sent.append(l)
+        data_human_desc_sent.append(l.lower())
     tokenizer = AutoTokenizer.from_pretrained(hg_model_hub_name)
     model = AutoModelForSequenceClassification.from_pretrained(hg_model_hub_name)
 
