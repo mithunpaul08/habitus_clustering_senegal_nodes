@@ -27,16 +27,19 @@ def read_tables(file_path):
                         tables = camelot.read_pdf(file_path,pages=str_list_pages)
                         if len(tables) > 0:
                             for each_table in tables:
-                                if len(each_table.cols)>1: #sometimes it converts figures or texts into one column tables
+                                if len(each_table.cols)>1: #sometimes it converts figures or texts into one column tables. stop that.
                                     print(f"table in page number {page}")
                                     df=each_table.df
                                     print(df,flush=True)
                                     logger.info(df)
+                                    print(each_table.parsing_report)
+                                    #camelot.plot(each_table, kind='contour').show()
 
 
-read_all_pdf_files_in_folder()
 
-# read_tables('data/pdffiles/05.pdf')
+#read_all_pdf_files_in_folder()
+
+read_tables('data/pdffiles/0338.pdf')
 # tables=camelot.read_pdf('data/pdffiles/05.pdf',flavor='stream')
 # assert len(tables) > 0
 # df = tables[0].df
