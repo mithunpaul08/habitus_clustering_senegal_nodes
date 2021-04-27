@@ -16,15 +16,18 @@ def read_all_pdf_files_in_folder():
 def read_tables(file_path):
                 if isfile(file_path):
                     no_of_pages=get_no_of_pages_in_a_pdf_file(file_path)
+                    print(f"{file_path}")
                     for page in range(no_of_pages):
-                        tables = camelot.read_pdf(file_path)
+                        list_pages = []
+                        list_pages.append(str(page))
+                        str_list_pages=",".join(list_pages)
+                        tables = camelot.read_pdf(file_path,pages=str_list_pages)
                         if len(tables) > 0:
-                                print(f"{file_path}")
-                                df=tables[0].df
+                            for each_table in tables:
+                                print(f"table in page number {page}")
+                                df=each_table.df
                                 print(df)
-                                exit
-                        else:
-                            continue
+
 
 #read_all_pdf_files_and_their_tables()
 
