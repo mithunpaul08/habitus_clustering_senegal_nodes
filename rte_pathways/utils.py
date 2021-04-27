@@ -2,8 +2,24 @@ import PyPDF2
 from os import listdir
 from os.path import isfile, join
 from tqdm import tqdm
-import pdftotext
+import logging
+from datetime import date
+import os
 
+def create_logger():
+    logger = logging.getLogger(__name__)
+    today = date.today()
+    today_date = today.strftime("%b-%d-%Y")
+    log_file_name = "log.txt"
+    full_path = os.path.join("./logs", log_file_name)
+    FORMAT = '%(message)s'
+    logging.basicConfig(
+        format=FORMAT,
+        level=logging.INFO,
+        filename=full_path,
+        filemode='w'
+    )
+    return logger
 
 def read_txt_data(folder_path):
     all_text = []
