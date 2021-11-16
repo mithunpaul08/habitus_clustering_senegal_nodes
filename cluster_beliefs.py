@@ -7,7 +7,7 @@ from scipy.cluster.hierarchy import dendrogram
 
 DISTANCE_THRESHOLD_CLUSTERING=0.9
 NO_OF_CLUSTERS=2
-GLOVE_FILE_NAME="glove.txt"
+GLOVE_FILE_NAME="/work/mithunpaul/glove_lemmas.840B.300d.txt"
 
 beliefs=[
 "loans are useful.",
