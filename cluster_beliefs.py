@@ -7,21 +7,19 @@ from scipy.cluster.hierarchy import dendrogram
 
 DISTANCE_THRESHOLD_CLUSTERING=0.9
 NO_OF_CLUSTERS=2
+GLOVE_FILE_NAME="glove.txt"
 
 beliefs=[
-    "work.Like working.",
-    "So wried wwent xalisae xtremecaffeine",
-    " yildirim z/28 zipout zulchzulu"
-# "loans are useful.",
-#     "Trump",
-#     "Paul makes good beer",
-#     "Dogfish Head makes better beer",
-#     "Paul makes the best beer",
-#     "there will be more virulent mutations",
-#     "premises of Social Darwinism",
-# "Troeg’s might know a thing or two about beer",
-# "Rudy Giuliani broke the law",
-# "anyone would hate The Princess Bride"
+"loans are useful.",
+    "Trump",
+    "Paul makes good beer",
+    "Dogfish Head makes better beer",
+    "Paul makes the best beer",
+    "there will be more virulent mutations",
+    "premises of Social Darwinism",
+"Troeg’s might know a thing or two about beer",
+"Rudy Giuliani broke the law",
+"anyone would hate The Princess Bride"
 ]
 
 def plot_dendrogram(model, **kwargs):
@@ -60,36 +58,31 @@ def load_glove_model(glove_file):
             embeddings_dict[word] = vector
     return embeddings_dict
 
-embeddings_dict = load_glove_model("glove_bottom10.txt")
-print(embeddings_dict.keys())
+embeddings_dict = load_glove_model(GLOVE_FILE_NAME)
 
-words_indices={}
-words_embeddings=[]
-for belief in beliefs:
-    belif_split=belief.split(" ")
-    for index,each_word in enumerate(belif_split):
+
+sent_indices={}
+beliefsent_embeddings=[]
+for index1, belief_sentence in enumerate(beliefs):
+    sentence_split=belief_sentence.split(" ")
+    combined_embedding_sent=np.zeros(300)
+
+    for index2,each_word in enumerate(sentence_split):
         if each_word in embeddings_dict:
-            words_indices[index]=each_word
-            words_embeddings.append(embeddings_dict[each_word])
+            combined_embedding_sent=combined_embedding_sent+embeddings_dict[each_word]
+    avg_emb_per_belief_sent=combined_embedding_sent/(len(sentence_split))
+    sent_indices[index1]=belief_sentence
+    beliefsent_embeddings.append(avg_emb_per_belief_sent)
 
-print(words_indices)
+for k,v in sent_indices.items():
+    print(f"{k}:{v}")
 
 
 #the engine part which does habitus and plotting. will need cosine similarities of each concept as input
 model=AgglomerativeClustering(n_clusters=NO_OF_CLUSTERS, linkage='average', affinity='cosine',compute_distances=True)
-model =model.fit(words_embeddings)
+model =model.fit(beliefsent_embeddings)
 plot_dendrogram(model, truncate_mode="level", p=NO_OF_CLUSTERS)
-
-# labels=model.labels_
-# cluster_count=clustering.n_clusters_
-
-# for index,clusterid in enumerate(labels.items):
-#    plt.scatter(words_embeddings[labels==index, 0], words_embeddings[labels==index, 1], s=50)
-
-######plot dendrograms
-# plt.figure(figsize=(15, 12))
-# dendo=sch.dendrogram(sch.linkage(words_embeddings,method='average'))
-plt.show()
+plt.savefig('clusters.png')
 
 
 
