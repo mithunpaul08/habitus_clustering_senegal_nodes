@@ -4,6 +4,14 @@ import matplotlib.pyplot as plt
 import scipy.cluster.hierarchy as sch
 from scipy.cluster.hierarchy import dendrogram
 
+'''
+THe first step of the entire project is extracting beliefs from spoken text. 
+for example if there is a sentence which says 'i believe Paul makes good beer' the belief is "Paul makes good beer",.
+This extraction of beliefs will be done using processors.
+The second part is this code, which clusters each such beliefs. In the code, we take the glove vector of each of the
+word in a given belief sentence, add them all together and divide by the number of words to get an average vector that
+represents each such belief sentence.
+'''
 
 DISTANCE_THRESHOLD_CLUSTERING=0.9
 NO_OF_CLUSTERS=2
@@ -11,7 +19,6 @@ GLOVE_FILE_NAME="/work/mithunpaul/glove/glove_lemmas.840B.300d.txt"
 
 beliefs=[
 "loans are useful.",
-    "Trump",
     "Paul makes good beer",
     "Dogfish Head makes better beer",
     "Paul makes the best beer",
