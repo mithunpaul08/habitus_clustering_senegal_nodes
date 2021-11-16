@@ -14,8 +14,16 @@ word in a given belief sentence, add them all together and divide by the number 
 represents each such belief sentence.
 '''
 
+#paths in laptop
+# BELIEFS_FILE="/Users/mordor/research/habitus/out/mentions.tsv"
+# GLOVE_FILE_NAME="glove.txt"
+# DISTANCE_THRESHOLD_CLUSTERING=0.1
+# NO_OF_CLUSTERS=3
+
+
+#paths in server
 BELIEFS_FILE="/work/mithunpaul/habitus/habitus_clulab_repo_wisconsin/out/mentions.tsv"
-DISTANCE_THRESHOLD_CLUSTERING=0.9
+DISTANCE_THRESHOLD_CLUSTERING=0.2
 NO_OF_CLUSTERS=30
 GLOVE_FILE_NAME="/work/mithunpaul/glove/glove_lemmas.840B.300d.txt"
 
@@ -89,7 +97,7 @@ for index1, belief_sentence in enumerate(beliefs):
     avg_emb_per_belief_sent=combined_embedding_sent/(len(sentence_split))
 
     #add only if the average is not a zero vector
-    if np.sum(avg_emb_per_belief_sent)>0:
+    if not np.sum(avg_emb_per_belief_sent)==0:
         sent_indices[index1]=belief_sentence
         beliefsent_embeddings.append(avg_emb_per_belief_sent)
 
