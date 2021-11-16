@@ -101,8 +101,10 @@ for index1, belief_sentence in enumerate(beliefs):
         sent_indices[index1]=belief_sentence
         beliefsent_embeddings.append(avg_emb_per_belief_sent)
 
+f= open("beliefs_indices.txt","a")
+
 for k,v in sent_indices.items():
-    print(f"{k}:{v}")
+    f.write(f"{k}:{v}\n")
 
 
 #the engine part which does habitus and plotting. will need cosine similarities of each concept as input
