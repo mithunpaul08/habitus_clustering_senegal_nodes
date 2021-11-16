@@ -1,3 +1,4 @@
+import csv
 import numpy as np
 from sklearn.cluster import AgglomerativeClustering
 import matplotlib.pyplot as plt
@@ -13,21 +14,29 @@ word in a given belief sentence, add them all together and divide by the number 
 represents each such belief sentence.
 '''
 
+BELIEFS_FILE="/work/mithunpaul/habitus/habitus_clulab_repo_wisconsin/out/mentions.tsv"
 DISTANCE_THRESHOLD_CLUSTERING=0.9
-NO_OF_CLUSTERS=2
+NO_OF_CLUSTERS=30
 GLOVE_FILE_NAME="/work/mithunpaul/glove/glove_lemmas.840B.300d.txt"
 
-beliefs=[
-"loans are useful.",
-    "Paul makes good beer",
-    "Dogfish Head makes better beer",
-    "Paul makes the best beer",
-    "there will be more virulent mutations",
-    "premises of Social Darwinism",
-"Troeg’s might know a thing or two about beer",
-"Rudy Giuliani broke the law",
-"anyone would hate The Princess Bride"
-]
+# beliefs=[
+# "loans are useful.",
+#     "Paul makes good beer",
+#     "Dogfish Head makes better beer",
+#     "Paul makes the best beer",
+#     "there will be more virulent mutations",
+#     "premises of Social Darwinism",
+# "Troeg’s might know a thing or two about beer",
+# "Rudy Giuliani broke the law",
+# "anyone would hate The Princess Bride"
+# ]
+
+beliefs=[]
+tsv_file = open(BELIEFS_FILE)
+read_tsv = csv.reader(tsv_file, delimiter="\t")
+
+for row in read_tsv:
+  beliefs.append(row[1])
 
 def plot_dendrogram(model, **kwargs):
     # Create linkage matrix and then plot the dendrogram
@@ -78,8 +87,11 @@ for index1, belief_sentence in enumerate(beliefs):
         if each_word in embeddings_dict:
             combined_embedding_sent=combined_embedding_sent+embeddings_dict[each_word]
     avg_emb_per_belief_sent=combined_embedding_sent/(len(sentence_split))
-    sent_indices[index1]=belief_sentence
-    beliefsent_embeddings.append(avg_emb_per_belief_sent)
+
+    #add only if the average is not a zero vector
+    if np.sum(avg_emb_per_belief_sent)>0:
+        sent_indices[index1]=belief_sentence
+        beliefsent_embeddings.append(avg_emb_per_belief_sent)
 
 for k,v in sent_indices.items():
     print(f"{k}:{v}")
