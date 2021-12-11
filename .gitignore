@@ -1,4 +1,6 @@
+.DS_Store
 __pycache__
 cluster*.csv
 concept*.csv
+*.pdf
 .idea/

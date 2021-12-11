@@ -259,7 +259,7 @@ all_data = np.delete(all_data,0,axis=0)
 
 
 
-#the engine part which does clustering and plotting. will need cosine similarities of each concept as input
+#the engine part which does habitus and plotting. will need cosine similarities of each concept as input
 model=AgglomerativeClustering(n_clusters=None, distance_threshold=DISTANCE_THRESHOLD_CLUSTERING, linkage='average', compute_full_tree=True, affinity='cosine')
 clustering =model.fit(all_data)
 labels=model.labels_
@@ -268,7 +268,7 @@ cluster_count=clustering.n_clusters_
 print(f"total number of concepts is {index}")
 print(f"total number of clusters is {cluster_count}")
 #print(f"final labels are  {labels}")
-#print(f"distances are{clustering.distances_}")
+#print(f"distances are{habitus.distances_}")
 
 
 
@@ -302,7 +302,7 @@ assert len(concept_text_cluster_id.keys()) > 0
 write_dict_to_csv(concept_text_cluster_id, filename,["concept_text", "cluster_id"])
 
 
-# plot the dendrogram before clustering process
+# plot the dendrogram before habitus process
 
 #all plotting related stuff
 ##### plot clusters
@@ -387,7 +387,7 @@ write_dict_to_csv(cluster_id_cluster_name, filename,["cluster_id","cluster_name"
 
 
 '''check if all the query variables exist in concepts, or atleast are close in embedding space
-# This is to check the efficacy of our clustering algo. i.e of the starting queries, how many were we able to retrieve back, in full or atleast close to it in embedding space.
+# This is to check the efficacy of our habitus algo. i.e of the starting queries, how many were we able to retrieve back, in full or atleast close to it in embedding space.
 steps:
 -.  
 take each of the query we used initially in google search,..

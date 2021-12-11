@@ -1,0 +1,13 @@
+modelname=distilbert-base-uncased
+Starting new HTTPS connection (1): huggingface.co:443
+https://huggingface.co:443 "HEAD /distilbert-base-uncased/resolve/main/config.json HTTP/1.1" 200 0
+Starting new HTTPS connection (1): huggingface.co:443
+https://huggingface.co:443 "HEAD /bert-base-uncased/resolve/main/vocab.txt HTTP/1.1" 200 0
+Starting new HTTPS connection (1): huggingface.co:443
+https://huggingface.co:443 "HEAD /bert-base-uncased/resolve/main/tokenizer.json HTTP/1.1" 200 0
+Starting new HTTPS connection (1): huggingface.co:443
+https://huggingface.co:443 "HEAD /distilbert-base-uncased/resolve/main/config.json HTTP/1.1" 200 0
+Starting new HTTPS connection (1): huggingface.co:443
+https://huggingface.co:443 "HEAD /distilbert-base-uncased/resolve/main/pytorch_model.bin HTTP/1.1" 302 0
+######going to run queries in the direction  education standard to ######
+*******

@@ -1,0 +1,16 @@
+modelname=distilbert-base-uncased
+######going to run queries in the direction i.e number of years of farming to income######
+In the multiword query sentence ['number', 'of', 'years', 'of', 'farming'] the average probability of the word income to occur at the end with all_promote_verbs is 4.805451262654969e-05
+In the multiword query sentence ['number', 'of', 'years', 'of', 'farming'] the average probability of the word income to occur at the end with all_inhibits_verbs is 7.998747632882441e-05
+In the multiword query sentence ['number', 'of', 'years', 'of', 'farming'] the average probability of the word income to occur at the end with all_does_not_promote_verbs is 0.00046967154048616067
+In the multiword query sentence ['number', 'of', 'years', 'of', 'farming'] the average probability of the word income to occur at the end with all_does_not_inhibits_verbs is 0.0005414246639702469
+######going to run in the opposite direction i.e income to number of years of farming######
+In the multiword query sentence ['number', 'of', 'years', 'of', 'farming'] the average probability of the word income to occur at the end with all_promote_verbs is 0.0033038086570741144
+In the multiword query sentence ['number', 'of', 'years', 'of', 'farming'] the average probability of the word income to occur at the end with all_inhibits_verbs is 0.0024343164513993543
+In the multiword query sentence ['number', 'of', 'years', 'of', 'farming'] the average probability of the word income to occur at the end with all_does_not_promote_verbs is 0.00379696011186752
+In the multiword query sentence ['number', 'of', 'years', 'of', 'farming'] the average probability of the word income to occur at the end with all_does_not_inhibits_verbs is 0.0031023175864902442
+Extended Summary:
+From number of years of farming to income
+From income to number of years of farming
+Brief Summary:
+ Overall_best=

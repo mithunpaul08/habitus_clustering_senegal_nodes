@@ -1,0 +1,71 @@
+{
+    "1 PROMOTES 2": 0.0005161457811482251,
+    "1 INHIBITS 2": 0.0005161457811482251,
+    "1 PROMOTES 2": 0.0005161457811482251,
+    ...
+    8 rows
+}
+{
+    "main crop PROMOTES income": 7.506042311433703e-05,
+    "main crop INHIBITS income": 2.8292415208852617e-05,
+    "main crop DOES_NOT_PROMOTE income": 0.0006208729610079899,
+    "main crop DOES_NOT_INHIBIT income": 0.00022078755137044936,
+    "income PROMOTES main crop": 0.0016408754075882825,
+    "income INHIBITS main crop": 0.0031542118484821913,
+    "income DOES_NOT_PROMOTE main crop": 0.0002546195377277627,
+    "income DOES_NOT_INHIBIT main crop": 0.0003436672425323195
+}{
+    "primary crop PROMOTES income": 0.0001677347972872667,
+    "primary crop INHIBITS income": 3.643663330876734e-05,
+    "primary crop DOES_NOT_PROMOTE income": 0.0008079317049123347,
+    "primary crop DOES_NOT_INHIBIT income": 0.00032976357033476233,
+    "income PROMOTES primary crop": 2.259760003653355e-05,
+    "income INHIBITS primary crop": 4.149211326875957e-05,
+    "income DOES_NOT_PROMOTE primary crop": 8.460614026262192e-06,
+    "income DOES_NOT_INHIBIT primary crop": 1.653394838285749e-05
+}{
+    "number of years of farming PROMOTES income": 4.805451262654969e-05,
+    "number of years of farming INHIBITS income": 7.998747632882441e-05,
+    "number of years of farming DOES_NOT_PROMOTE income": 0.00046967154048616067,
+    "number of years of farming DOES_NOT_INHIBIT income": 0.0005414246639702469,
+    "income PROMOTES number of years of farming": 0.0033038086570741144,
+    "income INHIBITS number of years of farming": 0.0024343164513993543,
+    "income DOES_NOT_PROMOTE number of years of farming": 0.00379696011186752,
+    "income DOES_NOT_INHIBIT number of years of farming": 0.0031023175864902442
+}{
+    "farming experience PROMOTES income": 0.00031572324223816395,
+    "farming experience INHIBITS income": 0.0002823946488206275,
+    "farming experience DOES_NOT_PROMOTE income": 0.0013637831434607506,
+    "farming experience DOES_NOT_INHIBIT income": 0.0008776401227805763,
+    "income PROMOTES farming experience": 0.00016660236360621639,
+    "income INHIBITS farming experience": 0.0001763493819453288,
+    "income DOES_NOT_PROMOTE farming experience": 6.797302557970397e-05,
+    "income DOES_NOT_INHIBIT farming experience": 9.06051400306751e-05
+}{
+    "farmer being in coop PROMOTES income": 0.0009617750092729693,
+    "farmer being in coop INHIBITS income": 0.0002073447139991913,
+    "farmer being in coop DOES_NOT_PROMOTE income": 0.0031951796263456345,
+    "farmer being in coop DOES_NOT_INHIBIT income": 0.0013524956884793937,
+    "income PROMOTES farmer being in coop": 4.8034895371529274e-05,
+    "income INHIBITS farmer being in coop": 5.286499595058558e-05,
+    "income DOES_NOT_PROMOTE farmer being in coop": 6.745799198881741e-05,
+    "income DOES_NOT_INHIBIT farmer being in coop": 6.631887464436659e-05
+}{
+    "coop PROMOTES income": 0.0003765282453969121,
+    "coop INHIBITS income": 6.525673961732537e-05,
+    "coop DOES_NOT_PROMOTE income": 0.0014133064541965723,
+    "coop DOES_NOT_INHIBIT income": 0.0005338378832675517,
+    "income PROMOTES coop": 2.9936188639112515e-06,
+    "income INHIBITS coop": 1.4164383173920214e-05,
+    "income DOES_NOT_PROMOTE coop": 7.501621439587325e-07,
+    "income DOES_NOT_INHIBIT coop": 1.4880073422318674e-06
+}{
+    "being in coop PROMOTES income": 2.481333755592156e-05,
+    "being in coop INHIBITS income": 1.438007006981934e-05,
+    "being in coop DOES_NOT_PROMOTE income": 0.0003805564629146829,
+    "being in coop DOES_NOT_INHIBIT income": 0.0002197674912167713,
+    "income PROMOTES being in coop": 3.042745508234172e-05,
+    "income INHIBITS being in coop": 3.397744004966322e-05,
+    "income DOES_NOT_PROMOTE being in coop": 4.397940741303804e-05,
+    "income DOES_NOT_INHIBIT being in coop": 4.1896002888582494e-05
+}
